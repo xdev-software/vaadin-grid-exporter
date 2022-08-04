@@ -1,6 +1,6 @@
 [![Latest version](https://img.shields.io/maven-central/v/com.xdev-software/vaadin-grid-exporter)](https://mvnrepository.com/artifact/com.xdev-software/vaadin-grid-exporter)
 [![Build](https://img.shields.io/github/workflow/status/xdev-software/vaadin-grid-exporter/Check%20Build/develop)](https://github.com/xdev-software/vaadin-grid-exporter/actions/workflows/checkBuild.yml?query=branch%3Adevelop)
-![Vaadin 23+](https://img.shields.io/badge/Vaadin%20Platform/Flow-14+-00b4f0.svg)
+![Vaadin 23+](https://img.shields.io/badge/Vaadin%20Platform/Flow-23+-00b4f0.svg)
 
 # vaadin-grid-exporter
 A Vaadin Grid Exporter
