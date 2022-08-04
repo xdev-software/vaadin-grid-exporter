@@ -9,7 +9,7 @@
 	<artifactId>vaadin-grid-exporter</artifactId>
 
 	<packaging>jar</packaging>
-	<version>3.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 
 	<description>DateRangePicker for Vaadin</description>
 	<url>https://github.com/xdev-software/vaadin-grid-exporter</url>
@@ -19,18 +19,18 @@
 		<connection>https://github.com/xdev-software/vaadin-grid-exporter.git</connection>
 	</scm>
 
-	<inceptionYear>2020</inceptionYear>
+	<inceptionYear>2022</inceptionYear>
 
 	<organization>
 		<name>XDEV Software</name>
-		<url>https://xdev.software</url>
+		<url>https://xdev.software/en</url>
 	</organization>
 
 	<developers>
 		<developer>
 			<name>XDEV Software</name>
 			<organization>XDEV Software</organization>
-			<url>https://xdev.software</url>
+			<url>https://xdev.software/en</url>
 		</developer>
 	</developers>
 
@@ -108,7 +108,6 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-core</artifactId>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -255,45 +254,6 @@
 							<!-- Sometimes OSSRH is really slow -->
 							<stagingProgressTimeoutMinutes>30</stagingProgressTimeoutMinutes>
 							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>directory</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-assembly-plugin</artifactId>
-						<version>3.4.2</version>
-						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
-							<descriptors>
-								<descriptor>assembly/assembly.xml</descriptor>
-							</descriptors>
-						</configuration>
-						<executions>
-							<execution>
-								<goals>
-									<goal>single</goal>
-								</goals>
-								<phase>install</phase>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-jar-plugin</artifactId>
-						<version>3.2.2</version>
-						<configuration>
-							<!-- VAADIN files that shouldn't be included in add-ons -->
-							<excludes>
-								<exclude>
-									META-INF/VAADIN/
-								</exclude>
-							</excludes>
 						</configuration>
 					</plugin>
 				</plugins>

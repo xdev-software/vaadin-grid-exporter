@@ -7,14 +7,14 @@
 
 	<groupId>com.xdev-software</groupId>
 	<artifactId>vaadin-grid-exporter-demo</artifactId>
-	<version>3.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<inceptionYear>2020</inceptionYear>
+	<inceptionYear>2022</inceptionYear>
 
 	<organization>
 		<name>XDEV Software</name>
-		<url>https://xdev.software</url>
+		<url>https://xdev.software/en</url>
 	</organization>
 
 	<licenses>
