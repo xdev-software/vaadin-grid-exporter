@@ -63,7 +63,7 @@ public interface GridDataSourceFactory<T>
 			final DRDataSource dataSource = new DRDataSource(
 				columns.stream()
 					.filter(ColumnConfiguration::isVisible)
-					.map(c -> c.getGridColumn().getKey())
+					.map(ColumnConfiguration::getKeyOrHeader)
 					.toArray(String[]::new));
 
 			this.getSortedAndFilteredData(configuration.getGrid()).forEach(item ->
@@ -73,7 +73,6 @@ public interface GridDataSourceFactory<T>
 					.map(column -> this.getFormattedValue(column.getGridColumn(), item))
 					.toArray();
 				dataSource.add(rowData);
-				
 			});
 			
 			return dataSource;

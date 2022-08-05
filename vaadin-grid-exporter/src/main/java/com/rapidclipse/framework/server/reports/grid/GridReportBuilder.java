@@ -120,11 +120,8 @@ public interface GridReportBuilder<T>
 		
 		private TextColumnBuilder<String> toReportColumn(final ColumnConfiguration<T> column)
 		{
-			final String fieldName = column.getGridColumn().getKey() != null
-				? column.getGridColumn().getKey()
-				: column.getHeader();
 			final TextColumnBuilder<String> reportColumn =
-				Columns.column(column.getHeader(), fieldName, String.class);
+				Columns.column(column.getHeader(), column.getKeyOrHeader(), String.class);
 			
 			final Integer width = column.getColumnWidth();
 			if(width != null && width > 0)
