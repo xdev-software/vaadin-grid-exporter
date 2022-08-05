@@ -51,7 +51,7 @@ public class DemoView extends Composite<VerticalLayout>
 	protected void onAttach(final AttachEvent attachEvent)
 	{
 		this.grExamples.setItems(
-			new Example("styled", "Styled-Demo", "dark mode 🌑  and more"),
+			new Example("styled", "Styled-Demo", "dark mode 🌑 and more"),
 			new Example("parameter", "Parameter-Demo", "configuration is stored in QueryParameters"),
 			new Example("localized", "Localized-Demo", "🌐 simple localization"),
 			new Example("customized", "Customized-Demo", "usage of a customized DateRange")

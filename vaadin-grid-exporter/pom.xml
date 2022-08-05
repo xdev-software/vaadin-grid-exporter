@@ -11,7 +11,7 @@
 	<packaging>jar</packaging>
 	<version>1.0.0-SNAPSHOT</version>
 
-	<description>DateRangePicker for Vaadin</description>
+	<description>GridExporter for Vaadin</description>
 	<url>https://github.com/xdev-software/vaadin-grid-exporter</url>
 
 	<scm>
