@@ -1,4 +1,5 @@
-## 1.0.0 - Initial release
+## 1.0.0
+<i>Initial release</i>
 
 * Forked project from the RapidClipse Framework
 * Updated to Vaadin 23
