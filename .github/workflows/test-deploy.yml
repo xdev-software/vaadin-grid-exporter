@@ -1,4 +1,4 @@
-name: Test Deployment CI
+name: Test Deployment
 
 on:
   workflow_dispatch:
