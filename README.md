@@ -38,12 +38,16 @@ View the [license of the current project](LICENSE) or the [summary including all
 
 
 ## Releasing [![Build](https://img.shields.io/github/workflow/status/xdev-software/vaadin-grid-exporter/Release?label=Release)](https://github.com/xdev-software/vaadin-grid-exporter/actions/workflows/release.yml)
+
+Before releasing:
+* Consider doing a [test-deployment](https://github.com/xdev-software/vaadin-grid-exporter/actions/workflows/test-deploy.yml?query=branch%3Adevelop) before actually releasing.
+* Check the [changelog](CHANGELOG.md)
+
 If the ``develop`` is ready for release, create a pull request to the ``master``-Branch and merge the changes
 
 When the release is finished do the following:
 * Merge the auto-generated PR (with the incremented version number) back into the ``develop``
-* Add the release notes to the [GitHub release](https://github.com/xdev-software/vaadin-grid-exporter/releases/latest)
-* Upload the generated release asset zip into the [Vaadin Directory](https://vaadin.com/directory) and update the component there
+* Link the corresponding version from the [changelog](CHANGELOG.md) to the [GitHub release](https://github.com/xdev-software/vaadin-grid-exporter/releases/latest)
 
 
 ## Developing
