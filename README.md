@@ -5,7 +5,7 @@
 # vaadin-grid-exporter
 A Vaadin Grid Exporter
 
-![demo](demo.png)
+![demo](assets/demo.png)
 
 
 ## Installation
@@ -29,7 +29,7 @@ A Vaadin Grid Exporter
 <details>
   <summary>Show example</summary>
   
-  ![demo](demo.gif)
+  ![demo](assets/demo.gif)
 </details>
 
 
