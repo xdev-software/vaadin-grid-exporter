@@ -340,6 +340,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 			.setSortable(false)
 			.setWidth("60px")
 			.setFlexGrow(0);
+		
 		this.grid.addColumn(new ComponentRenderer<>(v ->
 			{
 				final TextField txtField = new TextField();
@@ -357,6 +358,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 			.setSortable(false)
 			.setWidth("350px")
 			.setAutoWidth(true);
+		
 		this.grid.addColumn(new ComponentRenderer<>(v ->
 			{
 				final IntegerField ifField = new IntegerField();
@@ -377,6 +379,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 			.setSortable(false)
 			.setWidth("100px")
 			.setFlexGrow(0);
+		
 		this.grid
 			.addColumn(new ComponentRenderer<>(v ->
 			{
@@ -398,6 +401,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 			.setSortable(false)
 			.setWidth("150px")
 			.setFlexGrow(0);
+		
 		this.grid.setSelectionMode(Grid.SelectionMode.SINGLE);
 		this.gridselectors.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.STRETCH);
 		this.btnSelectAll.setText(this.translate(GridExportLocalizationConfig.SELECT_ALL));
