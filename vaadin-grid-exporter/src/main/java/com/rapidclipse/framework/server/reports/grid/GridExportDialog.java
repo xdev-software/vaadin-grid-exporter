@@ -298,7 +298,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		this.gridselectors = new VerticalLayout();
 		this.btnSelectAll = new Button();
 		this.btnClearSelection = new Button();
-		this.optionscontainer = new FlexLayout();
+		this.optionscontainer = new HorizontalLayout();
 		this.cmbPageFormat = new ComboBox<>();
 		this.cmbPageOrientation = new ComboBox<>();
 		this.configurationcheckboxes = new VerticalLayout();
@@ -402,12 +402,10 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		this.gridselectors.setDefaultHorizontalComponentAlignment(FlexComponent.Alignment.STRETCH);
 		this.btnSelectAll.setText(this.translate(GridExportLocalizationConfig.SELECT_ALL));
 		this.btnClearSelection.setText(this.translate(GridExportLocalizationConfig.SELECT_NONE));
-		this.optionscontainer.setFlexWrap(FlexWrap.WRAP);
+		this.optionscontainer.setPadding(false);
+		this.optionscontainer.setWidthFull();
 		this.cmbPageFormat.setLabel(this.translate(GridExportLocalizationConfig.PAGE_SIZE));
-		this.cmbPageFormat.getStyle().set("padding-right", "10px");
 		this.cmbPageOrientation.setLabel(this.translate(GridExportLocalizationConfig.PAGE_ORIENTATION));
-		this.cmbPageOrientation.getStyle().set("padding-right", "10px");
-		this.configurationcheckboxes.getStyle().set("padding-right", "10px");
 		this.ckShowPageNumbers.setLabel(this.translate(GridExportLocalizationConfig.SHOW_PAGE_NUMBERS));
 		this.ckHighlightRows.setLabel(this.translate(GridExportLocalizationConfig.HIGHLIGHT_ROWS));
 		this.cmbExportFormat.setLabel(this.translate(GridExportLocalizationConfig.FORMAT));
@@ -438,11 +436,12 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		this.gridcontainer.setFlexGrow(1.0, this.grid);
 		this.ckShowPageNumbers.setSizeUndefined();
 		this.ckHighlightRows.setSizeUndefined();
+		this.configurationcheckboxes.setPadding(false);
 		this.configurationcheckboxes.add(this.ckShowPageNumbers, this.ckHighlightRows);
-		this.cmbPageFormat.setSizeUndefined();
-		this.cmbPageOrientation.setSizeUndefined();
-		this.configurationcheckboxes.setSizeUndefined();
-		this.cmbExportFormat.setSizeUndefined();
+		this.cmbPageFormat.setSizeFull();
+		this.cmbPageOrientation.setSizeFull();
+		this.configurationcheckboxes.setSizeFull();
+		this.cmbExportFormat.setSizeFull();
 		this.optionscontainer.add(this.configurationcheckboxes, this.cmbPageFormat, this.cmbPageOrientation,
 			this.cmbExportFormat);
 		this.gridcontainer.setWidthFull();
@@ -484,7 +483,8 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 	
 	private Checkbox ckShowPageNumbers, ckHighlightRows;
 	private Button btnSelectAll, btnClearSelection, btnCancel, btnExport;
-	private FlexLayout optionscontainer, gridcontainer;
+	private FlexLayout gridcontainer;
+	private HorizontalLayout optionscontainer;
 	private Grid<ColumnConfiguration<T>> grid;
 	private VerticalLayout layout, gridcontent, configurationcheckboxes, gridselectors;
 	private HorizontalLayout titlebar, bottomlayout, buttonbar;
