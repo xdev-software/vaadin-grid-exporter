@@ -155,7 +155,7 @@ public class ReportViewerDialog extends Dialog implements AfterNavigationObserve
 		this.close();
 	}
 	
-	@Tag("object")
+	@Tag(Tag.OBJECT)
 	static class HtmlObject extends HtmlComponent
 	{
 		private static final PropertyDescriptor<String, String> DATA =
