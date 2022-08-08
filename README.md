@@ -15,7 +15,7 @@ A Vaadin Grid Exporter
 
 | Vaadin version | GridExporter version |
 | --- | --- |
-| Vaadin 23+ (latest) | ``1.x`` |
+| Vaadin 23+ (latest) | ``1+`` |
 
 
 ## Run the Demo
