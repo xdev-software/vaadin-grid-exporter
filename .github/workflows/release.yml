@@ -95,8 +95,8 @@ jobs:
         release_name: v${{ steps.version.outputs.release }}
         commitish: master
         body: |
-          ## [Changelog](https://github.com/xdev-software/vaadin-chip-combobox/blob/develop/CHANGELOG.md#${{ steps.version.outputs.releasenumber }})
-          See [Changelog#v${{ steps.version.outputs.release }}](https://github.com/xdev-software/vaadin-chip-combobox/blob/develop/CHANGELOG.md#${{ steps.version.outputs.releasenumber }}) for more information.
+          ## [Changelog](https://github.com/xdev-software/vaadin-grid-exporter/blob/develop/CHANGELOG.md#${{ steps.version.outputs.releasenumber }})
+          See [Changelog#v${{ steps.version.outputs.release }}](https://github.com/xdev-software/vaadin-grid-exporter/blob/develop/CHANGELOG.md#${{ steps.version.outputs.releasenumber }}) for more information.
 
           ## Installation
           Add the following lines to your pom:
