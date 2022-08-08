@@ -47,7 +47,6 @@ If the ``develop`` is ready for release, create a pull request to the ``master``
 
 When the release is finished do the following:
 * Merge the auto-generated PR (with the incremented version number) back into the ``develop``
-* Link the corresponding version from the [changelog](CHANGELOG.md) to the [GitHub release](https://github.com/xdev-software/vaadin-grid-exporter/releases/latest)
 
 
 ## Developing
