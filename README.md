@@ -47,6 +47,7 @@ If the ``develop`` is ready for release, create a pull request to the ``master``
 
 When the release is finished do the following:
 * Merge the auto-generated PR (with the incremented version number) back into the ``develop``
+* Upload the generated release asset zip into the [Vaadin Directory](https://vaadin.com/directory) and update the component there
 
 
 ## Developing
@@ -63,7 +64,6 @@ You should have the following things installed:
     * [Save Actions](https://plugins.jetbrains.com/plugin/7642-save-actions) - Provides save actions, like running the formatter or adding ``final`` to fields
     * [SonarLint](https://plugins.jetbrains.com/plugin/7973-sonarlint) - CodeStyle/CodeAnalysis
     * [Checkstyle-IDEA](https://plugins.jetbrains.com/plugin/1065-checkstyle-idea) - CodeStyle/CodeAnalysis
-    * (Optional) [Maven Helper](https://plugins.jetbrains.com/plugin/7179-maven-helper) - Better dependency overview
   * Import the project
   * Ensure that everything is encoded in ``UTF-8``
   * Ensure that the JDK/Java-Version is correct
