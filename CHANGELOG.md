@@ -1,3 +1,7 @@
+## 1.0.1
+
+* Removed unnecessary code and dependencies; Updated jasperreports to latest version
+
 ## 1.0.0
 <i>Initial release</i>
 
