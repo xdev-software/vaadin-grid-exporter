@@ -123,7 +123,23 @@
 					<groupId>net.sf.barcode4j</groupId>
 					<artifactId>barcode4j</artifactId>
 				</exclusion>
+				<!-- Unused -->
+				<exclusion>
+					<groupId>com.google.zxing</groupId>
+					<artifactId>core</artifactId>
+				</exclusion>
+				<!-- Unused -->
+				<exclusion>
+					<groupId>org.apache.xmlgraphics</groupId>
+					<artifactId>batik-bridge</artifactId>
+				</exclusion>
 			</exclusions>
+		</dependency>
+		<!-- Forced update. Dynamicreports uses 6.12 -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.20.0</version>
 		</dependency>
 
 		<!-- JAXB is no longer in the JDK (Java 9+) -->
