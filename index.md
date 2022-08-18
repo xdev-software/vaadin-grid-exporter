@@ -5,7 +5,7 @@
 # vaadin-grid-exporter
 A Vaadin Grid Exporter
 
-![demo](demo.png)
+![demo](assets/demo.png)
 
 
 ## Installation
@@ -15,7 +15,7 @@ A Vaadin Grid Exporter
 
 | Vaadin version | GridExporter version |
 | --- | --- |
-| Vaadin 23+ (latest) | ``1.x`` |
+| Vaadin 23+ (latest) | ``1+`` |
 
 
 ## Run the Demo
@@ -29,7 +29,7 @@ A Vaadin Grid Exporter
 <details>
   <summary>Show example</summary>
   
-  ![demo](demo.gif)
+  ![demo](assets/demo.gif)
 </details>
 
 
@@ -47,7 +47,7 @@ If the ``develop`` is ready for release, create a pull request to the ``master``
 
 When the release is finished do the following:
 * Merge the auto-generated PR (with the incremented version number) back into the ``develop``
-* Link the corresponding version from the [changelog](CHANGELOG.md) to the [GitHub release](https://github.com/xdev-software/vaadin-grid-exporter/releases/latest)
+* Upload the generated release asset zip into the [Vaadin Directory](https://vaadin.com/directory) and update the component there
 
 
 ## Developing
@@ -64,7 +64,6 @@ You should have the following things installed:
     * [Save Actions](https://plugins.jetbrains.com/plugin/7642-save-actions) - Provides save actions, like running the formatter or adding ``final`` to fields
     * [SonarLint](https://plugins.jetbrains.com/plugin/7973-sonarlint) - CodeStyle/CodeAnalysis
     * [Checkstyle-IDEA](https://plugins.jetbrains.com/plugin/1065-checkstyle-idea) - CodeStyle/CodeAnalysis
-    * (Optional) [Maven Helper](https://plugins.jetbrains.com/plugin/7179-maven-helper) - Better dependency overview
   * Import the project
   * Ensure that everything is encoded in ``UTF-8``
   * Ensure that the JDK/Java-Version is correct
