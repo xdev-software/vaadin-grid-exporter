@@ -1,3 +1,8 @@
+## 1.0.2
+
+* Updated dependencies
+  * Vaadin 23.2
+
 ## 1.0.1
 
 * Removed unnecessary code and dependencies; Updated jasperreports to latest version
