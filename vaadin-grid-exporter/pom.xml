@@ -52,7 +52,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 		<!-- Dependency-Versions -->
-		<vaadin.version>23.1.6</vaadin.version>
+		<vaadin.version>23.2.2</vaadin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -159,7 +159,7 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>5.9.0</version>
+			<version>5.9.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -208,6 +208,9 @@
 				<version>3.10.1</version>
 				<configuration>
 					<release>${maven.compiler.release}</release>
+					<compilerArgs>
+						<arg>-proc:none</arg>
+					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -245,7 +248,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.2.2</version>
+				<version>3.3.0</version>
 				<configuration>
 					<archive>
 						<index>true</index>
@@ -342,7 +345,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-jar-plugin</artifactId>
-						<version>3.2.2</version>
+						<version>3.3.0</version>
 						<configuration>
 							<!-- VAADIN files that shouldn't be included in add-ons -->
 							<excludes>
