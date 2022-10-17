@@ -1,3 +1,6 @@
+## 1.0.3
+* Removed unusued code
+
 ## 1.0.2
 
 * Updated dependencies

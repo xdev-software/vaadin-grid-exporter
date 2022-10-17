@@ -22,82 +22,44 @@ package com.rapidclipse.framework.server.reports;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.Map;
 
 import com.vaadin.flow.server.StreamResource;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
-import net.sf.jasperreports.engine.JRDataSource;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
 
 
 public interface Exporter
 {
-	StreamResource exportToResource(final JasperReportBuilder reportBuilder);
-	
 	StreamResource exportToResource(
 		final JasperReportBuilder reportBuilder,
 		final String fileNamePrefix);
 	
-	StreamResource exportToResource(
-		final InputStream jrxml,
-		final JRDataSource dataSource,
-		final Map<String, Object> parameters);
-	
-	StreamResource exportToResource(
-		final InputStream jrxml,
-		final JRDataSource dataSource,
-		final Map<String, Object> parameters,
-		final String fileNamePrefix);
-	
 	byte[] exportToBytes(final JasperReportBuilder reportBuilder);
-	
-	byte[] exportToBytes(
-		final InputStream jrxml,
-		final JRDataSource dataSource,
-		final Map<String, Object> parameters);
 	
 	void export(final JasperReportBuilder reportBuilder, final OutputStream stream);
 	
-	void export(final JasperPrint print, final OutputStream stream);
-	
-	void export(
-		final InputStream jrxml,
-		final JRDataSource dataSource,
-		final Map<String, Object> parameters,
-		final OutputStream stream);
-	
-	public static Exporter New(
+	static Exporter New(
 		final Format format,
-		final DynamicExporter dynamicExporter,
-		final PlainExporter plainExporter)
+		final DynamicExporter dynamicExporter)
 	{
-		return new Default(format, dynamicExporter, plainExporter);
+		return new Default(format, dynamicExporter);
 	}
 	
-	public static class Default implements Exporter
+	class Default implements Exporter
 	{
-		private final Format          format;
+		private final Format format;
 		private final DynamicExporter dynamicExporter;
-		private final PlainExporter   plainExporter;
 		
 		protected Default(
 			final Format format,
-			final DynamicExporter dynamicExporter,
-			final PlainExporter plainExporter)
+			final DynamicExporter dynamicExporter)
 		{
 			super();
 			
 			this.format          = format;
 			this.dynamicExporter = dynamicExporter;
-			this.plainExporter   = plainExporter;
 		}
 		
 		protected StreamResource createResource(final byte[] bytes, final String fileNamePrefix)
@@ -118,11 +80,6 @@ public interface Exporter
 			return "report" + System.currentTimeMillis();
 		}
 		
-		@Override
-		public StreamResource exportToResource(final JasperReportBuilder reportBuilder)
-		{
-			return this.exportToResource(reportBuilder, this.getDefaultFileNamePrefix());
-		}
 		
 		@Override
 		public StreamResource exportToResource(
@@ -148,69 +105,6 @@ public interface Exporter
 				this.dynamicExporter.export(reportBuilder, stream);
 			}
 			catch(final DRException e)
-			{
-				throw new ReportException(e);
-			}
-		}
-		
-		@Override
-		public StreamResource exportToResource(
-			final InputStream jrxml,
-			final JRDataSource dataSource,
-			final Map<String, Object> parameters)
-		{
-			return this.exportToResource(jrxml, dataSource, parameters, this.getDefaultFileNamePrefix());
-		}
-		
-		@Override
-		public StreamResource exportToResource(
-			final InputStream jrxml,
-			final JRDataSource dataSource,
-			final Map<String, Object> parameters,
-			final String fileNamePrefix)
-		{
-			return this.createResource(this.exportToBytes(jrxml, dataSource, parameters), fileNamePrefix);
-		}
-		
-		@Override
-		public byte[] exportToBytes(
-			final InputStream jrxml,
-			final JRDataSource dataSource,
-			final Map<String, Object> parameters)
-		{
-			final ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			this.export(jrxml, dataSource, parameters, stream);
-			return stream.toByteArray();
-		}
-		
-		@Override
-		public void export(
-			final InputStream jrxml,
-			final JRDataSource dataSource,
-			final Map<String, Object> parameters,
-			final OutputStream stream)
-		{
-			try
-			{
-				final JasperReport report = JasperCompileManager.compileReport(jrxml);
-				final JasperPrint  print  = JasperFillManager.fillReport(report, parameters,
-					dataSource);
-				this.export(print, stream);
-			}
-			catch(final JRException e)
-			{
-				throw new ReportException(e);
-			}
-		}
-		
-		@Override
-		public void export(final JasperPrint print, final OutputStream stream)
-		{
-			try
-			{
-				this.plainExporter.export(print, stream);
-			}
-			catch(final JRException e)
 			{
 				throw new ReportException(e);
 			}
