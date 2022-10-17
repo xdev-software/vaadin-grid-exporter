@@ -1,5 +1,5 @@
 ## 1.0.3
-* Remove unusued code
+* Removed unusued code
 
 ## 1.0.2
 
