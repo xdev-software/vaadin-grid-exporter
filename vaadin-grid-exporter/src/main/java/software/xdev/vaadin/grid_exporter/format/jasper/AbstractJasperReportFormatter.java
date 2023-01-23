@@ -117,12 +117,6 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 		final TextColumnBuilder<String> reportColumn =
 			Columns.column(column.getHeader(), column.getKeyOrHeader(), String.class);
 		
-		final Integer width = column.getColumnWidth();
-		if(width != null && width > 0)
-		{
-			reportColumn.setFixedWidth(width);
-		}
-		
 		reportColumn.setHorizontalTextAlignment(
 			this.toReportTextAlignment(column.getColumnAlignment()));
 		

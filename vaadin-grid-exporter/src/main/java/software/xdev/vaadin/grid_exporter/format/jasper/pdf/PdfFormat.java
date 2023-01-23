@@ -72,7 +72,7 @@ public class PdfFormat<T> extends AbstractJasperReportFormatter<T, PdfSpecificCo
 		}
 		
 		report.setShowColumnTitle(true);
-		report.setDataSource(GridDataSourceFactory.New().createDataSource(gridToExport, generalConfig));
+		report.setDataSource(new GridDataSourceFactory.Default<T>().createDataSource(gridToExport, generalConfig));
 		report.setPageFormat(specificConfig.getPageType(), specificConfig.getPageOrientation());
 		
 		report.setPageMargin(DynamicReports.margin(20));

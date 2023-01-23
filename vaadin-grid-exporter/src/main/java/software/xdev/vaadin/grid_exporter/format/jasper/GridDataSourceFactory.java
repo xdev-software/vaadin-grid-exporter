@@ -43,11 +43,6 @@ import software.xdev.vaadin.grid_exporter.grid.column.ColumnConfiguration;
 public interface GridDataSourceFactory<T>
 {
 	JRDataSource createDataSource(final Grid<T> grid, GeneralConfig<T> configuration);
-	
-	static <T> GridDataSourceFactory<T> New()
-	{
-		return new Default<>();
-	}
 
 	public static class Default<T> implements GridDataSourceFactory<T>
 	{

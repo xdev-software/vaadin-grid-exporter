@@ -41,7 +41,6 @@ import software.xdev.vaadin.grid_exporter.format.Format;
 import software.xdev.vaadin.grid_exporter.format.FormatConfigComponent;
 import software.xdev.vaadin.grid_exporter.format.GeneralConfig;
 import software.xdev.vaadin.grid_exporter.format.SpecificConfig;
-import software.xdev.vaadin.grid_exporter.grid.column.ColumnConfiguration;
 import software.xdev.vaadin.grid_exporter.grid.column.ColumnConfigurationComponent;
 
 
@@ -105,12 +104,6 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 	public String translate(final String key)
 	{
 		return this.localizationConfig.getTranslation(key, this);
-	}
-	
-	private boolean checkColumnSelection()
-	{
-		return this.configuration.getColumnConfigurations().stream()
-			.anyMatch(ColumnConfiguration::isVisible);
 	}
 	
 	private <E extends SpecificConfig> void export(

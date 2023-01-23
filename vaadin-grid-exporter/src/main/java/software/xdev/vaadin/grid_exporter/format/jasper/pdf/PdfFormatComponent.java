@@ -62,8 +62,10 @@ public class PdfFormatComponent
 			orientation == PageOrientation.PORTRAIT
 				? this.translate(GridExportLocalizationConfig.PORTRAIT)
 				: this.translate(GridExportLocalizationConfig.LANDSCAPE));
+		this.cmbPageOrientation.setValue(PageOrientation.PORTRAIT);
 		
 		this.cmbPageFormat.setItems(PageType.values());
+		this.cmbPageFormat.setValue(PageType.A4);
 		
 		this.add(this.cmbPageFormat, this.cmbPageOrientation, this.ckShowPageNumbers, this.ckHighlightRows);
 	}

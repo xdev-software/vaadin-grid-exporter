@@ -28,7 +28,6 @@ public class ColumnConfiguration<T>
 	private boolean visible = true;
 	private String header;
 	private ColumnTextAlign columnAlignment;
-	private Integer columnWidth;
 	
 	ColumnConfiguration(
 		final Column<T> gridColumn,
@@ -74,17 +73,6 @@ public class ColumnConfiguration<T>
 	public ColumnConfiguration<T> setColumnAlignment(final ColumnTextAlign columnAlignment)
 	{
 		this.columnAlignment = columnAlignment;
-		return this;
-	}
-	
-	public Integer getColumnWidth()
-	{
-		return this.columnWidth;
-	}
-	
-	public ColumnConfiguration<T> setColumnWidth(final Integer columnWidth)
-	{
-		this.columnWidth = columnWidth;
 		return this;
 	}
 	

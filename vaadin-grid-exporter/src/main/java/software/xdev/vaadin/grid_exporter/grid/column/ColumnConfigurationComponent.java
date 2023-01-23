@@ -25,7 +25,6 @@ import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.component.textfield.IntegerField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 
@@ -57,7 +56,6 @@ public class ColumnConfigurationComponent<T> extends VerticalLayout implements T
 	public void initUI()
 	{
 		this.grid.setItems(this.columnConfigurations);
-		this.grid.recalculateColumnWidths();
 		
 		this.grid.setMaxWidth("100%");
 		this.grid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS, GridVariant.LUMO_ROW_STRIPES);
@@ -79,26 +77,6 @@ public class ColumnConfigurationComponent<T> extends VerticalLayout implements T
 			.setSortable(false)
 			.setWidth("350px")
 			.setAutoWidth(true);
-		
-		this.grid.addColumn(new ComponentRenderer<>(v ->
-			{
-				final IntegerField ifField = new IntegerField();
-				ifField.setWidthFull();
-				
-				ifField.setValue(v.getColumnWidth());
-				ifField.addValueChangeListener(e ->
-				{
-					v.setColumnWidth(e.getValue());
-				});
-				
-				return ifField;
-			}))
-			.setKey("width")
-			.setHeader(this.translate(GridExportLocalizationConfig.WIDTH))
-			.setResizable(true)
-			.setSortable(false)
-			.setWidth("100px")
-			.setFlexGrow(0);
 		
 		this.grid
 			.addColumn(new ComponentRenderer<>(v ->
@@ -127,6 +105,11 @@ public class ColumnConfigurationComponent<T> extends VerticalLayout implements T
 		this.grid.setSelectionMode(Grid.SelectionMode.MULTI);
 		((GridMultiSelectionModel<?>)this.grid.getSelectionModel())
 			.setSelectAllCheckboxVisibility(GridMultiSelectionModel.SelectAllCheckboxVisibility.VISIBLE);
+		this.grid.addSelectionListener(event ->
+		{
+			this.columnConfigurations.forEach(column -> column.setVisible(false));
+			this.grid.getSelectedItems().forEach(column -> column.setVisible(true));
+		});
 		this.add(this.grid);
 	}
 	
