@@ -1,24 +1,43 @@
-.editable-label-button {
-	margin: 0;
-	padding: 0;
-	height: var(--lumo-size-xs);
-	width: var(--lumo-size-xs);
+.grid-exporter-flex-primary-child {
+	flex-grow: 1.0;
 }
 
-.editable-label-container {
-	margin: 0;
-	padding: 0;
-	align-items: center;
-	height: unset;
-	width: 100%;
+.grid-exporter-flex-wrap-container {
+	flex-wrap: wrap;
 }
 
-.editable-label-label {
+.grid-exporter-button {
 	height: unset;
 	width: unset;
 }
 
-.editable-label-editor {
+.grid-exporter-bar {
+	margin: 0px;
+	padding: 0px;
+	height: unset;
+	width: 100%;
+}
+
+.grid-exporter-status {
+	color: red;
+}
+
+.grid-exporter-grid-title {
+	padding-top: 10px;
+	height: unset;
+	width: unset;
+}
+
+.grid-exporter-main-layout {
+	margin: 0px;
+	padding: 0px;
+	max-height: 100%;
+	max-width: 100%;
+	height: unset;
+	width: 1000px;
+}
+
+.grid-exporter-dialog {
 	height: unset;
 	width: unset;
 }

@@ -28,7 +28,6 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
-import com.vaadin.flow.component.orderedlayout.FlexLayout.FlexWrap;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.AfterNavigationEvent;
@@ -129,55 +128,50 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 	{
 		final ColumnConfigurationComponent<T> columnConfigurationComponent =
 			new ColumnConfigurationComponent<>(this, this.configuration.getColumnConfigurations());
+		columnConfigurationComponent.addClassName(GridExporterStyles.PRIMARY_FLEX_CHILD);
+		columnConfigurationComponent.addClassName(GridExporterStyles.FLEX_WRAP_CONTAINER);
+		columnConfigurationComponent.addClassName(GridExporterStyles.BAR);
 		
 		final Label lblTitle = new Label(this.translate(GridExportLocalizationConfig.EXPORT_CAPTION));
+		lblTitle.addClassName(GridExporterStyles.PRIMARY_FLEX_CHILD);
 		final Button btnClose = new Button(VaadinIcon.CLOSE.create());
 		final Icon iconGrid = new Icon(VaadinIcon.TABLE);
 		final HorizontalLayout titlebar = new HorizontalLayout();
-		titlebar.add(iconGrid, lblTitle, btnClose);
-		titlebar.setWidthFull();
-		titlebar.setHeight(null);
-		titlebar.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
+		titlebar.addClassName(GridExporterStyles.BAR);
+		titlebar.addClassName(GridExporterStyles.FLEX_WRAP_CONTAINER);
 		titlebar.setFlexGrow(1.0, lblTitle);
+		titlebar.add(iconGrid, lblTitle, btnClose);
+		titlebar.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
 		
 		final Button btnCancel = new Button(this.translate(GridExportLocalizationConfig.CANCEL));
 		final Button btnExport = new Button(this.translate(GridExportLocalizationConfig.EXPORT));
 		btnExport.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-		btnCancel.setSizeUndefined();
-		btnExport.setSizeUndefined();
+		btnExport.addClassName(GridExporterStyles.BUTTON);
+		btnCancel.addClassName(GridExporterStyles.BUTTON);
 		btnCancel.addClickListener(event -> this.close());
 		btnClose.addClickListener(event -> this.close());
 		
 		final HorizontalLayout buttonbar = new HorizontalLayout();
 		buttonbar.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
 		buttonbar.add(btnCancel, btnExport);
-		buttonbar.setWidthFull();
-		buttonbar.setHeight(null);
+		buttonbar.addClassName(GridExporterStyles.BAR);
 		
 		final Label lblStatus = new Label();
-		lblStatus.getStyle().set("color", "red");
-		lblStatus.setWidthFull();
-		lblStatus.setHeight(null);
+		lblStatus.addClassName(GridExporterStyles.BAR);
+		lblStatus.addClassName(GridExporterStyles.STATUS);
 		
 		final HorizontalLayout bottomlayout = new HorizontalLayout();
 		bottomlayout.setSpacing(false);
 		bottomlayout.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
 		bottomlayout.add(lblStatus, buttonbar);
-		bottomlayout.setWidthFull();
-		bottomlayout.setHeight(null);
-		
-		columnConfigurationComponent.setFlexWrap(FlexWrap.WRAP);
-		columnConfigurationComponent.setFlexGrow(1.0, columnConfigurationComponent);
-		columnConfigurationComponent.setWidthFull();
-		columnConfigurationComponent.setHeight(null);
+		bottomlayout.addClassName(GridExporterStyles.BAR);
 		
 		final VerticalLayout gridcontent = new VerticalLayout();
 		gridcontent.setPadding(false);
 		final HorizontalLayout specificConfigurationLayout = new HorizontalLayout();
 		final ComboBox<Format<T, ?>> formatComboBox = new ComboBox<>();
 		gridcontent.add(columnConfigurationComponent, formatComboBox, specificConfigurationLayout);
-		gridcontent.setWidthFull();
-		gridcontent.setHeight(null);
+		gridcontent.addClassName(GridExporterStyles.BAR);
 		
 		formatComboBox.setItems(this.configuration.getAvailableFormats());
 		formatComboBox.setItemLabelGenerator(item -> item.getFormatNameToDisplay());
@@ -195,18 +189,13 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		formatComboBox.setValue(this.configuration.getPreselectedFormat());
 		
 		final Label lblGridTitle = new Label(this.translate(GridExportLocalizationConfig.CONFIGURE_COLUMNS));
-		lblGridTitle.getStyle().set("padding-top", "10px");
-		lblGridTitle.setSizeUndefined();
+		lblGridTitle.addClassName(GridExporterStyles.GRID_TITLE);
 		
 		final VerticalLayout layout = new VerticalLayout();
-		layout.setSpacing(false);
-		layout.setMaxHeight("100%");
-		layout.setMaxWidth("100%");
-		layout.setPadding(false);
+		
 		layout.add(titlebar, lblGridTitle, gridcontent, bottomlayout);
-		layout.setWidth("1000px");
-		layout.setHeight(null);
+		layout.addClassName(GridExporterStyles.MAIN_LAYOUT);
 		this.add(layout);
-		this.setSizeUndefined();
+		layout.addClassName(GridExporterStyles.DIALOG);
 	}
 }

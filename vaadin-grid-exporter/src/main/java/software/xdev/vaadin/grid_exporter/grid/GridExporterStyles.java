@@ -24,8 +24,12 @@ public interface GridExporterStyles
 {
 	String LOCATION = "./styles/gridExporter.css";
 	
-	String CONTAINER = "editable-label-container";
-	String BUTTON = "editable-label-button";
-	String LABEL = "editable-label-label";
-	String EDITOR = "editable-label-editor";
+	String BAR = "grid-exporter-bar";
+	String PRIMARY_FLEX_CHILD = "grid-exporter-flex-primary-child";
+	String BUTTON = "grid-exporter-button";
+	String STATUS = "grid-exporter-status";
+	String FLEX_WRAP_CONTAINER = "grid-exporter-flex-wrap-container";
+	String GRID_TITLE = "grid-exporter-grid-title";
+	String MAIN_LAYOUT = "grid-exporter-main-layout";
+	String DIALOG = "grid-exporter-dialog";
 }
