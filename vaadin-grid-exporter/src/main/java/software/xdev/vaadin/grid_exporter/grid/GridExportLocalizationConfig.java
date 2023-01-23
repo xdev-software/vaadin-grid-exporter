@@ -55,7 +55,7 @@ public class GridExportLocalizationConfig
 	// Key, Default Value
 	public static final Map<String, String > DEFAULT_VALUES = Map.ofEntries(
 		entry(EXPORT_CAPTION, "Export Grid"),
-		entry(REPORT_TITLE, "Report Title"),
+		entry(REPORT_TITLE, "Report Title (Optional)"),
 		entry(CONFIGURE_COLUMNS, "Configure Columns"),
 		entry(NAME, "Name"),
 		entry(WIDTH, "Width"),

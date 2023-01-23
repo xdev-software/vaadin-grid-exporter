@@ -17,8 +17,6 @@ package software.xdev.vaadin.grid_exporter.format.jasper;
 
 import java.io.ByteArrayOutputStream;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 
@@ -26,7 +24,6 @@ import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.column.Columns;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
-import net.sf.dynamicreports.report.builder.component.Components;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 import net.sf.dynamicreports.report.exception.DRException;
 import software.xdev.vaadin.grid_exporter.Translator;
@@ -153,20 +150,13 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 		report.setColumnTitleStyle(this.gridReportStyles.columnTitleStyle());
 		report.setColumnStyle(this.gridReportStyles.columnStyle());
 		
-		final String title = configuration.getTitle();
-		if(!StringUtils.isEmpty(title))
-		{
-			report.title(Components.text(title).setStyle(this.gridReportStyles.titleStyle()));
-			report.setReportName(title);
-		}
-		else
-		{
-			report.setReportName("GridExport");
-		}
-		
 		report.setIgnorePagination(!this.isPaginationActive());
 		
 		return report;
 	}
 	
+	public GridReportStyles getGridReportStyles()
+	{
+		return this.gridReportStyles;
+	}
 }

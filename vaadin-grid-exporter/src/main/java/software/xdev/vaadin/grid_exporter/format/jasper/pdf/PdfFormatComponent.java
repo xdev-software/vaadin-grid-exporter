@@ -19,6 +19,7 @@ import java.awt.Insets;
 
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.textfield.TextField;
 
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
@@ -35,6 +36,7 @@ public class PdfFormatComponent
 	private ComboBox<PageOrientation> cmbPageOrientation;
 	private ComboBox<PageType> cmbPageFormat;
 	private Checkbox ckShowPageNumbers, ckHighlightRows;
+	private final TextField txtReportTitle = new TextField();
 	
 	PdfFormatComponent(final Translator translator)
 	{
@@ -57,6 +59,11 @@ public class PdfFormatComponent
 		this.cmbPageFormat.setSizeFull();
 		this.cmbPageOrientation.setSizeFull();
 		
+		this.txtReportTitle.setMaxWidth("100%");
+		this.txtReportTitle.setLabel(this.translate(GridExportLocalizationConfig.REPORT_TITLE));
+		this.txtReportTitle.setWidth("400px");
+		this.txtReportTitle.setHeight(null);
+		
 		this.cmbPageOrientation.setItems(PageOrientation.values());
 		this.cmbPageOrientation.setItemLabelGenerator(orientation ->
 			orientation == PageOrientation.PORTRAIT
@@ -67,7 +74,12 @@ public class PdfFormatComponent
 		this.cmbPageFormat.setItems(PageType.values());
 		this.cmbPageFormat.setValue(PageType.A4);
 		
-		this.add(this.cmbPageFormat, this.cmbPageOrientation, this.ckShowPageNumbers, this.ckHighlightRows);
+		this.add(
+			this.txtReportTitle,
+			this.cmbPageFormat,
+			this.cmbPageOrientation,
+			this.ckShowPageNumbers,
+			this.ckHighlightRows);
 	}
 	
 	@Override
@@ -86,6 +98,7 @@ public class PdfFormatComponent
 				.withPageOrientation(this.cmbPageOrientation.getValue())
 				.withShowPageNumber(this.ckShowPageNumbers.getValue())
 				.withPageMargin(new Insets(20, 20, 20, 20))
+				.withTitle(this.txtReportTitle.getValue())
 			;
 	}
 }

@@ -29,6 +29,7 @@ public class PdfSpecificConfig implements SpecificConfig
 	private Insets pageMargin = new Insets(20, 20, 20, 20);
 	private boolean showPageNumber = false;
 	private boolean highlightRows = false;
+	private String title = ""; // No text = no title
 	
 	public PageType getPageType()
 	{
@@ -82,6 +83,17 @@ public class PdfSpecificConfig implements SpecificConfig
 	public PdfSpecificConfig withHighlightRows(final boolean highlightRows)
 	{
 		this.highlightRows = highlightRows;
+		return this;
+	}
+	
+	public String getTitle()
+	{
+		return this.title;
+	}
+	
+	public PdfSpecificConfig withTitle(final String title)
+	{
+		this.title = title;
 		return this;
 	}
 }

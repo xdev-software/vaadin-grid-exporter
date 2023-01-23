@@ -15,10 +15,13 @@
  */
 package software.xdev.vaadin.grid_exporter.format.jasper.pdf;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.vaadin.flow.component.grid.Grid;
 
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.report.builder.DynamicReports;
+import net.sf.dynamicreports.report.builder.component.Components;
 import software.xdev.vaadin.grid_exporter.Translator;
 import software.xdev.vaadin.grid_exporter.format.FormatConfigComponent;
 import software.xdev.vaadin.grid_exporter.format.GeneralConfig;
@@ -74,6 +77,17 @@ public class PdfFormat<T> extends AbstractJasperReportFormatter<T, PdfSpecificCo
 		report.setShowColumnTitle(true);
 		report.setDataSource(new GridDataSourceFactory.Default<T>().createDataSource(gridToExport, generalConfig));
 		report.setPageFormat(specificConfig.getPageType(), specificConfig.getPageOrientation());
+		
+		final String title = specificConfig.getTitle();
+		if(!StringUtils.isEmpty(title))
+		{
+			report.title(Components.text(title).setStyle(this.getGridReportStyles().titleStyle()));
+			report.setReportName(title);
+		}
+		else
+		{
+			report.setReportName("GridExport");
+		}
 		
 		report.setPageMargin(DynamicReports.margin(20));
 		

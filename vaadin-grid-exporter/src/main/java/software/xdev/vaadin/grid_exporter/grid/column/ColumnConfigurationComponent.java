@@ -23,8 +23,8 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridMultiSelectionModel;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
-import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 
@@ -32,7 +32,7 @@ import software.xdev.vaadin.grid_exporter.Translator;
 import software.xdev.vaadin.grid_exporter.grid.GridExportLocalizationConfig;
 
 
-public class ColumnConfigurationComponent<T> extends VerticalLayout implements Translator
+public class ColumnConfigurationComponent<T> extends FlexLayout implements Translator
 {
 	private final Grid<ColumnConfiguration<T>> grid = new Grid<>();
 	private final List<ColumnConfiguration<T>> columnConfigurations;
@@ -110,6 +110,7 @@ public class ColumnConfigurationComponent<T> extends VerticalLayout implements T
 			this.columnConfigurations.forEach(column -> column.setVisible(false));
 			this.grid.getSelectedItems().forEach(column -> column.setVisible(true));
 		});
+		this.columnConfigurations.forEach(column -> this.grid.select(column));
 		this.add(this.grid);
 	}
 	

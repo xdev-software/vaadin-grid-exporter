@@ -46,7 +46,6 @@ public class GeneralConfig<T>
 	}
 	
 	private final List<ColumnConfiguration<T>> columnConfigurations;
-	private String title = "";                        // No text = no title
 	private final String fileName = "ExportedGrid";
 	
 	private final Translator translator;
@@ -123,17 +122,6 @@ public class GeneralConfig<T>
 	public List<ColumnConfiguration<T>> getColumnConfigurations()
 	{
 		return this.columnConfigurations;
-	}
-	
-	public String getTitle()
-	{
-		return this.title;
-	}
-	
-	public GeneralConfig<T> withTitle(final String title)
-	{
-		this.title = title;
-		return this;
 	}
 	
 	public String getFileName()
