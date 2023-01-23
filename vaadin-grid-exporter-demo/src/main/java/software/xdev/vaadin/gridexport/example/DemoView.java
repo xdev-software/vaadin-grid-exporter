@@ -1,6 +1,5 @@
 package software.xdev.vaadin.gridexport.example;
 
-import com.rapidclipse.framework.server.reports.grid.GridExportDialog;
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
@@ -10,6 +9,8 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+
+import software.xdev.vaadin.grid_exporter.grid.GridExportDialog;
 
 
 @PageTitle("GridExport Examples")
