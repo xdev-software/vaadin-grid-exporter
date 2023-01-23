@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 XDEV Software (https://xdev.software/en)
+ * Copyright © 2022 XDEV Software (https://xdev.software)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package software.xdev.vaadin.grid_exporter.format;
+package software.xdev.vaadin.grid_exporter.format.jasper;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -36,6 +36,7 @@ import com.vaadin.flow.function.ValueProvider;
 
 import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.jasperreports.engine.JRDataSource;
+import software.xdev.vaadin.grid_exporter.format.GeneralConfig;
 import software.xdev.vaadin.grid_exporter.grid.column.ColumnConfiguration;
 
 

@@ -1,10 +1,24 @@
+/*
+ * Copyright © 2022 XDEV Software (https://xdev.software)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package software.xdev.vaadin.grid_exporter.format.jasper.pdf;
 
 import java.awt.Insets;
 
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 
 import net.sf.dynamicreports.report.constant.PageOrientation;
 import net.sf.dynamicreports.report.constant.PageType;
@@ -14,15 +28,17 @@ import software.xdev.vaadin.grid_exporter.grid.GridExportLocalizationConfig;
 
 
 public class PdfFormatComponent
-	extends HorizontalLayout
-	implements FormatConfigComponent<PdfSpecificConfig>, Translator
+	extends FormatConfigComponent<PdfSpecificConfig>
+	implements Translator
 {
+	private final Translator translator;
 	private ComboBox<PageOrientation> cmbPageOrientation;
 	private ComboBox<PageType> cmbPageFormat;
 	private Checkbox ckShowPageNumbers, ckHighlightRows;
 	
-	PdfFormatComponent()
+	PdfFormatComponent(final Translator translator)
 	{
+		this.translator = translator;
 		this.initUI();
 	}
 	
@@ -55,8 +71,7 @@ public class PdfFormatComponent
 	@Override
 	public String translate(final String key)
 	{
-		// TODO
-		return null;
+		return this.translator != null ? this.translator.translate(key) : key;
 	}
 	
 	@Override

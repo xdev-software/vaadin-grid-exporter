@@ -1,7 +1,21 @@
+/*
+ * Copyright © 2022 XDEV Software (https://xdev.software)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package software.xdev.vaadin.grid_exporter.format.jasper;
 
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -14,23 +28,18 @@ import net.sf.dynamicreports.report.builder.column.Columns;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.Components;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
-import software.xdev.vaadin.grid_exporter.DynamicExporter;
+import net.sf.dynamicreports.report.exception.DRException;
 import software.xdev.vaadin.grid_exporter.Translator;
 import software.xdev.vaadin.grid_exporter.format.Format;
 import software.xdev.vaadin.grid_exporter.format.GeneralConfig;
-import software.xdev.vaadin.grid_exporter.format.GridDataSourceFactory;
 import software.xdev.vaadin.grid_exporter.format.SpecificConfig;
 import software.xdev.vaadin.grid_exporter.grid.column.ColumnConfiguration;
 
 
 public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig> implements Format<T, E>
 {
-	
-	private final GridDataSourceFactory gridDataSourceFactory = GridDataSourceFactory.New();
 	private final GridReportStyles gridReportStyles = GridReportStyles.New();
-	
 	private final DynamicExporter exporter;
-	
 	private final String nameToDisplay;
 	private final String fileSuffix;
 	private final String mimeType;
@@ -57,6 +66,11 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 		this.translator = translator;
 	}
 	
+	public Translator getTranslator()
+	{
+		return this.translator;
+	}
+	
 	@Override
 	public String getFormatNameToDisplay()
 	{
@@ -75,15 +89,22 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 		return this.mimeType;
 	}
 	
-	private OutputStream exportToBytes(final JasperReportBuilder reportBuilder)
+	private byte[] exportToBytes(final JasperReportBuilder reportBuilder)
 	{
 		final ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		this.export(reportBuilder, stream);
-		return stream;
+		try
+		{
+			this.exporter.export(reportBuilder, stream);
+		}
+		catch(final DRException e)
+		{
+			throw new RuntimeException(e);
+		}
+		return stream.toByteArray();
 	}
 	
 	@Override
-	public OutputStream export(
+	public byte[] export(
 		final Grid<T> gridToExport,
 		final GeneralConfig<T> generalConfig,
 		final E specificConfig)

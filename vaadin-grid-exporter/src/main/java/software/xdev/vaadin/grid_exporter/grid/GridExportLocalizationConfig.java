@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 XDEV Software (https://xdev.software/en)
+ * Copyright © 2022 XDEV Software (https://xdev.software)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,8 +36,6 @@ public class GridExportLocalizationConfig
 	public static final String NAME = PREFIX + "columnName";
 	public static final String WIDTH = PREFIX + "columnWidth";
 	public static final String POSITION = PREFIX + "position";
-	public static final String SELECT_ALL = PREFIX + "selectAll";
-	public static final String SELECT_NONE = PREFIX + "selectNone";
 	public static final String PAGE_ORIENTATION = PREFIX + "orientation";
 	public static final String SHOW_PAGE_NUMBERS = PREFIX + "showPageNumbers";
 	public static final String HIGHLIGHT_ROWS = PREFIX + "highlightRows";
@@ -62,8 +60,6 @@ public class GridExportLocalizationConfig
 		entry(NAME, "Name"),
 		entry(WIDTH, "Width"),
 		entry(POSITION, "Position"),
-		entry(SELECT_ALL, "Select All"),
-		entry(SELECT_NONE, "Select None"),
 		entry(PAGE_ORIENTATION, "Page Orientation"),
 		entry(SHOW_PAGE_NUMBERS, "Show Page Numbers"),
 		entry(HIGHLIGHT_ROWS, "Highlight Rows"),

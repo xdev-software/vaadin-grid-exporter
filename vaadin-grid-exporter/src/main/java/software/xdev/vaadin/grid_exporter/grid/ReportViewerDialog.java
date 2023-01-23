@@ -1,5 +1,5 @@
 /*
- * Copyright © 2022 XDEV Software (https://xdev.software/en)
+ * Copyright © 2022 XDEV Software (https://xdev.software)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,8 @@ import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.server.AbstractStreamResource;
 import com.vaadin.flow.server.StreamResource;
 
-import software.xdev.vaadin.grid_exporter.Format;
+import software.xdev.vaadin.grid_exporter.Translator;
+import software.xdev.vaadin.grid_exporter.format.Format;
 
 
 /**
@@ -61,10 +62,10 @@ public class ReportViewerDialog extends Dialog implements AfterNavigationObserve
 		final StreamResource res,
 		final String mimeType,
 		final boolean isPreviewableInStandardBrowser,
-		final GridExportLocalizationConfig localizationConfig)
+		final Translator translator)
 	{
 		this.previewAccordionPanel = new AccordionPanel(
-			localizationConfig.getTranslation(GridExportLocalizationConfig.PREVIEW, this),
+			translator.translate(GridExportLocalizationConfig.PREVIEW),
 			new Div());
 		this.initUI();
 		
@@ -76,7 +77,7 @@ public class ReportViewerDialog extends Dialog implements AfterNavigationObserve
 		this.resViewer.setMaxWidth("100%");
 		this.resViewer.setMaxHeight("100%");
 		this.resViewer.getElement().setText(
-			localizationConfig.getTranslation(GridExportLocalizationConfig.UNABLE_TO_SHOW_PREVIEW, this));
+			translator.translate(GridExportLocalizationConfig.UNABLE_TO_SHOW_PREVIEW));
 		
 		this.previewAccordionPanel.setContent(this.resViewer);
 		if(isPreviewableInStandardBrowser)
@@ -89,7 +90,7 @@ public class ReportViewerDialog extends Dialog implements AfterNavigationObserve
 		}
 		
 		final Button btnDownload = new Button(
-			localizationConfig.getTranslation(GridExportLocalizationConfig.DOWNLOAD, this),
+			translator.translate(GridExportLocalizationConfig.DOWNLOAD),
 			VaadinIcon.DOWNLOAD.create());
 		btnDownload.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 		this.downloadAnchor.add(btnDownload);
@@ -99,9 +100,9 @@ public class ReportViewerDialog extends Dialog implements AfterNavigationObserve
 	public ReportViewerDialog(
 		final StreamResource res,
 		final Format format,
-		final GridExportLocalizationConfig config)
+		final Translator translator)
 	{
-		this(res, format.mimeType(), format.isPreviewableInStandardBrowser(), config);
+		this(res, format.getMimeType(), format.isPreviewableInStandardBrowser(), translator);
 	}
 	
 	private void initUI()
