@@ -6,6 +6,19 @@
 	flex-wrap: wrap;
 }
 
+.grid-exporter-specific-configuration-container {
+	flex-wrap: wrap;
+	margin: 0px;
+	padding: 0px;
+	height: unset;
+	width: 100%;
+	row-gap: 10px;
+	column-gap: 20px;
+	align-items: baseline;
+	align-content: flex-start;
+	flex-direction: row;
+}
+
 .grid-exporter-button {
 	height: unset;
 	width: unset;

@@ -75,7 +75,6 @@ public class ColumnConfigurationComponent<T> extends FlexLayout implements Trans
 			.setHeader(this.translate(GridExportLocalizationConfig.NAME))
 			.setResizable(true)
 			.setSortable(false)
-			.setWidth("350px")
 			.setAutoWidth(true);
 		
 		this.grid
@@ -99,8 +98,6 @@ public class ColumnConfigurationComponent<T> extends FlexLayout implements Trans
 			.setSortable(false)
 			.setWidth("150px")
 			.setFlexGrow(0);
-		this.grid.setWidth("600px");
-		this.grid.setHeight("400px");
 		
 		this.grid.setSelectionMode(Grid.SelectionMode.MULTI);
 		((GridMultiSelectionModel<?>)this.grid.getSelectionModel())

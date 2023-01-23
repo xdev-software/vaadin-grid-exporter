@@ -28,6 +28,7 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.AfterNavigationEvent;
@@ -168,7 +169,8 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		
 		final VerticalLayout gridcontent = new VerticalLayout();
 		gridcontent.setPadding(false);
-		final HorizontalLayout specificConfigurationLayout = new HorizontalLayout();
+		final FlexLayout specificConfigurationLayout = new FlexLayout();
+		specificConfigurationLayout.addClassName(GridExporterStyles.SPECIFIC_CONFIGURATION_CONTAINER);
 		final ComboBox<Format<T, ?>> formatComboBox = new ComboBox<>();
 		gridcontent.add(columnConfigurationComponent, formatComboBox, specificConfigurationLayout);
 		gridcontent.addClassName(GridExporterStyles.BAR);
@@ -180,7 +182,8 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 			event -> {
 				specificConfigurationLayout.removeAll();
 				final Format<T, ? extends SpecificConfig> value = event.getValue();
-				final FormatConfigComponent<?> configurationComponent = value.getConfigurationComponent();
+				final FormatConfigComponent<?> configurationComponent = value.createConfigurationComponent();
+				configurationComponent.addClassName(GridExporterStyles.SPECIFIC_CONFIGURATION_CONTAINER);
 				specificConfigurationLayout.add(configurationComponent);
 				
 				btnExport.addClickListener(e -> this.export(value, configurationComponent));

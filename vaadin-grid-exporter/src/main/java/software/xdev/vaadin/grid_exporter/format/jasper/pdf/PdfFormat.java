@@ -45,7 +45,7 @@ public class PdfFormat<T> extends AbstractJasperReportFormatter<T, PdfSpecificCo
 	}
 	
 	@Override
-	public FormatConfigComponent<PdfSpecificConfig> getConfigurationComponent()
+	public FormatConfigComponent<PdfSpecificConfig> createConfigurationComponent()
 	{
 		return new PdfFormatComponent(this.getTranslator());
 	}

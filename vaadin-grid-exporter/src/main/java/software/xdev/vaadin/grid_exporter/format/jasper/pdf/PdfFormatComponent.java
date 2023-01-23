@@ -54,15 +54,8 @@ public class PdfFormatComponent
 		this.cmbPageOrientation.setLabel(this.translate(GridExportLocalizationConfig.PAGE_ORIENTATION));
 		this.ckShowPageNumbers.setLabel(this.translate(GridExportLocalizationConfig.SHOW_PAGE_NUMBERS));
 		this.ckHighlightRows.setLabel(this.translate(GridExportLocalizationConfig.HIGHLIGHT_ROWS));
-		this.ckShowPageNumbers.setSizeUndefined();
-		this.ckHighlightRows.setSizeUndefined();
-		this.cmbPageFormat.setSizeFull();
-		this.cmbPageOrientation.setSizeFull();
 		
-		this.txtReportTitle.setMaxWidth("100%");
 		this.txtReportTitle.setLabel(this.translate(GridExportLocalizationConfig.REPORT_TITLE));
-		this.txtReportTitle.setWidth("400px");
-		this.txtReportTitle.setHeight(null);
 		
 		this.cmbPageOrientation.setItems(PageOrientation.values());
 		this.cmbPageOrientation.setItemLabelGenerator(orientation ->

@@ -15,10 +15,10 @@
  */
 package software.xdev.vaadin.grid_exporter.format;
 
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.FlexLayout;
 
 
-public abstract class FormatConfigComponent<T extends SpecificConfig> extends HorizontalLayout
+public abstract class FormatConfigComponent<T extends SpecificConfig> extends FlexLayout
 {
 	public abstract T getConfig();
 }
