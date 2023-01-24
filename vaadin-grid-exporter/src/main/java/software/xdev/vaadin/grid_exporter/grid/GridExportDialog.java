@@ -25,12 +25,15 @@ import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.tabs.Tab;
+import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.server.StreamResource;
@@ -46,6 +49,10 @@ import software.xdev.vaadin.grid_exporter.grid.column.ColumnConfigurationCompone
 @CssImport(GridExporterStyles.LOCATION)
 public class GridExportDialog<T> extends Dialog implements AfterNavigationObserver, Translator
 {
+	private Tab tabConfigure;
+	private Tab tabPreview;
+	private Tabs tabs;
+	private ReportViewerComponent viewerComponent;
 	private final GeneralConfig<T> configuration;
 	private final GridExportLocalizationConfig localizationConfig;
 	private final Grid<T> gridToExport;
@@ -117,7 +124,8 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 			() -> new ByteArrayInputStream(exportedGridAsBytes));
 		resource.setContentType(format.getMimeType());
 		
-		new ReportViewerDialog(resource, format, this).open();
+		this.viewerComponent.setData(resource, format.getMimeType(), format.isPreviewableInStandardBrowser(), this);
+		this.tabs.setSelectedTab(this.tabPreview);
 	}
 	
 	@Override
@@ -135,7 +143,36 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		columnConfigurationComponent.addClassName(GridExporterStyles.FLEX_WRAP_CONTAINER);
 		columnConfigurationComponent.addClassName(GridExporterStyles.BAR);
 		
+		this.viewerComponent = new ReportViewerComponent();
+		this.viewerComponent.addClassName(GridExporterStyles.MAIN_LAYOUT);
+		final VerticalLayout gridcontent = new VerticalLayout();
+		gridcontent.setSizeUndefined();
+		gridcontent.addClassName(GridExporterStyles.MAIN_LAYOUT);
+		
 		// HEADER
+		this.tabConfigure = new Tab(
+			VaadinIcon.COG.create(),
+			new Span(this.translate(GridExportLocalizationConfig.CONFIGURE_COLUMNS)));
+		this.tabPreview =
+			new Tab(VaadinIcon.VIEWPORT.create(), new Span(this.translate(GridExportLocalizationConfig.PREVIEW)));
+		
+		this.tabs = new Tabs(this.tabConfigure, this.tabPreview);
+		this.tabs.addClassName(GridExporterStyles.BAR);
+		this.tabs.addSelectedChangeListener(
+			event ->
+			{
+				this.removeAll();
+				if(event.getSelectedTab() == this.tabPreview)
+				{
+					this.add(this.viewerComponent);
+				}
+				else
+				{
+					this.add(gridcontent);
+				}
+			}
+		);
+		
 		final Label lblTitle = new Label(this.translate(GridExportLocalizationConfig.EXPORT_CAPTION));
 		lblTitle.addClassName(GridExporterStyles.PRIMARY_FLEX_CHILD);
 		final Button btnClose = new Button(VaadinIcon.CLOSE.create());
@@ -146,7 +183,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		titlebar.setFlexGrow(1.0, lblTitle);
 		titlebar.add(iconGrid, lblTitle, btnClose);
 		titlebar.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-		this.getHeader().add(titlebar);
+		this.getHeader().add(new VerticalLayout(titlebar, this.tabs));
 		
 		// FOOTER
 		final Button btnCancel = new Button(this.translate(GridExportLocalizationConfig.CANCEL));
@@ -174,7 +211,6 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		bottomlayout.addClassName(GridExporterStyles.BAR);
 		this.getFooter().add(bottomlayout);
 		
-		final VerticalLayout gridcontent = new VerticalLayout();
 		gridcontent.setPadding(false);
 		final FlexLayout specificConfigurationLayout = new FlexLayout();
 		specificConfigurationLayout.addClassName(GridExporterStyles.SPECIFIC_CONFIGURATION_CONTAINER);
@@ -196,14 +232,9 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		);
 		formatComboBox.setValue(this.configuration.getPreselectedFormat());
 		
-		final Label lblGridTitle = new Label(this.translate(GridExportLocalizationConfig.CONFIGURE_COLUMNS));
-		lblGridTitle.addClassName(GridExporterStyles.GRID_TITLE);
-		
-		final VerticalLayout layout = new VerticalLayout();
-		layout.setSizeUndefined();
-		layout.add(lblGridTitle, gridcontent);
-		layout.addClassName(GridExporterStyles.MAIN_LAYOUT);
-		this.add(layout);
 		this.addClassName(GridExporterStyles.DIALOG);
+		// Simply call the "Selection Changed Listener"
+		this.tabs.setSelectedTab(this.tabPreview);
+		this.tabs.setSelectedTab(this.tabConfigure);
 	}
 }

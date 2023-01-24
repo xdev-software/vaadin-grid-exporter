@@ -23,109 +23,94 @@ import com.vaadin.flow.component.accordion.Accordion;
 import com.vaadin.flow.component.accordion.AccordionPanel;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
-import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
-import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
-import com.vaadin.flow.router.AfterNavigationEvent;
-import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.server.AbstractStreamResource;
 import com.vaadin.flow.server.StreamResource;
 
 import software.xdev.vaadin.grid_exporter.Translator;
-import software.xdev.vaadin.grid_exporter.format.Format;
 
 
 /**
  * @author XDEV Software
  * @since 10.01.00
  */
-public class ReportViewerDialog extends Dialog implements AfterNavigationObserver
+public class ReportViewerComponent extends VerticalLayout
 {
 	private final VerticalLayout rootLayout = new VerticalLayout();
 	
 	private final HorizontalLayout headerbar = new HorizontalLayout();
-	private final Button btnClose = new Button(VaadinIcon.CLOSE.create());
 	private final Anchor downloadAnchor = new Anchor();
-	private final Label lblTitle = new Label("Report");
+	private StreamResource res;
+	private String mimeType;
+	private boolean isPreviewableInStandardBrowser;
+	private Translator translator;
 	
 	private final Accordion previewAccordion = new Accordion();
-	private final AccordionPanel previewAccordionPanel;
 	
-	private final HtmlObject resViewer;
-	
-	protected ReportViewerDialog(
+	public void setData(
 		final StreamResource res,
 		final String mimeType,
 		final boolean isPreviewableInStandardBrowser,
-		final Translator translator)
+		final Translator translator
+	)
 	{
-		this.previewAccordionPanel = new AccordionPanel(
-			translator.translate(GridExportLocalizationConfig.PREVIEW),
-			new Div());
+		this.res = res;
+		this.mimeType = mimeType;
+		this.isPreviewableInStandardBrowser = isPreviewableInStandardBrowser;
+		this.translator = translator;
 		this.initUI();
+	}
+	
+	private void initUI()
+	{
+		final Button btnDownload = new Button(
+			this.translator.translate(GridExportLocalizationConfig.DOWNLOAD),
+			VaadinIcon.DOWNLOAD.create());
+		btnDownload.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+		this.downloadAnchor.add(btnDownload);
+		this.downloadAnchor.setHref(this.res);
 		
-		this.lblTitle.setText(res.getName());
+		this.headerbar.setSpacing(true);
+		this.headerbar.setPadding(false);
+		this.headerbar.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
+		this.headerbar.setWidthFull();
+		this.headerbar.add(this.downloadAnchor);
 		
-		this.resViewer = new HtmlObject(res, mimeType);
-		this.resViewer.setMinHeight("60vh");
-		this.resViewer.setSizeFull();
-		this.resViewer.setMaxWidth("100%");
-		this.resViewer.setMaxHeight("100%");
-		this.resViewer.getElement().setText(
-			translator.translate(GridExportLocalizationConfig.UNABLE_TO_SHOW_PREVIEW));
+		this.previewAccordion.setSizeFull();
+		final AccordionPanel previewAccordionPanel = new AccordionPanel(
+			this.translator.translate(GridExportLocalizationConfig.PREVIEW),
+			new Div());
+		this.previewAccordion.add(previewAccordionPanel);
 		
-		this.previewAccordionPanel.setContent(this.resViewer);
-		if(isPreviewableInStandardBrowser)
+		final HtmlObject resViewer = new HtmlObject(this.res, this.mimeType);
+		resViewer.setMinHeight("60vh");
+		resViewer.setSizeFull();
+		resViewer.setMaxWidth("100%");
+		resViewer.setMaxHeight("100%");
+		resViewer.getElement().setText(
+			this.translator.translate(GridExportLocalizationConfig.UNABLE_TO_SHOW_PREVIEW));
+		
+		previewAccordionPanel.setContent(resViewer);
+		if(this.isPreviewableInStandardBrowser)
 		{
-			this.previewAccordion.open(this.previewAccordionPanel);
+			this.previewAccordion.open(previewAccordionPanel);
 		}
 		else
 		{
 			this.previewAccordion.close();
 		}
 		
-		final Button btnDownload = new Button(
-			translator.translate(GridExportLocalizationConfig.DOWNLOAD),
-			VaadinIcon.DOWNLOAD.create());
-		btnDownload.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-		this.downloadAnchor.add(btnDownload);
-		this.downloadAnchor.setHref(res);
-	}
-	
-	public ReportViewerDialog(
-		final StreamResource res,
-		final Format format,
-		final Translator translator)
-	{
-		this(res, format.getMimeType(), format.isPreviewableInStandardBrowser(), translator);
-	}
-	
-	private void initUI()
-	{
-		this.btnClose.addClickListener(event -> this.close());
+		this.setSpacing(true);
+		this.setPadding(false);
+		this.setWidth("70vw");
+		this.setMaxHeight("80vh");
+		this.add(this.headerbar, this.previewAccordion);
 		
-		this.headerbar.setSpacing(true);
-		this.headerbar.setPadding(false);
-		this.headerbar.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-		this.headerbar.setFlexGrow(1.0, this.lblTitle);
-		this.headerbar.setWidthFull();
-		this.headerbar.add(this.lblTitle, this.downloadAnchor, this.btnClose);
-		
-		this.previewAccordion.setSizeFull();
-		this.previewAccordion.add(this.previewAccordionPanel);
-		
-		this.rootLayout.setSpacing(true);
-		this.rootLayout.setPadding(false);
-		this.rootLayout.setWidth("70vw");
-		this.rootLayout.setMaxHeight("80vh");
-		this.rootLayout.add(this.headerbar, this.previewAccordion);
-		
-		this.add(this.rootLayout);
 		this.setSizeUndefined();
 	}
 	
@@ -135,21 +120,6 @@ public class ReportViewerDialog extends Dialog implements AfterNavigationObserve
 	public VerticalLayout getRootLayout()
 	{
 		return this.rootLayout;
-	}
-	
-	/**
-	 * @return the resViewer
-	 */
-	public HtmlObject getResViewer()
-	{
-		return this.resViewer;
-	}
-	
-	@Override
-	public void afterNavigation(final AfterNavigationEvent event)
-	{
-		// Workaround for https://github.com/vaadin/vaadin-dialog-flow/issues/108
-		this.close();
 	}
 	
 	@Tag(Tag.OBJECT)
