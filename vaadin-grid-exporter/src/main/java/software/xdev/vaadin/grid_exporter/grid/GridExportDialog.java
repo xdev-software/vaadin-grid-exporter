@@ -135,6 +135,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		columnConfigurationComponent.addClassName(GridExporterStyles.FLEX_WRAP_CONTAINER);
 		columnConfigurationComponent.addClassName(GridExporterStyles.BAR);
 		
+		// HEADER
 		final Label lblTitle = new Label(this.translate(GridExportLocalizationConfig.EXPORT_CAPTION));
 		lblTitle.addClassName(GridExporterStyles.PRIMARY_FLEX_CHILD);
 		final Button btnClose = new Button(VaadinIcon.CLOSE.create());
@@ -145,7 +146,9 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		titlebar.setFlexGrow(1.0, lblTitle);
 		titlebar.add(iconGrid, lblTitle, btnClose);
 		titlebar.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
+		this.getHeader().add(titlebar);
 		
+		// FOOTER
 		final Button btnCancel = new Button(this.translate(GridExportLocalizationConfig.CANCEL));
 		final Button btnExport = new Button(this.translate(GridExportLocalizationConfig.EXPORT));
 		btnExport.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
@@ -169,6 +172,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		bottomlayout.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
 		bottomlayout.add(lblStatus, buttonbar);
 		bottomlayout.addClassName(GridExporterStyles.BAR);
+		this.getFooter().add(bottomlayout);
 		
 		final VerticalLayout gridcontent = new VerticalLayout();
 		gridcontent.setPadding(false);
@@ -197,7 +201,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		
 		final VerticalLayout layout = new VerticalLayout();
 		layout.setSizeUndefined();
-		layout.add(titlebar, lblGridTitle, gridcontent, bottomlayout);
+		layout.add(lblGridTitle, gridcontent);
 		layout.addClassName(GridExporterStyles.MAIN_LAYOUT);
 		this.add(layout);
 		this.addClassName(GridExporterStyles.DIALOG);

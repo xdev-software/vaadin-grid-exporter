@@ -101,7 +101,7 @@ public class ColumnConfigurationComponent<T> extends FlexLayout implements Trans
 			.setKey("position")
 			.setHeader(this.translate(GridExportLocalizationConfig.POSITION))
 			.setSortable(false)
-			.setWidth("150px")
+			.setWidth("110px")
 			.setFlexGrow(0);
 		
 		this.grid.setSelectionMode(Grid.SelectionMode.MULTI);
