@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridMultiSelectionModel;
 import com.vaadin.flow.component.grid.GridVariant;
@@ -26,6 +27,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.component.textfield.TextFieldVariant;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 
 import software.xdev.vaadin.grid_exporter.Translator;
@@ -68,6 +70,7 @@ public class ColumnConfigurationComponent<T> extends FlexLayout implements Trans
 				
 				txtField.setValue(v.getHeader());
 				txtField.addValueChangeListener(e -> v.setHeader(e.getValue()));
+				txtField.addThemeVariants(TextFieldVariant.LUMO_SMALL);
 				
 				return txtField;
 			}))
@@ -83,9 +86,11 @@ public class ColumnConfigurationComponent<T> extends FlexLayout implements Trans
 				final Button up = new Button(
 					VaadinIcon.ARROW_UP.create(),
 					e -> this.moveUp(v));
+				up.addThemeVariants(ButtonVariant.LUMO_SMALL);
 				final Button down = new Button(
 					VaadinIcon.ARROW_DOWN.create(),
 					e -> this.moveDown(v));
+				down.addThemeVariants(ButtonVariant.LUMO_SMALL);
 				
 				final HorizontalLayout hlContainer = new HorizontalLayout(up, down);
 				hlContainer.setSizeFull();

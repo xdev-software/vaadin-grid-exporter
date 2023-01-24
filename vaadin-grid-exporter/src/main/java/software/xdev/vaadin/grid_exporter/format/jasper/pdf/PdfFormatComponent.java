@@ -15,8 +15,6 @@
  */
 package software.xdev.vaadin.grid_exporter.format.jasper.pdf;
 
-import java.awt.Insets;
-
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.textfield.TextField;
@@ -84,14 +82,11 @@ public class PdfFormatComponent
 	@Override
 	public PdfSpecificConfig getConfig()
 	{
-		return
-			new PdfSpecificConfig()
-				.withPageType(this.cmbPageFormat.getValue())
-				.withHighlightRows(this.ckHighlightRows.getValue())
-				.withPageOrientation(this.cmbPageOrientation.getValue())
-				.withShowPageNumber(this.ckShowPageNumbers.getValue())
-				.withPageMargin(new Insets(20, 20, 20, 20))
-				.withTitle(this.txtReportTitle.getValue())
-			;
+		return new PdfSpecificConfig()
+			.withPageType(this.cmbPageFormat.getValue())
+			.withHighlightRows(this.ckHighlightRows.getValue())
+			.withPageOrientation(this.cmbPageOrientation.getValue())
+			.withShowPageNumber(this.ckShowPageNumbers.getValue())
+			.withTitle(this.txtReportTitle.getValue());
 	}
 }

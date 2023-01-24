@@ -49,6 +49,8 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 	private final GeneralConfig<T> configuration;
 	private final GridExportLocalizationConfig localizationConfig;
 	private final Grid<T> gridToExport;
+	private Format<T, ?> selectedFormat;
+	private FormatConfigComponent<?> selectedFormatConfigComponent;
 	
 	public static <T> GridExportDialog<T> open(final Grid<T> gridToExport)
 	{
@@ -149,6 +151,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		btnExport.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 		btnExport.addClassName(GridExporterStyles.BUTTON);
 		btnCancel.addClassName(GridExporterStyles.BUTTON);
+		btnExport.addClickListener(event -> this.export(this.selectedFormat, this.selectedFormatConfigComponent));
 		btnCancel.addClickListener(event -> this.close());
 		btnClose.addClickListener(event -> this.close());
 		
@@ -181,12 +184,10 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		formatComboBox.addValueChangeListener(
 			event -> {
 				specificConfigurationLayout.removeAll();
-				final Format<T, ? extends SpecificConfig> value = event.getValue();
-				final FormatConfigComponent<?> configurationComponent = value.createConfigurationComponent();
-				configurationComponent.addClassName(GridExporterStyles.SPECIFIC_CONFIGURATION_CONTAINER);
-				specificConfigurationLayout.add(configurationComponent);
-				
-				btnExport.addClickListener(e -> this.export(value, configurationComponent));
+				this.selectedFormat = event.getValue();
+				this.selectedFormatConfigComponent = this.selectedFormat.createConfigurationComponent();
+				this.selectedFormatConfigComponent.addClassName(GridExporterStyles.SPECIFIC_CONFIGURATION_CONTAINER);
+				specificConfigurationLayout.add(this.selectedFormatConfigComponent);
 			}
 		);
 		formatComboBox.setValue(this.configuration.getPreselectedFormat());
@@ -195,10 +196,10 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		lblGridTitle.addClassName(GridExporterStyles.GRID_TITLE);
 		
 		final VerticalLayout layout = new VerticalLayout();
-		
+		layout.setSizeUndefined();
 		layout.add(titlebar, lblGridTitle, gridcontent, bottomlayout);
 		layout.addClassName(GridExporterStyles.MAIN_LAYOUT);
 		this.add(layout);
-		layout.addClassName(GridExporterStyles.DIALOG);
+		this.addClassName(GridExporterStyles.DIALOG);
 	}
 }

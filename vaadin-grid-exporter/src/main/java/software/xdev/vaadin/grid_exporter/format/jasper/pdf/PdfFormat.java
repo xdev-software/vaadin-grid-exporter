@@ -26,7 +26,6 @@ import software.xdev.vaadin.grid_exporter.Translator;
 import software.xdev.vaadin.grid_exporter.format.FormatConfigComponent;
 import software.xdev.vaadin.grid_exporter.format.GeneralConfig;
 import software.xdev.vaadin.grid_exporter.format.jasper.AbstractJasperReportFormatter;
-import software.xdev.vaadin.grid_exporter.format.jasper.GridDataSourceFactory;
 import software.xdev.vaadin.grid_exporter.format.jasper.GridReportStyles;
 
 
@@ -35,25 +34,21 @@ public class PdfFormat<T> extends AbstractJasperReportFormatter<T, PdfSpecificCo
 	
 	public PdfFormat(final Translator translator)
 	{
-		super(JasperReportBuilder::toPdf, "PDF", "pdf", "application/pdf", translator);
-	}
-	
-	@Override
-	public boolean isPreviewableInStandardBrowser()
-	{
-		return true;
+		super(
+			JasperReportBuilder::toPdf,
+			"PDF",
+			"pdf",
+			"application/pdf",
+			true,
+			true,
+			translator
+		);
 	}
 	
 	@Override
 	public FormatConfigComponent<PdfSpecificConfig> createConfigurationComponent()
 	{
 		return new PdfFormatComponent(this.getTranslator());
-	}
-	
-	@Override
-	public boolean isPaginationActive()
-	{
-		return true;
 	}
 	
 	@Override
@@ -75,7 +70,6 @@ public class PdfFormat<T> extends AbstractJasperReportFormatter<T, PdfSpecificCo
 		}
 		
 		report.setShowColumnTitle(true);
-		report.setDataSource(new GridDataSourceFactory.Default<T>().createDataSource(gridToExport, generalConfig));
 		report.setPageFormat(specificConfig.getPageType(), specificConfig.getPageOrientation());
 		
 		final String title = specificConfig.getTitle();

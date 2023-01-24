@@ -23,6 +23,17 @@ import java.util.stream.Collectors;
 import com.vaadin.flow.component.grid.Grid;
 
 import software.xdev.vaadin.grid_exporter.Translator;
+import software.xdev.vaadin.grid_exporter.format.jasper.CsvFormat;
+import software.xdev.vaadin.grid_exporter.format.jasper.DocxFormat;
+import software.xdev.vaadin.grid_exporter.format.jasper.HtmlFormat;
+import software.xdev.vaadin.grid_exporter.format.jasper.OdsFormat;
+import software.xdev.vaadin.grid_exporter.format.jasper.OdtFormat;
+import software.xdev.vaadin.grid_exporter.format.jasper.PptxFormat;
+import software.xdev.vaadin.grid_exporter.format.jasper.RtfFormat;
+import software.xdev.vaadin.grid_exporter.format.jasper.TextFormat;
+import software.xdev.vaadin.grid_exporter.format.jasper.XlsFormat;
+import software.xdev.vaadin.grid_exporter.format.jasper.XlsxFormat;
+import software.xdev.vaadin.grid_exporter.format.jasper.XmlFormat;
 import software.xdev.vaadin.grid_exporter.format.jasper.pdf.PdfFormat;
 import software.xdev.vaadin.grid_exporter.grid.column.ColumnConfiguration;
 import software.xdev.vaadin.grid_exporter.grid.column.ColumnConfigurationBuilder;
@@ -90,7 +101,20 @@ public class GeneralConfig<T>
 		}
 		
 		this.preselectedFormat = new PdfFormat<>(translator);
-		this.availableFormats = Arrays.asList(this.preselectedFormat);
+		this.availableFormats = Arrays.asList(
+			new CsvFormat<>(translator),
+			new DocxFormat<>(translator),
+			new HtmlFormat<>(translator),
+			new OdsFormat<>(translator),
+			new OdtFormat<>(translator),
+			new PptxFormat<>(translator),
+			this.preselectedFormat,
+			new RtfFormat<>(translator),
+			new TextFormat<>(translator),
+			new XlsFormat<>(translator),
+			new XlsxFormat<>(translator),
+			new XmlFormat<>(translator)
+		);
 		
 		// This has to be done here so that it's already available for the ExportDialog
 		this.columnConfigurations = grid.getColumns().stream()
@@ -109,7 +133,7 @@ public class GeneralConfig<T>
 	{
 		if(!this.availableFormats.contains(format))
 		{
-			throw new RuntimeException(
+			throw new IllegalStateException(
 				"Can't select unavailable format. Please make shure the format is available in 'availableFormats'.");
 		}
 		this.preselectedFormat = format;

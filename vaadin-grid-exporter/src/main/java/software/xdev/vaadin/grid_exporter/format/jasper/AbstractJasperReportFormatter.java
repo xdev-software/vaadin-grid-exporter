@@ -41,25 +41,40 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 	private final String fileSuffix;
 	private final String mimeType;
 	private final Translator translator;
+	private final boolean isPreviewableInStandardBrowser;
+	private final boolean isPaginationActive;
 	
 	/**
 	 * Returns if a report is paginated (on every new page a new title, column-headers are printed, etc)
 	 *
 	 * @return <code>true</code> if the pagination is active
 	 */
-	public abstract boolean isPaginationActive();
+	public boolean isPaginationActive()
+	{
+		return this.isPaginationActive;
+	}
+	
+	@Override
+	public boolean isPreviewableInStandardBrowser()
+	{
+		return this.isPreviewableInStandardBrowser;
+	}
 	
 	public AbstractJasperReportFormatter(
 		final DynamicExporter exporter,
 		final String nameToDisplay,
 		final String fileSuffix,
 		final String mimeType,
+		final boolean isPreviewableInStandardBrowser,
+		final boolean isPaginationActive,
 		final Translator translator)
 	{
 		this.exporter = exporter;
 		this.nameToDisplay = nameToDisplay;
 		this.fileSuffix = fileSuffix;
 		this.mimeType = mimeType;
+		this.isPreviewableInStandardBrowser = isPreviewableInStandardBrowser;
+		this.isPaginationActive = isPaginationActive;
 		this.translator = translator;
 	}
 	
@@ -137,12 +152,12 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 	
 	protected JasperReportBuilder buildReport(
 		final Grid<T> gridToExport,
-		final GeneralConfig<T> configuration,
+		final GeneralConfig<T> generalConfig,
 		final E specificConfig)
 	{
 		final JasperReportBuilder report = DynamicReports.report();
 		
-		configuration.getColumnConfigurations().stream()
+		generalConfig.getColumnConfigurations().stream()
 			.filter(ColumnConfiguration::isVisible)
 			.map(this::toReportColumn)
 			.forEach(report::addColumn);
@@ -151,6 +166,8 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 		report.setColumnStyle(this.gridReportStyles.columnStyle());
 		
 		report.setIgnorePagination(!this.isPaginationActive());
+		
+		report.setDataSource(new GridDataSourceFactory.Default<T>().createDataSource(gridToExport, generalConfig));
 		
 		return report;
 	}
