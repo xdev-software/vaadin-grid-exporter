@@ -58,9 +58,6 @@ public class GeneralConfig<T>
 	
 	private final List<ColumnConfiguration<T>> columnConfigurations;
 	private final String fileName = "ExportedGrid";
-	
-	private final Translator translator;
-	
 	private final List<software.xdev.vaadin.grid_exporter.format.Format<T, ?>> availableFormats;
 	private Format<T, ?> preselectedFormat;
 	
@@ -90,7 +87,6 @@ public class GeneralConfig<T>
 		ColumnConfigurationBuilder configurationBuilder,
 		final Translator translator)
 	{
-		this.translator = translator;
 		if(columnFilter == null)
 		{
 			columnFilter = DefaultColumnFilter();

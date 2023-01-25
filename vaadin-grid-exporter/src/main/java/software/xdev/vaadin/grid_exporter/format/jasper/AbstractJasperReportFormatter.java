@@ -155,11 +155,8 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 		
 		report.setColumnTitleStyle(this.gridReportStyles.columnTitleStyle());
 		report.setColumnStyle(this.gridReportStyles.columnStyle());
-		
 		report.setIgnorePagination(!this.isPaginationActive());
-		
 		report.setDataSource(new GridDataSourceFactory.Default<T>().createDataSource(gridToExport, generalConfig));
-		
 		return report;
 	}
 	

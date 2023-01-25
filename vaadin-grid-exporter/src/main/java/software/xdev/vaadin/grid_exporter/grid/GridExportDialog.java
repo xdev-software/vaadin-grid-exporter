@@ -124,7 +124,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 			() -> new ByteArrayInputStream(exportedGridAsBytes));
 		resource.setContentType(format.getMimeType());
 		
-		this.viewerComponent.setData(resource, format.getMimeType(), format.isPreviewableInStandardBrowser());
+		this.viewerComponent.setData(resource, format.getMimeType());
 		this.tabs.setSelectedTab(this.tabPreview);
 	}
 	

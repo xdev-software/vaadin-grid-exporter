@@ -30,7 +30,8 @@ public interface GridExporterStyles
 	String STATUS = "grid-exporter-status";
 	String FLEX_WRAP_CONTAINER = "grid-exporter-flex-wrap-container";
 	String SPECIFIC_CONFIGURATION_CONTAINER = "grid-exporter-specific-configuration-container";
-	String GRID_TITLE = "grid-exporter-grid-title";
 	String MAIN_LAYOUT = "grid-exporter-main-layout";
 	String DIALOG = "grid-exporter-dialog";
+	String HTML_PREVIEW = "grid-exporter-html-preview";
+	String COLUMN_GRID = "grid-exporter-column-grid";
 }

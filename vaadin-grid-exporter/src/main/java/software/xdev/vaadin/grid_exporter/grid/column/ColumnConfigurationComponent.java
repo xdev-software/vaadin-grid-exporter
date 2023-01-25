@@ -32,6 +32,7 @@ import com.vaadin.flow.data.renderer.ComponentRenderer;
 
 import software.xdev.vaadin.grid_exporter.Translator;
 import software.xdev.vaadin.grid_exporter.grid.GridExportLocalizationConfig;
+import software.xdev.vaadin.grid_exporter.grid.GridExporterStyles;
 
 
 public class ColumnConfigurationComponent<T> extends FlexLayout implements Translator
@@ -58,8 +59,6 @@ public class ColumnConfigurationComponent<T> extends FlexLayout implements Trans
 	public void initUI()
 	{
 		this.grid.setItems(this.columnConfigurations);
-		
-		this.grid.setMaxWidth("100%");
 		this.grid.addThemeVariants(GridVariant.LUMO_COLUMN_BORDERS, GridVariant.LUMO_ROW_STRIPES);
 		
 		this.grid.addColumn(new ComponentRenderer<>(v ->
@@ -113,6 +112,7 @@ public class ColumnConfigurationComponent<T> extends FlexLayout implements Trans
 			this.grid.getSelectedItems().forEach(column -> column.setVisible(true));
 		});
 		this.columnConfigurations.forEach(column -> this.grid.select(column));
+		this.addClassName(GridExporterStyles.COLUMN_GRID);
 		this.add(this.grid);
 	}
 	
