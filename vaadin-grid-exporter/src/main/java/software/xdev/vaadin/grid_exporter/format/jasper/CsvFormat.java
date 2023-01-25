@@ -22,7 +22,7 @@ import software.xdev.vaadin.grid_exporter.format.VoidConfig;
 import software.xdev.vaadin.grid_exporter.format.VoidConfigComponent;
 
 
-public class CsvFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
+public class CsvFormat<T> extends AbstractJasperReportFormat<T, VoidConfig>
 {
 	
 	public CsvFormat(final Translator translator)

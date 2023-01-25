@@ -16,6 +16,7 @@
 package software.xdev.vaadin.grid_exporter.grid;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.Objects;
 
 import com.vaadin.flow.component.button.Button;
@@ -28,6 +29,8 @@ import com.vaadin.flow.component.html.Label;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.icon.Icon;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.notification.NotificationVariant;
 import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.FlexLayout;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -53,10 +56,10 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 	private Tab tabPreview;
 	private Tabs tabs;
 	private ReportViewerComponent viewerComponent;
-	private final GeneralConfig<T> configuration;
-	private final GridExportLocalizationConfig localizationConfig;
+	private transient final GeneralConfig<T> configuration;
+	private transient final GridExportLocalizationConfig localizationConfig;
 	private final Grid<T> gridToExport;
-	private Format<T, ?> selectedFormat;
+	private transient Format<T, ?> selectedFormat;
 	private FormatConfigComponent<?> selectedFormatConfigComponent;
 	
 	public static <T> GridExportDialog<T> open(final Grid<T> gridToExport)
@@ -64,7 +67,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		final GridExportLocalizationConfig gridExportLocalizationConfig = new GridExportLocalizationConfig();
 		return open(
 			gridToExport,
-			new GeneralConfig(
+			new GeneralConfig<>(
 				gridToExport,
 				(Translator)key -> gridExportLocalizationConfig.getTranslation(key, gridToExport)),
 			gridExportLocalizationConfig);
@@ -72,7 +75,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 	
 	public static <T> GridExportDialog<T> open(final Grid<T> gridToExport, final GeneralConfig<T> configuration)
 	{
-		return open(gridToExport, configuration);
+		return open(gridToExport, configuration, new GridExportLocalizationConfig());
 	}
 	
 	public static <T> GridExportDialog<T> open(
@@ -116,16 +119,29 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		final Format<T, E> format,
 		final FormatConfigComponent<?> specificConfigComponent)
 	{
-		final byte[] exportedGridAsBytes =
-			format.export(this.gridToExport, this.configuration, (E)specificConfigComponent.getConfig());
-		
-		final StreamResource resource = new StreamResource(
-			this.configuration.getFileName() + "." + format.getFormatFilenameSuffix(),
-			() -> new ByteArrayInputStream(exportedGridAsBytes));
-		resource.setContentType(format.getMimeType());
-		
-		this.viewerComponent.setData(resource, format.getMimeType());
-		this.tabs.setSelectedTab(this.tabPreview);
+		final byte[] exportedGridAsBytes;
+		try
+		{
+			exportedGridAsBytes =
+				format.export(this.gridToExport, this.configuration, (E)specificConfigComponent.getConfig());
+			
+			final StreamResource resource = new StreamResource(
+				this.configuration.getFileName() + "." + format.getFormatFilenameSuffix(),
+				() -> new ByteArrayInputStream(exportedGridAsBytes));
+			resource.setContentType(format.getMimeType());
+			
+			this.viewerComponent.setData(resource, format.getMimeType());
+			this.tabs.setSelectedTab(this.tabPreview);
+		}
+		catch(final IOException e)
+		{
+			final Notification errorMessage = new Notification(
+				this.translate(GridExportLocalizationConfig.ERROR_EXPORTING),
+				3000,
+				Notification.Position.MIDDLE);
+			errorMessage.addThemeVariants(NotificationVariant.LUMO_ERROR);
+			errorMessage.open();
+		}
 	}
 	
 	@Override

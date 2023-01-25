@@ -38,8 +38,8 @@ import software.xdev.vaadin.grid_exporter.grid.GridExporterStyles;
 public class ColumnConfigurationComponent<T> extends FlexLayout implements Translator
 {
 	private final Grid<ColumnConfiguration<T>> grid = new Grid<>();
-	private final List<ColumnConfiguration<T>> columnConfigurations;
-	private final Translator translator;
+	private transient final List<ColumnConfiguration<T>> columnConfigurations;
+	private transient final Translator translator;
 	
 	public ColumnConfigurationComponent(
 		final Translator translator,
@@ -111,7 +111,7 @@ public class ColumnConfigurationComponent<T> extends FlexLayout implements Trans
 			this.columnConfigurations.forEach(column -> column.setVisible(false));
 			this.grid.getSelectedItems().forEach(column -> column.setVisible(true));
 		});
-		this.columnConfigurations.forEach(column -> this.grid.select(column));
+		this.columnConfigurations.forEach(this.grid::select);
 		this.addClassName(GridExporterStyles.COLUMN_GRID);
 		this.add(this.grid);
 	}

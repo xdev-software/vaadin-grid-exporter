@@ -31,6 +31,7 @@ public class GridExportLocalizationConfig
 	public static final String PREFIX = "gridexporter.";
 	
 	public static final String EXPORT_CAPTION = PREFIX + "caption";
+	public static final String ERROR_EXPORTING = PREFIX + "errorExporting";
 	public static final String REPORT_TITLE = PREFIX + "title";
 	public static final String CONFIGURE_COLUMNS = PREFIX + "columns";
 	public static final String NAME = PREFIX + "columnName";
@@ -55,6 +56,7 @@ public class GridExportLocalizationConfig
 	// Key, Default Value
 	public static final Map<String, String > DEFAULT_VALUES = Map.ofEntries(
 		entry(EXPORT_CAPTION, "Export Grid"),
+		entry(ERROR_EXPORTING, "Could not export the grid to the selected format."),
 		entry(REPORT_TITLE, "Report Title (Optional)"),
 		entry(CONFIGURE_COLUMNS, "Configure Columns"),
 		entry(NAME, "Name"),

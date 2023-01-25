@@ -16,6 +16,7 @@
 package software.xdev.vaadin.grid_exporter.format.jasper;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
@@ -30,10 +31,11 @@ import software.xdev.vaadin.grid_exporter.Translator;
 import software.xdev.vaadin.grid_exporter.format.Format;
 import software.xdev.vaadin.grid_exporter.format.GeneralConfig;
 import software.xdev.vaadin.grid_exporter.format.SpecificConfig;
+import software.xdev.vaadin.grid_exporter.format.jasper.pdf.PdfSpecificConfig;
 import software.xdev.vaadin.grid_exporter.grid.column.ColumnConfiguration;
 
 
-public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig> implements Format<T, E>
+public abstract class AbstractJasperReportFormat<T, E extends SpecificConfig> implements Format<T, E>
 {
 	private final GridReportStyles gridReportStyles = GridReportStyles.New();
 	private final DynamicExporter exporter;
@@ -53,7 +55,7 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 		return this.isPaginationActive;
 	}
 	
-	public AbstractJasperReportFormatter(
+	protected AbstractJasperReportFormat(
 		final DynamicExporter exporter,
 		final String nameToDisplay,
 		final String fileSuffix,
@@ -92,17 +94,10 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 		return this.mimeType;
 	}
 	
-	private byte[] exportToBytes(final JasperReportBuilder reportBuilder)
+	private byte[] exportToBytes(final JasperReportBuilder reportBuilder) throws DRException
 	{
 		final ByteArrayOutputStream stream = new ByteArrayOutputStream();
-		try
-		{
-			this.exporter.export(reportBuilder, stream);
-		}
-		catch(final DRException e)
-		{
-			throw new RuntimeException(e);
-		}
+		this.exporter.export(reportBuilder, stream);
 		return stream.toByteArray();
 	}
 	
@@ -110,9 +105,16 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 	public byte[] export(
 		final Grid<T> gridToExport,
 		final GeneralConfig<T> generalConfig,
-		final E specificConfig)
+		final E specificConfig) throws IOException
 	{
-		return this.exportToBytes(this.buildReport(gridToExport, generalConfig, specificConfig));
+		try
+		{
+			return this.exportToBytes(this.buildReport(gridToExport, generalConfig, specificConfig));
+		}
+		catch(final DRException e)
+		{
+			throw new IOException(e);
+		}
 	}
 	
 	private TextColumnBuilder<String> toReportColumn(final ColumnConfiguration<T> column)
@@ -141,6 +143,11 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 		}
 	}
 	
+	/**
+	 * @param specificConfig contains all configuration for a specific format. Can be used in overriding methods (see
+	 *                       {@link software.xdev.vaadin.grid_exporter.format.jasper.pdf.PdfFormat#buildReport(Grid,
+	 *                       GeneralConfig, PdfSpecificConfig)}).
+	 */
 	protected JasperReportBuilder buildReport(
 		final Grid<T> gridToExport,
 		final GeneralConfig<T> generalConfig,

@@ -25,11 +25,11 @@ import net.sf.dynamicreports.report.builder.component.Components;
 import software.xdev.vaadin.grid_exporter.Translator;
 import software.xdev.vaadin.grid_exporter.format.FormatConfigComponent;
 import software.xdev.vaadin.grid_exporter.format.GeneralConfig;
-import software.xdev.vaadin.grid_exporter.format.jasper.AbstractJasperReportFormatter;
+import software.xdev.vaadin.grid_exporter.format.jasper.AbstractJasperReportFormat;
 import software.xdev.vaadin.grid_exporter.format.jasper.GridReportStyles;
 
 
-public class PdfFormat<T> extends AbstractJasperReportFormatter<T, PdfSpecificConfig>
+public class PdfFormat<T> extends AbstractJasperReportFormat<T, PdfSpecificConfig>
 {
 	
 	public PdfFormat(final Translator translator)

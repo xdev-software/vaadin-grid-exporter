@@ -15,6 +15,8 @@
  */
 package software.xdev.vaadin.grid_exporter.format;
 
+import java.io.IOException;
+
 import com.vaadin.flow.component.grid.Grid;
 
 
@@ -28,5 +30,5 @@ public interface Format<T, E extends SpecificConfig>
 	
 	FormatConfigComponent<E> createConfigurationComponent();
 	
-	byte[] export(Grid<T> gridToExport, GeneralConfig<T> generalConfig, E specificConfig);
+	byte[] export(Grid<T> gridToExport, GeneralConfig<T> generalConfig, E specificConfig) throws IOException;
 }

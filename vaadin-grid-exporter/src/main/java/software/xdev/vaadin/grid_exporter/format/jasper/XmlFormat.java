@@ -22,7 +22,7 @@ import software.xdev.vaadin.grid_exporter.format.VoidConfig;
 import software.xdev.vaadin.grid_exporter.format.VoidConfigComponent;
 
 
-public class XmlFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
+public class XmlFormat<T> extends AbstractJasperReportFormat<T, VoidConfig>
 {
 	
 	public XmlFormat(final Translator translator)

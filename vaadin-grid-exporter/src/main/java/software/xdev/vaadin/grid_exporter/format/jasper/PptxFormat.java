@@ -22,7 +22,7 @@ import software.xdev.vaadin.grid_exporter.format.VoidConfig;
 import software.xdev.vaadin.grid_exporter.format.VoidConfigComponent;
 
 
-public class PptxFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
+public class PptxFormat<T> extends AbstractJasperReportFormat<T, VoidConfig>
 {
 	
 	public PptxFormat(final Translator translator)
