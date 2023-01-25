@@ -105,7 +105,7 @@ public interface GridDataSourceFactory<T>
 			catch(final IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchFieldException
 						| SecurityException e)
 			{
-				e.printStackTrace();
+				// Something went wrong, but it's not our place to say what or why.
 			}
 			return null;
 		}
@@ -138,7 +138,7 @@ public interface GridDataSourceFactory<T>
 				catch(final IllegalAccessException | IllegalArgumentException | InvocationTargetException
 							| NoSuchMethodException | SecurityException e)
 				{
-					e.printStackTrace();
+					// Something went wrong, but it's not our place to say what or why.
 				}
 			}
 			return null;
