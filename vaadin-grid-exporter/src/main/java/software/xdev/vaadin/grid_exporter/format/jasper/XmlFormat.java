@@ -33,7 +33,6 @@ public class XmlFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
 			"xml",
 			"text/xml",
 			true,
-			true,
 			translator
 		);
 	}

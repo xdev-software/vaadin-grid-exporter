@@ -40,7 +40,6 @@ public class PdfFormat<T> extends AbstractJasperReportFormatter<T, PdfSpecificCo
 			"pdf",
 			"application/pdf",
 			true,
-			true,
 			translator
 		);
 	}

@@ -33,7 +33,6 @@ public class PptxFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
 			"pptx",
 			"application/vnd.openxmlformats-officedocument.presentationml.presentation",
 			true,
-			true,
 			translator
 		);
 	}

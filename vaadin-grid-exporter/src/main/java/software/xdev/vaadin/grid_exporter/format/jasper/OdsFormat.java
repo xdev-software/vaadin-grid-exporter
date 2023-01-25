@@ -33,7 +33,6 @@ public class OdsFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
 			"ods",
 			"application/vnd.oasis.opendocument.spreadsheet",
 			true,
-			true,
 			translator
 		);
 	}

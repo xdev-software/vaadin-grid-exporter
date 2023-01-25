@@ -33,7 +33,6 @@ public class OdtFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
 			"odt",
 			"application/vnd.oasis.opendocument.text",
 			true,
-			true,
 			translator
 		);
 	}

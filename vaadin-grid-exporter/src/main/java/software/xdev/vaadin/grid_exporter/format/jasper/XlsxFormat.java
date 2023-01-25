@@ -33,7 +33,6 @@ public class XlsxFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
 			"xlsx",
 			"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
 			true,
-			true,
 			translator
 		);
 	}

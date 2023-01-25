@@ -33,7 +33,6 @@ public class XlsFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
 			"xls",
 			"application/vnd.ms-excel",
 			true,
-			true,
 			translator
 		);
 	}

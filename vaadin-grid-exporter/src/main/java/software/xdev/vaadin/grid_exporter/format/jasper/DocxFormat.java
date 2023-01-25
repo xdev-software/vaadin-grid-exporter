@@ -33,7 +33,6 @@ public class DocxFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
 			"docx",
 			"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
 			true,
-			true,
 			translator
 		);
 	}

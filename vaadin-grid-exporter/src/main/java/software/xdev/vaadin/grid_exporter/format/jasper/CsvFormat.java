@@ -33,7 +33,6 @@ public class CsvFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
 			"csv",
 			"text/comma-separated-value",
 			true,
-			true,
 			translator
 		);
 	}

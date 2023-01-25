@@ -33,7 +33,6 @@ public class RtfFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
 			"rtf",
 			"text/rtf",
 			true,
-			true,
 			translator
 		);
 	}

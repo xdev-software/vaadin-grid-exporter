@@ -41,7 +41,6 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 	private final String fileSuffix;
 	private final String mimeType;
 	private final Translator translator;
-	private final boolean isPreviewableInStandardBrowser;
 	private final boolean isPaginationActive;
 	
 	/**
@@ -54,18 +53,11 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 		return this.isPaginationActive;
 	}
 	
-	@Override
-	public boolean isPreviewableInStandardBrowser()
-	{
-		return this.isPreviewableInStandardBrowser;
-	}
-	
 	public AbstractJasperReportFormatter(
 		final DynamicExporter exporter,
 		final String nameToDisplay,
 		final String fileSuffix,
 		final String mimeType,
-		final boolean isPreviewableInStandardBrowser,
 		final boolean isPaginationActive,
 		final Translator translator)
 	{
@@ -73,7 +65,6 @@ public abstract class AbstractJasperReportFormatter<T, E extends SpecificConfig>
 		this.nameToDisplay = nameToDisplay;
 		this.fileSuffix = fileSuffix;
 		this.mimeType = mimeType;
-		this.isPreviewableInStandardBrowser = isPreviewableInStandardBrowser;
 		this.isPaginationActive = isPaginationActive;
 		this.translator = translator;
 	}

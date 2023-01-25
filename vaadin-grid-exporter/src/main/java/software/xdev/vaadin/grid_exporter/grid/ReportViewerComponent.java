@@ -20,13 +20,10 @@ import com.vaadin.flow.component.PropertyDescriptor;
 import com.vaadin.flow.component.PropertyDescriptors;
 import com.vaadin.flow.component.Tag;
 import com.vaadin.flow.component.accordion.Accordion;
-import com.vaadin.flow.component.accordion.AccordionPanel;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.html.Anchor;
-import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.server.AbstractStreamResource;
@@ -45,73 +42,46 @@ public class ReportViewerComponent extends VerticalLayout
 	
 	private final HorizontalLayout headerbar = new HorizontalLayout();
 	private final Anchor downloadAnchor = new Anchor();
-	private StreamResource res;
-	private String mimeType;
-	private boolean isPreviewableInStandardBrowser;
-	private Translator translator;
+	private final Translator translator;
 	
 	private final Accordion previewAccordion = new Accordion();
+	private final Button btnDownload;
+	
+	public ReportViewerComponent(final Translator translator)
+	{
+		this.translator = translator;
+		this.btnDownload = new Button(
+			translator.translate(GridExportLocalizationConfig.DOWNLOAD),
+			VaadinIcon.DOWNLOAD.create()
+		);
+		this.btnDownload.setEnabled(false);
+		this.btnDownload.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+		this.btnDownload.addClassName(GridExporterStyles.BUTTON);
+		this.downloadAnchor.add(this.btnDownload);
+		this.downloadAnchor.getElement().setAttribute("download", true);
+	}
+	
+	public Anchor getDownloadAnchor()
+	{
+		return this.downloadAnchor;
+	}
 	
 	public void setData(
 		final StreamResource res,
-		final String mimeType,
-		final boolean isPreviewableInStandardBrowser,
-		final Translator translator
+		final String mimeType
 	)
 	{
-		this.res = res;
-		this.mimeType = mimeType;
-		this.isPreviewableInStandardBrowser = isPreviewableInStandardBrowser;
-		this.translator = translator;
-		this.initUI();
-	}
-	
-	private void initUI()
-	{
-		final Button btnDownload = new Button(
-			this.translator.translate(GridExportLocalizationConfig.DOWNLOAD),
-			VaadinIcon.DOWNLOAD.create());
-		btnDownload.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-		this.downloadAnchor.add(btnDownload);
-		this.downloadAnchor.setHref(this.res);
+		this.downloadAnchor.setHref(res);
+		this.btnDownload.setEnabled(true);
 		
-		this.headerbar.setSpacing(true);
-		this.headerbar.setPadding(false);
-		this.headerbar.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
-		this.headerbar.setWidthFull();
-		this.headerbar.add(this.downloadAnchor);
-		
-		this.previewAccordion.setSizeFull();
-		final AccordionPanel previewAccordionPanel = new AccordionPanel(
-			this.translator.translate(GridExportLocalizationConfig.PREVIEW),
-			new Div());
-		this.previewAccordion.add(previewAccordionPanel);
-		
-		final HtmlObject resViewer = new HtmlObject(this.res, this.mimeType);
+		final HtmlObject resViewer = new HtmlObject(res, mimeType);
 		resViewer.setMinHeight("60vh");
 		resViewer.setSizeFull();
 		resViewer.setMaxWidth("100%");
 		resViewer.setMaxHeight("100%");
 		resViewer.getElement().setText(
 			this.translator.translate(GridExportLocalizationConfig.UNABLE_TO_SHOW_PREVIEW));
-		
-		previewAccordionPanel.setContent(resViewer);
-		if(this.isPreviewableInStandardBrowser)
-		{
-			this.previewAccordion.open(previewAccordionPanel);
-		}
-		else
-		{
-			this.previewAccordion.close();
-		}
-		
-		this.setSpacing(true);
-		this.setPadding(false);
-		this.setWidth("70vw");
-		this.setMaxHeight("80vh");
-		this.add(this.headerbar, this.previewAccordion);
-		
-		this.setSizeUndefined();
+		this.add(resViewer);
 	}
 	
 	/**

@@ -124,7 +124,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 			() -> new ByteArrayInputStream(exportedGridAsBytes));
 		resource.setContentType(format.getMimeType());
 		
-		this.viewerComponent.setData(resource, format.getMimeType(), format.isPreviewableInStandardBrowser(), this);
+		this.viewerComponent.setData(resource, format.getMimeType(), format.isPreviewableInStandardBrowser());
 		this.tabs.setSelectedTab(this.tabPreview);
 	}
 	
@@ -143,7 +143,32 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		columnConfigurationComponent.addClassName(GridExporterStyles.FLEX_WRAP_CONTAINER);
 		columnConfigurationComponent.addClassName(GridExporterStyles.BAR);
 		
-		this.viewerComponent = new ReportViewerComponent();
+		// FOOTER
+		final Button btnCancel = new Button(this.translate(GridExportLocalizationConfig.CANCEL));
+		final Button btnExport = new Button(this.translate(GridExportLocalizationConfig.EXPORT));
+		btnExport.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+		btnExport.addClassName(GridExporterStyles.BUTTON);
+		btnCancel.addClassName(GridExporterStyles.BUTTON);
+		btnExport.addClickListener(event -> this.export(this.selectedFormat, this.selectedFormatConfigComponent));
+		btnCancel.addClickListener(event -> this.close());
+		
+		final HorizontalLayout buttonbar = new HorizontalLayout();
+		buttonbar.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
+		buttonbar.addClassName(GridExporterStyles.BAR);
+		
+		final Label lblStatus = new Label();
+		lblStatus.addClassName(GridExporterStyles.BAR);
+		lblStatus.addClassName(GridExporterStyles.STATUS);
+		
+		final HorizontalLayout bottomlayout = new HorizontalLayout();
+		bottomlayout.setSpacing(false);
+		bottomlayout.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
+		bottomlayout.add(lblStatus, buttonbar);
+		bottomlayout.addClassName(GridExporterStyles.BAR);
+		this.getFooter().add(bottomlayout);
+		
+		this.viewerComponent = new ReportViewerComponent(this);
+		this.viewerComponent.setSizeUndefined();
 		this.viewerComponent.addClassName(GridExporterStyles.MAIN_LAYOUT);
 		final VerticalLayout gridcontent = new VerticalLayout();
 		gridcontent.setSizeUndefined();
@@ -162,12 +187,15 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 			event ->
 			{
 				this.removeAll();
+				buttonbar.removeAll();
 				if(event.getSelectedTab() == this.tabPreview)
 				{
+					buttonbar.add(btnCancel, this.viewerComponent.getDownloadAnchor());
 					this.add(this.viewerComponent);
 				}
 				else
 				{
+					buttonbar.add(btnCancel, btnExport);
 					this.add(gridcontent);
 				}
 			}
@@ -176,6 +204,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		final Label lblTitle = new Label(this.translate(GridExportLocalizationConfig.EXPORT_CAPTION));
 		lblTitle.addClassName(GridExporterStyles.PRIMARY_FLEX_CHILD);
 		final Button btnClose = new Button(VaadinIcon.CLOSE.create());
+		btnClose.addClickListener(event -> this.close());
 		final Icon iconGrid = new Icon(VaadinIcon.TABLE);
 		final HorizontalLayout titlebar = new HorizontalLayout();
 		titlebar.addClassName(GridExporterStyles.BAR);
@@ -184,32 +213,6 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		titlebar.add(iconGrid, lblTitle, btnClose);
 		titlebar.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
 		this.getHeader().add(new VerticalLayout(titlebar, this.tabs));
-		
-		// FOOTER
-		final Button btnCancel = new Button(this.translate(GridExportLocalizationConfig.CANCEL));
-		final Button btnExport = new Button(this.translate(GridExportLocalizationConfig.EXPORT));
-		btnExport.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-		btnExport.addClassName(GridExporterStyles.BUTTON);
-		btnCancel.addClassName(GridExporterStyles.BUTTON);
-		btnExport.addClickListener(event -> this.export(this.selectedFormat, this.selectedFormatConfigComponent));
-		btnCancel.addClickListener(event -> this.close());
-		btnClose.addClickListener(event -> this.close());
-		
-		final HorizontalLayout buttonbar = new HorizontalLayout();
-		buttonbar.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
-		buttonbar.add(btnCancel, btnExport);
-		buttonbar.addClassName(GridExporterStyles.BAR);
-		
-		final Label lblStatus = new Label();
-		lblStatus.addClassName(GridExporterStyles.BAR);
-		lblStatus.addClassName(GridExporterStyles.STATUS);
-		
-		final HorizontalLayout bottomlayout = new HorizontalLayout();
-		bottomlayout.setSpacing(false);
-		bottomlayout.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
-		bottomlayout.add(lblStatus, buttonbar);
-		bottomlayout.addClassName(GridExporterStyles.BAR);
-		this.getFooter().add(bottomlayout);
 		
 		gridcontent.setPadding(false);
 		final FlexLayout specificConfigurationLayout = new FlexLayout();

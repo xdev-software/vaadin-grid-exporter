@@ -33,7 +33,6 @@ public class HtmlFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
 			"html",
 			"text/html",
 			true,
-			true,
 			translator
 		);
 	}

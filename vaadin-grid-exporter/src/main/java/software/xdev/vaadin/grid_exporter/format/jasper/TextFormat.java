@@ -33,7 +33,6 @@ public class TextFormat<T> extends AbstractJasperReportFormatter<T, VoidConfig>
 			"txt",
 			"text/plain",
 			true,
-			true,
 			translator
 		);
 	}
