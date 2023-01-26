@@ -1,16 +1,16 @@
-## 1.0.4
+## 1.1.0
 * Updated dependencies
+* Restructured the GUI
+* Refactored software architecture to make the component more expandable
 
 ## 1.0.3
 * Removed unused code
 
 ## 1.0.2
-
 * Updated dependencies
   * Vaadin 23.2
 
 ## 1.0.1
-
 * Removed unnecessary code and dependencies; Updated jasperreports to latest version
 
 ## 1.0.0

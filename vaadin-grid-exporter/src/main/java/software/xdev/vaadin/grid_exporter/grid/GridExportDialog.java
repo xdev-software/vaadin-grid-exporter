@@ -19,6 +19,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.Objects;
 
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -49,9 +50,16 @@ import software.xdev.vaadin.grid_exporter.format.SpecificConfig;
 import software.xdev.vaadin.grid_exporter.grid.column.ColumnConfigurationComponent;
 
 
+/**
+ * Dialog where the user can export data from a Vaadin {@link Grid} and configure the format.
+ *
+ * @author Johannes Rabauer
+ * @author AB
+ */
 @CssImport(GridExporterStyles.LOCATION)
 public class GridExportDialog<T> extends Dialog implements AfterNavigationObserver, Translator
 {
+	private static final int ERROR_NOTIFICATION_DURATION_IN_MS = 3000;
 	private Tab tabConfigure;
 	private Tab tabPreview;
 	private Tabs tabs;
@@ -106,7 +114,6 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		this.localizationConfig = Objects.requireNonNull(localizationConfig);
 		
 		this.initUI();
-		
 	}
 	
 	@Override
@@ -137,7 +144,7 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		{
 			final Notification errorMessage = new Notification(
 				this.translate(GridExportLocalizationConfig.ERROR_EXPORTING),
-				3000,
+				ERROR_NOTIFICATION_DURATION_IN_MS,
 				Notification.Position.MIDDLE);
 			errorMessage.addThemeVariants(NotificationVariant.LUMO_ERROR);
 			errorMessage.open();
@@ -161,34 +168,26 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		
 		// FOOTER
 		final Button btnCancel = new Button(this.translate(GridExportLocalizationConfig.CANCEL));
+		btnCancel.addClassName(GridExporterStyles.BUTTON);
 		final Button btnExport = new Button(this.translate(GridExportLocalizationConfig.EXPORT));
 		btnExport.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 		btnExport.addClassName(GridExporterStyles.BUTTON);
-		btnCancel.addClassName(GridExporterStyles.BUTTON);
 		btnExport.addClickListener(event -> this.export(this.selectedFormat, this.selectedFormatConfigComponent));
 		btnCancel.addClickListener(event -> this.close());
 		
 		final HorizontalLayout buttonbar = new HorizontalLayout();
 		buttonbar.setJustifyContentMode(FlexComponent.JustifyContentMode.END);
 		buttonbar.addClassName(GridExporterStyles.BAR);
-		
-		final Label lblStatus = new Label();
-		lblStatus.addClassName(GridExporterStyles.BAR);
-		lblStatus.addClassName(GridExporterStyles.STATUS);
-		
-		final HorizontalLayout bottomlayout = new HorizontalLayout();
-		bottomlayout.setSpacing(false);
-		bottomlayout.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
-		bottomlayout.add(lblStatus, buttonbar);
-		bottomlayout.addClassName(GridExporterStyles.BAR);
-		this.getFooter().add(bottomlayout);
+		buttonbar.setSpacing(false);
+		buttonbar.setJustifyContentMode(FlexComponent.JustifyContentMode.BETWEEN);
+		this.getFooter().add(buttonbar);
 		
 		this.viewerComponent = new ReportViewerComponent(this);
 		this.viewerComponent.setSizeUndefined();
 		this.viewerComponent.addClassName(GridExporterStyles.MAIN_LAYOUT);
-		final VerticalLayout gridcontent = new VerticalLayout();
-		gridcontent.setSizeUndefined();
-		gridcontent.addClassName(GridExporterStyles.MAIN_LAYOUT);
+		final VerticalLayout configurationLayout = new VerticalLayout();
+		configurationLayout.setSizeUndefined();
+		configurationLayout.addClassName(GridExporterStyles.MAIN_LAYOUT);
 		
 		// HEADER
 		this.tabConfigure = new Tab(
@@ -199,22 +198,12 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		
 		this.tabs = new Tabs(this.tabConfigure, this.tabPreview);
 		this.tabs.addClassName(GridExporterStyles.BAR);
-		this.tabs.addSelectedChangeListener(
-			event ->
-			{
-				this.removeAll();
-				buttonbar.removeAll();
-				if(event.getSelectedTab() == this.tabPreview)
-				{
-					buttonbar.add(btnCancel, this.viewerComponent.getDownloadAnchor());
-					this.add(this.viewerComponent);
-				}
-				else
-				{
-					buttonbar.add(btnCancel, btnExport);
-					this.add(gridcontent);
-				}
-			}
+		this.tabs.addSelectedChangeListener(event -> this.selectedTabChanged(
+			btnCancel,
+			btnExport,
+			buttonbar,
+			configurationLayout,
+			event)
 		);
 		
 		final Label lblTitle = new Label(this.translate(GridExportLocalizationConfig.EXPORT_CAPTION));
@@ -230,30 +219,54 @@ public class GridExportDialog<T> extends Dialog implements AfterNavigationObserv
 		titlebar.setDefaultVerticalComponentAlignment(FlexComponent.Alignment.CENTER);
 		this.getHeader().add(new VerticalLayout(titlebar, this.tabs));
 		
-		gridcontent.setPadding(false);
 		final FlexLayout specificConfigurationLayout = new FlexLayout();
 		specificConfigurationLayout.addClassName(GridExporterStyles.SPECIFIC_CONFIGURATION_CONTAINER);
 		final ComboBox<Format<T, ?>> formatComboBox = new ComboBox<>();
-		gridcontent.add(columnConfigurationComponent, formatComboBox, specificConfigurationLayout);
-		gridcontent.addClassName(GridExporterStyles.BAR);
-		
 		formatComboBox.setItems(this.configuration.getAvailableFormats());
 		formatComboBox.setItemLabelGenerator(item -> item.getFormatNameToDisplay());
 		formatComboBox.setLabel(this.translate(GridExportLocalizationConfig.FORMAT));
-		formatComboBox.addValueChangeListener(
-			event -> {
-				specificConfigurationLayout.removeAll();
-				this.selectedFormat = event.getValue();
-				this.selectedFormatConfigComponent = this.selectedFormat.createConfigurationComponent();
-				this.selectedFormatConfigComponent.addClassName(GridExporterStyles.SPECIFIC_CONFIGURATION_CONTAINER);
-				specificConfigurationLayout.add(this.selectedFormatConfigComponent);
-			}
-		);
+		formatComboBox.addValueChangeListener(event -> this.selectedFormatChanged(specificConfigurationLayout, event));
 		formatComboBox.setValue(this.configuration.getPreselectedFormat());
+		
+		configurationLayout.setPadding(false);
+		configurationLayout.add(columnConfigurationComponent, formatComboBox, specificConfigurationLayout);
+		configurationLayout.addClassName(GridExporterStyles.BAR);
 		
 		this.addClassName(GridExporterStyles.DIALOG);
 		// Simply call the "Selection Changed Listener"
 		this.tabs.setSelectedTab(this.tabPreview);
 		this.tabs.setSelectedTab(this.tabConfigure);
+	}
+	
+	private void selectedTabChanged(
+		final Button btnCancel,
+		final Button btnExport,
+		final HorizontalLayout buttonbar,
+		final VerticalLayout configurationLayout,
+		final Tabs.SelectedChangeEvent event)
+	{
+		this.removeAll();
+		buttonbar.removeAll();
+		if(event.getSelectedTab() == this.tabPreview)
+		{
+			buttonbar.add(btnCancel, this.viewerComponent.getDownloadAnchor());
+			this.add(this.viewerComponent);
+		}
+		else
+		{
+			buttonbar.add(btnCancel, btnExport);
+			this.add(configurationLayout);
+		}
+	}
+	
+	private void selectedFormatChanged(
+		final FlexLayout specificConfigurationLayout,
+		final AbstractField.ComponentValueChangeEvent<ComboBox<Format<T, ?>>, Format<T, ?>> event)
+	{
+		specificConfigurationLayout.removeAll();
+		this.selectedFormat = event.getValue();
+		this.selectedFormatConfigComponent = this.selectedFormat.createConfigurationComponent();
+		this.selectedFormatConfigComponent.addClassName(GridExporterStyles.SPECIFIC_CONFIGURATION_CONTAINER);
+		specificConfigurationLayout.add(this.selectedFormatConfigComponent);
 	}
 }

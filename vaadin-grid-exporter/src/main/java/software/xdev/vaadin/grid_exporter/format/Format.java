@@ -20,6 +20,13 @@ import java.io.IOException;
 import com.vaadin.flow.component.grid.Grid;
 
 
+/**
+ * Defines a format to export grid data to.
+ *
+ * @param <T> type of the grid elements
+ * @param <E> type of specific configuration for a format. If no specific configuration is needed, use
+ *            {@link VoidConfig}.
+ */
 public interface Format<T, E extends SpecificConfig>
 {
 	String getFormatNameToDisplay();

@@ -15,8 +15,6 @@
  */
 package software.xdev.vaadin.grid_exporter.grid;
 
-
-
 import static java.util.Map.entry;
 
 import java.util.HashMap;
@@ -26,6 +24,11 @@ import java.util.function.BiFunction;
 import com.vaadin.flow.component.Component;
 
 
+/**
+ * Makes i18n possible for the component. As default the english language is used.
+ *
+ * @author AB
+ */
 public class GridExportLocalizationConfig
 {
 	public static final String PREFIX = "gridexporter.";

@@ -13,6 +13,12 @@ import com.vaadin.flow.router.Route;
 import software.xdev.vaadin.grid_exporter.grid.GridExportDialog;
 
 
+/**
+ * Shows the simple usage of the {@link GridExportDialog}.
+ *
+ * @author JohannesRabauer
+ * @author AB
+ */
 @PageTitle("GridExport Examples")
 @Route("")
 public class DemoView extends Composite<VerticalLayout>
@@ -59,7 +65,6 @@ public class DemoView extends Composite<VerticalLayout>
 		);
 	}
 	
-	
 	static class Example
 	{
 		private final String route;
@@ -73,17 +78,17 @@ public class DemoView extends Composite<VerticalLayout>
 			this.name = name;
 			this.desc = desc;
 		}
-
+		
 		public String getRoute()
 		{
 			return this.route;
 		}
-
+		
 		public String getName()
 		{
 			return this.name;
 		}
-
+		
 		public String getDesc()
 		{
 			return this.desc;

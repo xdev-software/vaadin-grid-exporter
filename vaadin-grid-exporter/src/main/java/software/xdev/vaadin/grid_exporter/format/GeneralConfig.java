@@ -39,6 +39,12 @@ import software.xdev.vaadin.grid_exporter.grid.column.ColumnConfiguration;
 import software.xdev.vaadin.grid_exporter.grid.column.ColumnConfigurationBuilder;
 
 
+/**
+ * Configurations that are valid for every {@link Format}. The configuration of every available column is contained
+ * here.
+ *
+ * @param <T> type of the grid elements
+ */
 public class GeneralConfig<T>
 {
 	public static <T> Predicate<Grid.Column<T>> DefaultColumnFilter()
@@ -96,8 +102,19 @@ public class GeneralConfig<T>
 			configurationBuilder = getDefaultColumnConfigBuilder();
 		}
 		
+		this.availableFormats = this.createAvailableFormats(translator);
+		
+		// This has to be done here so that it's already available for the ExportDialog
+		this.columnConfigurations = grid.getColumns().stream()
+			.filter(columnFilter)
+			.map(configurationBuilder::build)
+			.collect(Collectors.toList());
+	}
+	
+	protected List<software.xdev.vaadin.grid_exporter.format.Format<T, ?>> createAvailableFormats(final Translator translator)
+	{
 		this.preselectedFormat = new PdfFormat<>(translator);
-		this.availableFormats = Arrays.asList(
+		return Arrays.asList(
 			new CsvFormat<>(translator),
 			new DocxFormat<>(translator),
 			new HtmlFormat<>(translator),
@@ -111,12 +128,6 @@ public class GeneralConfig<T>
 			new XlsxFormat<>(translator),
 			new XmlFormat<>(translator)
 		);
-		
-		// This has to be done here so that it's already available for the ExportDialog
-		this.columnConfigurations = grid.getColumns().stream()
-			.filter(columnFilter)
-			.map(configurationBuilder::build)
-			.collect(Collectors.toList());
 	}
 	
 	public <E extends SpecificConfig> GeneralConfig<T> withFormat(final Format<T, E> format)
@@ -124,7 +135,6 @@ public class GeneralConfig<T>
 		this.availableFormats.add(format);
 		return this;
 	}
-
 	
 	public <E extends SpecificConfig> GeneralConfig<T> withPreselectedFormat(final Format<T, E> format)
 	{

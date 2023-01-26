@@ -15,8 +15,15 @@
  */
 package software.xdev.vaadin.grid_exporter;
 
+/**
+ * Simple interface to translate a given key into some language.
+ */
 @FunctionalInterface
 public interface Translator
 {
+	/**
+	 * @param key to translate
+	 * @return translated String
+	 */
 	String translate(final String key);
 }

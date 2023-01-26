@@ -25,8 +25,11 @@ import com.vaadin.flow.server.StreamResource;
 
 import software.xdev.vaadin.grid_exporter.Translator;
 
-
 /**
+ * Shows the preview of the exported Grid. An anchor is created to download, but must be placed somewhere else.
+ *
+ * @author Johannes Rabauer
+ * @author AB
  * @author XDEV Software
  * @since 10.01.00
  */
