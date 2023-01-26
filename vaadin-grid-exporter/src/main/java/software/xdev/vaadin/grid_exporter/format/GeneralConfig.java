@@ -63,7 +63,7 @@ public class GeneralConfig<T>
 	}
 	
 	private final List<ColumnConfiguration<T>> columnConfigurations;
-	private final String fileName = "ExportedGrid";
+	private String fileName = "ExportedGrid";
 	private List<software.xdev.vaadin.grid_exporter.format.Format<T, ?>> availableFormats;
 	private Format<T, ?> preselectedFormat;
 	
@@ -158,6 +158,12 @@ public class GeneralConfig<T>
 	public String getFileName()
 	{
 		return this.fileName;
+	}
+	
+	public GeneralConfig<T> withFileName(final String fileName)
+	{
+		this.fileName = fileName;
+		return this;
 	}
 	
 	public List<Format<T, ?>> getAvailableFormats()
