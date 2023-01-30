@@ -22,14 +22,14 @@
 
 	<organization>
 		<name>XDEV Software</name>
-		<url>https://xdev.software/en</url>
+		<url>https://xdev.software</url>
 	</organization>
 
 	<developers>
 		<developer>
 			<name>XDEV Software</name>
 			<organization>XDEV Software</organization>
-			<url>https://xdev.software/en</url>
+			<url>https://xdev.software</url>
 		</developer>
 	</developers>
 
@@ -50,7 +50,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 		<!-- Dependency-Versions -->
-		<vaadin.version>23.3.3</vaadin.version>
+		<vaadin.version>23.3.5</vaadin.version>
 	</properties>
 
 	<dependencyManagement>

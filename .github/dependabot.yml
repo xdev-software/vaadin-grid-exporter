@@ -21,12 +21,6 @@ updates:
     time: "00:00"
   open-pull-requests-limit: 10
   ignore:
-  - dependency-name: "org.eclipse.jetty:jetty-maven-plugin"
-    # Version 11+ requires jakarta.* instead of javax.* (see https://www.eclipse.org/jetty/download.php#what-jetty-version)
-    versions: ">=11.0.0"
-  - dependency-name: "jakarta.xml.bind:jakarta.xml.bind-api"
-    # Version 3+ uses jakarta.* instead of javax.*
-    versions: ">=3.0.0"
-  - dependency-name: "org.glassfish.jaxb:jaxb-runtime"
-    # Version 3+ uses jakarta.* instead of javax.*
+  - dependency-name: "org.springframework.boot:*"
+    # Version 3+ requires Vaadin 24
     versions: ">=3.0.0"
