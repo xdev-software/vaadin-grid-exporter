@@ -1,9 +1,8 @@
 ## 1.0.4
-* Merge from vaadin-addon-template
 
 
 ## 1.0.3
-* Removed unusued code
+* Removed unused code
 
 ## 1.0.2
 
