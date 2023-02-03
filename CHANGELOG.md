@@ -1,7 +1,9 @@
-## 1.1.0
-* Updated dependencies
-* Restructured the GUI
+## 2.0.0
+* Restructured the UI
+  * Using a step-by-step-wizard like layout
+  * Made formats configurable via UI
 * Refactored software architecture to make the component more expandable
+* Updated dependencies
 
 ## 1.0.3
 * Removed unused code
