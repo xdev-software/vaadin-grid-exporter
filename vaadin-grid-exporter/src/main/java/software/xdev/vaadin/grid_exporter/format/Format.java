@@ -15,19 +15,19 @@
  */
 package software.xdev.vaadin.grid_exporter.format;
 
-import java.io.IOException;
+import java.util.List;
+import java.util.function.Function;
 
 import com.vaadin.flow.component.grid.Grid;
+
+import software.xdev.vaadin.grid_exporter.Translator;
+import software.xdev.vaadin.grid_exporter.column.ColumnConfiguration;
 
 
 /**
  * Defines a format to export grid data to.
- *
- * @param <T> type of the grid elements
- * @param <E> type of specific configuration for a format. If no specific configuration is needed, use
- *            {@link VoidConfig}.
  */
-public interface Format<T, E extends SpecificConfig>
+public interface Format
 {
 	String getFormatNameToDisplay();
 	
@@ -35,7 +35,10 @@ public interface Format<T, E extends SpecificConfig>
 	
 	String getMimeType();
 	
-	FormatConfigComponent<E> createConfigurationComponent();
+	List<Function<Translator, ? extends SpecificConfigComponent<? extends SpecificConfig>>> getConfigComponents();
 	
-	byte[] export(Grid<T> gridToExport, GeneralConfig<T> generalConfig, E specificConfig) throws IOException;
+	<T> byte[] export(
+		Grid<T> gridToExport,
+		List<ColumnConfiguration<T>> columnsToExport,
+		List<? extends SpecificConfig> configs);
 }
