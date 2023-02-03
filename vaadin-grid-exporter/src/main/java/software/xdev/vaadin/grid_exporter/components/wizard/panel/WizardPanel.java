@@ -57,6 +57,7 @@ public class WizardPanel<S extends WizardState>
 	protected final Tabs tabsStep = new Tabs();
 	protected final ProgressBar progress = new ProgressBar();
 	protected final VerticalLayout vlContent = new VerticalLayout();
+	
 	public WizardPanel()
 	{
 		this.initUI();
@@ -68,12 +69,14 @@ public class WizardPanel<S extends WizardState>
 		this.tabsStep.setAutoselect(false);
 		this.tabsStep.addSelectedChangeListener(this::onTabChange);
 		
+		// Don't collapse progress bar
+		this.progress.setHeight("0.2em");
+		this.progress.setMinHeight(this.progress.getHeight());
 		this.progress.getStyle().set("margin-top", "0");
 		
 		this.vlContent.addClassName(WizardStyles.WIZARD_PANEL_CONTENT);
 		this.vlContent.getStyle().set("overflow-y", "auto");
 		this.vlContent.setPadding(false);
-		
 		
 		final VerticalLayout vlRoot = this.getContent();
 		vlRoot.addClassName(WizardStyles.WIZARD_PANEL);
