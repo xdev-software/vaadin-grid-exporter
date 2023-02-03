@@ -15,8 +15,6 @@
  */
 package software.xdev.vaadin.grid_exporter.column.headerresolving;
 
-
-
 import java.lang.reflect.Field;
 import java.util.Optional;
 
@@ -25,10 +23,8 @@ import com.vaadin.flow.data.renderer.Renderer;
 
 
 /**
- * Tries to access vaadins internal fields of a Grid/Column to get the header.<br/>
- * This will resolve headers who have been set using {@link Column#setHeader(String)}.<br/>
- * <br/>
- * Note: This might fail when the vaadin version changes
+ * Tries to access vaadins internal fields of a Grid/Column to get the header.<br/> This will resolve headers who have
+ * been set using {@link Column#setHeader(String)}.<br/> <br/> Note: This might fail when the vaadin version changes
  */
 public class VaadinInternalRenderingColumnHeaderResolvingStrategy implements ColumnHeaderResolvingStrategy
 {
@@ -53,6 +49,7 @@ public class VaadinInternalRenderingColumnHeaderResolvingStrategy implements Col
 		return null;
 	}
 	
+	@SuppressWarnings("java:S3011") // Accessing non-public Vaadin fields
 	@Override
 	public Optional<String> resolve(final Column<?> column)
 	{
@@ -66,9 +63,9 @@ public class VaadinInternalRenderingColumnHeaderResolvingStrategy implements Col
 			
 			colHeaderRendererField.setAccessible(true);
 			
-			final Renderer<?> renderer      = (Renderer<?>)colHeaderRendererField.get(column);
+			final Renderer<?> renderer = (Renderer<?>)colHeaderRendererField.get(column);
 			
-			final Field       templateField = Renderer.class.getDeclaredField("template");
+			final Field templateField = Renderer.class.getDeclaredField("template");
 			templateField.setAccessible(true);
 			
 			return Optional.ofNullable((String)templateField.get(renderer));

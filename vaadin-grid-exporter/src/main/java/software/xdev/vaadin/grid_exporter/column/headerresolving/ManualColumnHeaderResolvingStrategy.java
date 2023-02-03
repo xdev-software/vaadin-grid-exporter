@@ -15,8 +15,6 @@
  */
 package software.xdev.vaadin.grid_exporter.column.headerresolving;
 
-
-
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -25,10 +23,8 @@ import com.vaadin.flow.component.grid.Grid.Column;
 
 
 /**
- * Resolves the header-text by using the unique identification {@linkplain I}
- * and find the corresponding resolving function for the identification in a map.<br/>
- * This function is the used to resolve the header-text.<br/>
- * <br/>
+ * Resolves the header-text by using the unique identification {@linkplain I} and find the corresponding resolving
+ * function for the identification in a map.<br/> This function is the used to resolve the header-text.<br/> <br/>
  * Example:<br/>
  *
  * <pre>
@@ -39,26 +35,25 @@ import com.vaadin.flow.component.grid.Grid.Column;
  * 		"pw", "Password"))
  * </pre>
  *
- * @param <I>
- *            The identifier of the column, e.g. the key or the column itself
+ * @param <I> The identifier of the column, e.g. the key or the column itself
  */
 public class ManualColumnHeaderResolvingStrategy<I> implements ColumnHeaderResolvingStrategy
 {
-	private final Function<Column<?>, I>      identifierResolver;
+	private final Function<Column<?>, I> identifierResolver;
 	private final Map<I, Function<I, String>> headerTextResolverMap;
 	
 	public ManualColumnHeaderResolvingStrategy(
 		final Function<Column<?>, I> identifierResolver,
 		final Map<I, Function<I, String>> headerTextResolverMap)
 	{
-		this.identifierResolver    = identifierResolver;
+		this.identifierResolver = identifierResolver;
 		this.headerTextResolverMap = headerTextResolverMap;
 	}
 	
 	@Override
 	public Optional<String> resolve(final Column<?> column)
 	{
-		final I                   identifier      = this.identifierResolver.apply(column);
+		final I identifier = this.identifierResolver.apply(column);
 		
 		final Function<I, String> resolveFunction = this.headerTextResolverMap.get(identifier);
 		if(resolveFunction == null)

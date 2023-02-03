@@ -99,11 +99,7 @@ public class ColumnConfigurationHeaderResolvingStrategyBuilder
 			}
 			
 			// Fallback
-			if(col.getKey() != null)
-			{
-				return col.getKey();
-			}
-			return "";
+			return col.getKey() != null ? col.getKey() : "";
 		};
 	}
 }
