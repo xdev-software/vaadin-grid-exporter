@@ -6,11 +6,14 @@ import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
-import software.xdev.vaadin.grid_exporter.grid.GridExportDialog;
+import software.xdev.vaadin.grid_exporter.GridExportLocalizationConfig;
+import software.xdev.vaadin.grid_exporter.GridExporter;
+import software.xdev.vaadin.grid_exporter.jasper.config.JasperConfigsLocalization;
 
 
 /**
@@ -27,6 +30,19 @@ public class DemoView extends Composite<VerticalLayout>
 	
 	public DemoView()
 	{
+		final HorizontalLayout hlButtonContainer = new HorizontalLayout();
+		hlButtonContainer.setPadding(false);
+		hlButtonContainer.add(
+			new Button(
+				"Export",
+				VaadinIcon.PRINT.create(),
+				e -> new GridExporter<>(this.grExamples).export()),
+			new Button(
+				"Export (German translation)",
+				VaadinIcon.PRINT.create(),
+				e -> new GridExporter<>(this.grExamples).withLocalizationConfig(germanLocalizationConfig()).export())
+		);
+		
 		this.grExamples
 			.addColumn(Example::getRoute)
 			.setHeader("Route")
@@ -46,10 +62,7 @@ public class DemoView extends Composite<VerticalLayout>
 		this.grExamples.addThemeVariants(GridVariant.LUMO_COMPACT);
 		
 		this.getContent().add(
-			new Button(
-				"Export",
-				VaadinIcon.PRINT.create(),
-				e -> GridExportDialog.open(this.grExamples)),
+			hlButtonContainer,
 			this.grExamples);
 		this.getContent().setHeightFull();
 	}
@@ -93,5 +106,38 @@ public class DemoView extends Composite<VerticalLayout>
 		{
 			return this.desc;
 		}
+	}
+	
+	static GridExportLocalizationConfig germanLocalizationConfig()
+	{
+		return new GridExportLocalizationConfig()
+			.with(GridExportLocalizationConfig.EXPORT_GRID, "Tabelle exportieren")
+			.with(GridExportLocalizationConfig.CANCEL, "Abbrechen")
+			.with(GridExportLocalizationConfig.PREVIOUS, "Zurück")
+			.with(GridExportLocalizationConfig.NEXT, "Weiter")
+			.with(GridExportLocalizationConfig.DOWNLOAD, "Herunterladen")
+			.with(GridExportLocalizationConfig.GENERAL, "Generell")
+			.with(GridExportLocalizationConfig.FILENAME, "Dateiname")
+			.with(GridExportLocalizationConfig.COLUMNS, "Spalten")
+			.with(GridExportLocalizationConfig.NAME, "Name")
+			.with(GridExportLocalizationConfig.POSITION, "Position")
+			.with(GridExportLocalizationConfig.FORMAT, "Format")
+			.with(GridExportLocalizationConfig.PREVIEW, "Vorschau")
+			.with(GridExportLocalizationConfig.UNABLE_TO_SHOW_PREVIEW, "Vorschau kann nicht angezeigt werden")
+			.with(JasperConfigsLocalization.ENCODING, "Enkodierung")
+			.with(JasperConfigsLocalization.WITH_BOM, "mit BOM")
+			.with(JasperConfigsLocalization.HEADER, "Header")
+			.with(JasperConfigsLocalization.EXPORT_HEADER, "Kopfzeilen exportieren")
+			.with(JasperConfigsLocalization.HIGHLIGHTING, "Hervorhebungen")
+			.with(JasperConfigsLocalization.HIGHLIGHT_ROWS, "Zeilen hervorheben")
+			.with(JasperConfigsLocalization.PAGE, "Seite")
+			.with(JasperConfigsLocalization.FORMAT_PAGE_TYPE, "Format / Seitentyp")
+			.with(JasperConfigsLocalization.ORIENTATION, "Orientierung")
+			.with(JasperConfigsLocalization.ORIENTATION_PORTRAIT, "Hochformat")
+			.with(JasperConfigsLocalization.ORIENTATION_LANDSCAPE, "Querformat")
+			.with(JasperConfigsLocalization.SHOW_PAGE_NUMBERS, "Seitennummerierung")
+			.with(JasperConfigsLocalization.MARGIN, "Rand")
+			.with(JasperConfigsLocalization.SEPARATOR, "Trennzeichen")
+			.with(JasperConfigsLocalization.TITLE, "Titel");
 	}
 }
