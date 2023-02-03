@@ -181,7 +181,11 @@ public abstract class AbstractJasperReportFormat
 		
 		this.getValueFrom(configs, HighlightConfig.class, HighlightConfig::isHighlightOddRows)
 			.filter(highlight -> highlight)
-			.ifPresent(x -> report.highlightDetailOddRows());
+			.ifPresent(x ->
+			{
+				report.setDetailOddRowStyle(this.gridReportStyles.columnStyleHighlighted());
+				report.highlightDetailOddRows();
+			});
 		
 		this.getConfigFrom(configs, PageConfig.class)
 			.ifPresent(pc -> {
