@@ -27,7 +27,7 @@ import com.vaadin.flow.component.grid.Grid.Column;
  */
 public class ColumnConfigurationBuilder
 {
-	private final ColumnConfigurationHeaderResolvingStrategyBuilder columnConfigHeaderResolvingStrategyBuilder =
+	protected final ColumnConfigurationHeaderResolvingStrategyBuilder columnConfigHeaderResolvingStrategyBuilder =
 		new ColumnConfigurationHeaderResolvingStrategyBuilder();
 	
 	public ColumnConfigurationBuilder withColumnConfigHeaderResolvingStrategyBuilder(

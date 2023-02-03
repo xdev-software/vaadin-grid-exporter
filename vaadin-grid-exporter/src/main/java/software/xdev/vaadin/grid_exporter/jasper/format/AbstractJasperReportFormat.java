@@ -33,6 +33,7 @@ import net.sf.dynamicreports.report.builder.DynamicReports;
 import net.sf.dynamicreports.report.builder.column.Columns;
 import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.Components;
+import net.sf.dynamicreports.report.builder.component.PageXofYBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
 import net.sf.dynamicreports.report.exception.DRException;
 import software.xdev.vaadin.grid_exporter.column.ColumnConfiguration;
@@ -187,7 +188,12 @@ public abstract class AbstractJasperReportFormat
 				report.setPageFormat(pc.getSelectedPageType(), pc.getSelectedPageOrientation());
 				if(pc.isUsePageNumbering())
 				{
-					report.pageFooter(DynamicReports.cmp.pageXofY().setStyle(GridReportStyles.New().footerStyle()));
+					final PageXofYBuilder pageXofYBuilder = DynamicReports.cmp.pageXofY();
+					if(this.hasStyle)
+					{
+						pageXofYBuilder.setStyle(this.gridReportStyles.footerStyle());
+					}
+					report.pageFooter(pageXofYBuilder);
 				}
 				report.setPageMargin(DynamicReports.margin(pc.getPageMargin()));
 			});

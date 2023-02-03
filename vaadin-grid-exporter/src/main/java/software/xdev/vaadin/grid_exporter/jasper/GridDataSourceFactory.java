@@ -27,11 +27,9 @@ import com.vaadin.flow.component.grid.ColumnPathRenderer;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.Grid.Column;
 import com.vaadin.flow.data.provider.Query;
-import com.vaadin.flow.data.provider.QuerySortOrder;
 import com.vaadin.flow.data.renderer.BasicRenderer;
 import com.vaadin.flow.data.renderer.Renderer;
 import com.vaadin.flow.data.renderer.TextRenderer;
-import com.vaadin.flow.function.SerializableComparator;
 import com.vaadin.flow.function.ValueProvider;
 
 import net.sf.dynamicreports.report.datasource.DRDataSource;
@@ -43,6 +41,7 @@ public interface GridDataSourceFactory<T>
 {
 	JRDataSource createDataSource(final Grid<T> grid, List<ColumnConfiguration<T>> columnsToExport);
 	
+	@SuppressWarnings({"java:S3011", "unchecked"}) // Accessing non-public Vaadin fields
 	class Default<T> implements GridDataSourceFactory<T>
 	{
 		@Override
@@ -64,14 +63,13 @@ public interface GridDataSourceFactory<T>
 			return dataSource;
 		}
 		
-		@SuppressWarnings("unchecked")
-		private String getFormattedValue(final Column<T> column, final T item)
+		protected String getFormattedValue(final Column<T> column, final T item)
 		{
 			try
 			{
-				final Renderer<T>         renderer          = column.getRenderer();
-				final Method              getValueFormatter = this.getValueFormatter(renderer);
-				final ValueProvider<T, ?> valueProvider     = this.getValueProvider(column);
+				final Renderer<T> renderer = column.getRenderer();
+				final Method getValueFormatter = this.getValueFormatter(renderer);
+				final ValueProvider<T, ?> valueProvider = this.getValueProvider(column);
 				if(valueProvider != null)
 				{
 					final Object value = valueProvider.apply(item);
@@ -97,7 +95,8 @@ public interface GridDataSourceFactory<T>
 					}
 				}
 			}
-			catch(final IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchFieldException
+			catch(final IllegalAccessException | IllegalArgumentException | InvocationTargetException |
+						NoSuchFieldException
 						| SecurityException e)
 			{
 				// Something went wrong, but it's not our place to say what or why.
@@ -105,7 +104,7 @@ public interface GridDataSourceFactory<T>
 			return null;
 		}
 		
-		private <RENDERER> Method getValueFormatter(final RENDERER renderer)
+		protected <R> Method getValueFormatter(final R renderer)
 		{
 			for(final Method m : renderer.getClass().getDeclaredMethods())
 			{
@@ -118,8 +117,7 @@ public interface GridDataSourceFactory<T>
 			return null;
 		}
 		
-		@SuppressWarnings("unchecked")
-		private ValueProvider<T, ?> getValueProvider(final Column<T> column)
+		protected ValueProvider<T, ?> getValueProvider(final Column<T> column)
 		{
 			final Renderer<T> r = column.getRenderer();
 			if(r instanceof BasicRenderer)
@@ -139,17 +137,17 @@ public interface GridDataSourceFactory<T>
 			return null;
 		}
 		
-		@SuppressWarnings({"rawtypes", "unchecked"})
-		private Stream<T> getSortedAndFilteredData(final Grid<T> grid)
+		protected Stream<T> getSortedAndFilteredData(final Grid<T> grid)
 		{
-			final List<QuerySortOrder>      sortOrder       = grid.getSortOrder().stream()
-				.flatMap(so -> so.getSorted().getSortOrder(so.getDirection()))
-				.collect(Collectors.toList());
-			final SerializableComparator<T> inMemorySorting = grid.getDataCommunicator()
-				.getInMemorySorting();
-			final Query                     query           = new Query<>(0, Integer.MAX_VALUE,
-				sortOrder, inMemorySorting, null);
-			return grid.getDataProvider().fetch(query);
+			return grid.getDataProvider().fetch(
+				new Query<>(
+					0,
+					Integer.MAX_VALUE,
+					grid.getSortOrder().stream()
+						.flatMap(so -> so.getSorted().getSortOrder(so.getDirection()))
+						.collect(Collectors.toList()),
+					grid.getDataCommunicator().getInMemorySorting(),
+					null));
 		}
 	}
 }

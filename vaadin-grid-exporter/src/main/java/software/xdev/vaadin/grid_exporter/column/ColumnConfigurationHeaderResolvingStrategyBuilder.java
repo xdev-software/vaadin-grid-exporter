@@ -35,7 +35,7 @@ import software.xdev.vaadin.grid_exporter.column.headerresolving.VaadinInternalR
  */
 public class ColumnConfigurationHeaderResolvingStrategyBuilder
 {
-	private final List<ColumnHeaderResolvingStrategy> strategies = new ArrayList<>();
+	protected final List<ColumnHeaderResolvingStrategy> strategies = new ArrayList<>();
 	
 	/**
 	 * Uses the {@link VaadinInternalRenderingColumnHeaderResolvingStrategy}

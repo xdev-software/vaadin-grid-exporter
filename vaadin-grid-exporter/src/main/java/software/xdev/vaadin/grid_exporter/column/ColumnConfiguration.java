@@ -23,10 +23,10 @@ import com.vaadin.flow.function.SerializableFunction;
 
 public class ColumnConfiguration<T>
 {
-	private final Column<T> gridColumn;
-	private String header;
+	protected final Column<T> gridColumn;
+	protected String header;
 	
-	ColumnConfiguration(
+	public ColumnConfiguration(
 		final Column<T> gridColumn,
 		final SerializableFunction<Column<?>, String> headerResolver)
 	{

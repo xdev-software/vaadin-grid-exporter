@@ -39,8 +39,8 @@ import com.vaadin.flow.component.grid.Grid.Column;
  */
 public class ManualColumnHeaderResolvingStrategy<I> implements ColumnHeaderResolvingStrategy
 {
-	private final Function<Column<?>, I> identifierResolver;
-	private final Map<I, Function<I, String>> headerTextResolverMap;
+	protected final Function<Column<?>, I> identifierResolver;
+	protected final Map<I, Function<I, String>> headerTextResolverMap;
 	
 	public ManualColumnHeaderResolvingStrategy(
 		final Function<Column<?>, I> identifierResolver,
