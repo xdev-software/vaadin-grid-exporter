@@ -19,12 +19,6 @@ import software.xdev.vaadin.gridexport.example.jsonext.JsonConfigComponent;
 import software.xdev.vaadin.gridexport.example.jsonext.JsonFormat;
 
 
-/**
- * Shows the simple usage of the {@link GridExportDialog}.
- *
- * @author JohannesRabauer
- * @author AB
- */
 @PageTitle("GridExport Examples")
 @Route("")
 public class DemoView extends Composite<VerticalLayout>

@@ -9,9 +9,6 @@
 	<version>2.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>Demo for Grid Exporter for Vaadin</name>
-	<description>Shows how to use the Grid Exporter for Vaadin on an easy example</description>
-
 	<inceptionYear>2022</inceptionYear>
 
 	<organization>
