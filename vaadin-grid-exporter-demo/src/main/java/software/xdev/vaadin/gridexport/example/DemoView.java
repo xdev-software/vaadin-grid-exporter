@@ -33,19 +33,19 @@ public class DemoView extends Composite<VerticalLayout>
 				"Export",
 				VaadinIcon.PRINT.create(),
 				e -> GridExporter.newWithDefaults(this.grExamples)
-					.export()),
+					.open()),
 			new Button(
 				"Export (German translation)",
 				VaadinIcon.PRINT.create(),
 				e -> GridExporter.newWithDefaults(this.grExamples)
 					.withLocalizationConfig(germanLocalizationConfig())
-					.export()),
+					.open()),
 			new Button(
 				"Export (JSON)",
 				VaadinIcon.PRINT.create(),
 				e -> GridExporter.newWithDefaults(this.grExamples)
 					.loadFromProvider(new JsonGridExporterProvider())
-					.export())
+					.open())
 		);
 		
 		this.grExamples

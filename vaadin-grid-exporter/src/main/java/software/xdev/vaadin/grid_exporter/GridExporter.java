@@ -153,7 +153,7 @@ public class GridExporter<T>
 	/**
 	 * Opens the {@link GridExporterWizard}.
 	 */
-	public void export()
+	public void open()
 	{
 		final GridExporterWizardState<T> state = new GridExporterWizardState<>(
 			this.gridDataExtractorSupplier.apply(this.grid),
