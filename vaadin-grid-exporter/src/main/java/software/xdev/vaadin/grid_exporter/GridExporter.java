@@ -43,7 +43,6 @@ import software.xdev.vaadin.grid_exporter.jasper.format.PdfFormat;
 import software.xdev.vaadin.grid_exporter.jasper.format.PptxFormat;
 import software.xdev.vaadin.grid_exporter.jasper.format.RtfFormat;
 import software.xdev.vaadin.grid_exporter.jasper.format.TextFormat;
-import software.xdev.vaadin.grid_exporter.jasper.format.XlsFormat;
 import software.xdev.vaadin.grid_exporter.jasper.format.XlsxFormat;
 import software.xdev.vaadin.grid_exporter.jasper.format.XmlFormat;
 import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizard;
@@ -70,7 +69,6 @@ public class GridExporter<T>
 		new ArrayList<>(Arrays.asList(
 			new PdfFormat(),
 			new XlsxFormat(),
-			new XlsFormat(),
 			new CsvFormat(),
 			new DocxFormat(),
 			new HtmlFormat(),
