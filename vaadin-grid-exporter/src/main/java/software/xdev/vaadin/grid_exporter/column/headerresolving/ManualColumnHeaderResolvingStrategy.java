@@ -24,16 +24,14 @@ import com.vaadin.flow.component.grid.Grid.Column;
 
 /**
  * Resolves the header-text by using the unique identification {@linkplain I} and find the corresponding resolving
- * function for the identification in a map.<br/> This function is the used to resolve the header-text.<br/> <br/>
- * Example:<br/>
- *
- * <pre>
- * new ManualColumnHeaderResolvingStrategy(
- * 	col -> col.getKey(),
- * 	Map.of(
- * 		"name", "Username",
- * 		"pw", "Password"))
- * </pre>
+ * function for the identification in a map.
+ * <br>
+ * This function is the used to resolve the header-text.
+ * <p>
+ * Example:
+ * <br>
+ * {@code new ManualColumnHeaderResolvingStrategy( col -> col.getKey(), Map.of( "name", "Username", "pw", "Password"))}
+ * </p>
  *
  * @param <I> The identifier of the column, e.g. the key or the column itself
  */
