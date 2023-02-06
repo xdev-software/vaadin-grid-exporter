@@ -85,6 +85,7 @@ public class ColumnConfigurationHeaderResolvingStrategyBuilder
 		return this;
 	}
 	
+	@SuppressWarnings("java:S1452") // Not exposed to the user and otherwise compilation failure
 	public SerializableFunction<Column<?>, String> build()
 	{
 		return col ->

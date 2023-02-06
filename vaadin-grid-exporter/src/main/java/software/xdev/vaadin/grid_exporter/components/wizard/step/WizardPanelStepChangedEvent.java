@@ -22,7 +22,7 @@ import com.vaadin.flow.component.ComponentEvent;
 import software.xdev.vaadin.grid_exporter.components.wizard.WizardState;
 import software.xdev.vaadin.grid_exporter.components.wizard.panel.WizardPanel;
 
-
+@SuppressWarnings("java:S1948")
 public class WizardPanelStepChangedEvent<S extends WizardState> extends ComponentEvent<WizardPanel<S>>
 {
 	protected final WizardStepState stepState;

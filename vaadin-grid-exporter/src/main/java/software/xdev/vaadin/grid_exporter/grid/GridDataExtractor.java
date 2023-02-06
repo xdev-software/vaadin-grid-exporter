@@ -113,7 +113,7 @@ public class GridDataExtractor<T>
 		return null;
 	}
 	
-	protected ValueProvider<T, ?> getValueProvider(final Grid.Column<T> column)
+	protected <X> ValueProvider<T, X> getValueProvider(final Grid.Column<T> column)
 	{
 		final Renderer<T> r = column.getRenderer();
 		if(r instanceof BasicRenderer)
@@ -122,7 +122,7 @@ public class GridDataExtractor<T>
 			{
 				final Method getValueProvider = BasicRenderer.class.getDeclaredMethod("getValueProvider");
 				getValueProvider.setAccessible(true);
-				return (ValueProvider<T, ?>)getValueProvider.invoke(r);
+				return (ValueProvider<T, X>)getValueProvider.invoke(r);
 			}
 			catch(final IllegalAccessException | IllegalArgumentException | InvocationTargetException
 						| NoSuchMethodException | SecurityException e)

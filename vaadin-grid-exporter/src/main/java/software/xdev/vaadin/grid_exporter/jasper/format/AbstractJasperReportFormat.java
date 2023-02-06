@@ -52,7 +52,7 @@ public abstract class AbstractJasperReportFormat
 	<B extends AbstractJasperExporterBuilder<B, ? extends AbstractJasperExporter>>
 	extends AbstractFormat
 {
-	protected final JasperGridReportStyles jasperGridReportStyles = JasperGridReportStyles.New();
+	protected final JasperGridReportStyles jasperGridReportStyles = new JasperGridReportStyles.Default();
 	
 	protected final boolean hasPages;
 	
@@ -115,6 +115,7 @@ public abstract class AbstractJasperReportFormat
 		return this.jasperExportBuilderSupplier.apply(stream);
 	}
 	
+	@SuppressWarnings("java:S112")
 	protected void export(
 		final JasperReportBuilder reportBuilder,
 		final B exportBuilder,

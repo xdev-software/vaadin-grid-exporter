@@ -20,7 +20,7 @@ import com.vaadin.flow.component.Composite;
 
 import software.xdev.vaadin.grid_exporter.components.wizard.WizardState;
 
-
+@SuppressWarnings("java:S1948")
 public abstract class WizardStepComposite<C extends Component, S extends WizardState>
 	extends Composite<C>
 	implements WizardStep<S>

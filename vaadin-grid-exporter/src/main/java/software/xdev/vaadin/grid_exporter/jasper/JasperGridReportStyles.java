@@ -35,12 +35,7 @@ public interface JasperGridReportStyles
 	
 	SimpleStyleBuilder columnStyleHighlighted();
 	
-	static JasperGridReportStyles New()
-	{
-		return new Default();
-	}
-	
-	public static class Default implements JasperGridReportStyles
+	class Default implements JasperGridReportStyles
 	{
 		protected final StyleBuilder defaultStyle = Styles.style().setPadding(2);
 		protected final StyleBuilder boldCenterStyle = Styles.style(this.defaultStyle)
@@ -55,11 +50,6 @@ public interface JasperGridReportStyles
 			.setPadding(2)
 			.setBackgroundColor(new Color(222, 222, 222)) // Extra light gray so that the data remains readable
 			.setBorder(Styles.pen1Point());
-		
-		Default()
-		{
-			super();
-		}
 		
 		@Override
 		public StyleBuilder titleStyle()

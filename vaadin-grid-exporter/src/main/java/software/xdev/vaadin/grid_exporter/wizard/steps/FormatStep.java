@@ -35,7 +35,7 @@ import software.xdev.vaadin.grid_exporter.format.SpecificConfig;
 import software.xdev.vaadin.grid_exporter.format.SpecificConfigComponent;
 import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizardState;
 
-
+@SuppressWarnings("java:S1948")
 public class FormatStep<T> extends AbstractGridExportWizardStepComposite<VerticalLayout, T>
 {
 	protected final Binder<GridExporterWizardState<T>> binder = new Binder<>();

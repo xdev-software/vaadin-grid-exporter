@@ -23,6 +23,7 @@ public class JsonFormat extends AbstractFormat
 		);
 	}
 	
+	@SuppressWarnings("java:S112") // IDK
 	@Override
 	public <T> byte[] export(
 		final GridDataExtractor<T> gridDataExtractor,

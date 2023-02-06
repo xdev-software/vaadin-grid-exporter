@@ -44,6 +44,7 @@ import software.xdev.vaadin.grid_exporter.components.wizard.step.WizardStepState
 
 
 @CssImport(WizardStyles.LOCATION)
+@SuppressWarnings("java:S1948")
 public class WizardPanel<S extends WizardState>
 	extends Composite<VerticalLayout>
 	implements WizardPanelActions

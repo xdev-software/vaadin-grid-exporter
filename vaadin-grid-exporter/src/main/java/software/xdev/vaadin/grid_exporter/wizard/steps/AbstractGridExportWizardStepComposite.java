@@ -23,7 +23,7 @@ import software.xdev.vaadin.grid_exporter.Translator;
 import software.xdev.vaadin.grid_exporter.components.wizard.step.WizardStepComposite;
 import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizardState;
 
-
+@SuppressWarnings("java:S1948")
 public abstract class AbstractGridExportWizardStepComposite<C extends Component, T>
 	extends WizardStepComposite<C, GridExporterWizardState<T>>
 	implements Translator

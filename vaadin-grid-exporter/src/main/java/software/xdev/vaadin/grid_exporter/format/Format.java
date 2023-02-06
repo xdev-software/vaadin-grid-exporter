@@ -34,6 +34,8 @@ public interface Format
 	
 	String getMimeType();
 	
+	// Either ignore a rawtype or a generic wildcard type warning
+	@SuppressWarnings("java:S1452")
 	List<Function<Translator, ? extends SpecificConfigComponent<? extends SpecificConfig>>> getConfigComponents();
 	
 	<T> byte[] export(

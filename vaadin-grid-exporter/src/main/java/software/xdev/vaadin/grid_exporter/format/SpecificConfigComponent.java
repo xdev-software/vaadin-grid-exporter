@@ -24,7 +24,7 @@ import com.vaadin.flow.data.binder.Binder;
 
 import software.xdev.vaadin.grid_exporter.Translator;
 
-
+@SuppressWarnings("java:S1948")
 public abstract class SpecificConfigComponent<T extends SpecificConfig>
 	extends Composite<FormLayout>
 	implements Translator

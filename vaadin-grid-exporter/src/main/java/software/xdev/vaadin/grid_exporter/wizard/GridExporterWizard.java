@@ -33,6 +33,7 @@ import software.xdev.vaadin.grid_exporter.wizard.steps.GeneralStep;
 import software.xdev.vaadin.grid_exporter.wizard.steps.PreviewStep;
 
 
+@SuppressWarnings("java:S1948")
 public class GridExporterWizard<T> extends Dialog implements AfterNavigationObserver, Translator
 {
 	protected final Button closeButton = new Button(VaadinIcon.CLOSE.create());
