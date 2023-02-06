@@ -20,8 +20,8 @@ import java.util.Objects;
 import com.vaadin.flow.component.Component;
 
 import software.xdev.vaadin.grid_exporter.Translator;
-import software.xdev.vaadin.grid_exporter.components.wizard.GridExporterWizardState;
 import software.xdev.vaadin.grid_exporter.components.wizard.step.WizardStepComposite;
+import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizardState;
 
 
 public abstract class AbstractGridExportWizardStepComposite<C extends Component, T>

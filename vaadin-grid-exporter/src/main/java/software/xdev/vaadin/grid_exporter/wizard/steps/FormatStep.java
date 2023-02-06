@@ -30,10 +30,10 @@ import com.vaadin.flow.data.provider.DataProvider;
 
 import software.xdev.vaadin.grid_exporter.GridExportLocalizationConfig;
 import software.xdev.vaadin.grid_exporter.Translator;
-import software.xdev.vaadin.grid_exporter.components.wizard.GridExporterWizardState;
 import software.xdev.vaadin.grid_exporter.format.Format;
 import software.xdev.vaadin.grid_exporter.format.SpecificConfig;
 import software.xdev.vaadin.grid_exporter.format.SpecificConfigComponent;
+import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizardState;
 
 
 public class FormatStep<T> extends AbstractGridExportWizardStepComposite<VerticalLayout, T>

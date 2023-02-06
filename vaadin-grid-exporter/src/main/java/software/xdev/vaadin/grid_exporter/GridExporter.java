@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -30,8 +31,8 @@ import com.vaadin.flow.component.grid.Grid;
 import software.xdev.vaadin.grid_exporter.column.ColumnConfiguration;
 import software.xdev.vaadin.grid_exporter.column.ColumnConfigurationBuilder;
 import software.xdev.vaadin.grid_exporter.column.ColumnConfigurationHeaderResolvingStrategyBuilder;
-import software.xdev.vaadin.grid_exporter.components.wizard.GridExporterWizardState;
 import software.xdev.vaadin.grid_exporter.format.Format;
+import software.xdev.vaadin.grid_exporter.grid.GridDataExtractor;
 import software.xdev.vaadin.grid_exporter.jasper.config.JasperConfigsLocalization;
 import software.xdev.vaadin.grid_exporter.jasper.format.CsvFormat;
 import software.xdev.vaadin.grid_exporter.jasper.format.DocxFormat;
@@ -46,6 +47,7 @@ import software.xdev.vaadin.grid_exporter.jasper.format.XlsFormat;
 import software.xdev.vaadin.grid_exporter.jasper.format.XlsxFormat;
 import software.xdev.vaadin.grid_exporter.jasper.format.XmlFormat;
 import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizard;
+import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizardState;
 
 
 public class GridExporter<T>
@@ -81,6 +83,8 @@ public class GridExporter<T>
 		));
 	
 	protected Format preSelectedFormat = null;
+	
+	protected Function<Grid<T>, GridDataExtractor<T>> gridDataExtractorSupplier = GridDataExtractor::new;
 	
 	public GridExporter(final Grid<T> grid)
 	{
@@ -139,6 +143,13 @@ public class GridExporter<T>
 		return this;
 	}
 	
+	public GridExporter<T> withGridDataExtractorSupplier(
+		final Function<Grid<T>, GridDataExtractor<T>> dataExtractorSupplier)
+	{
+		this.gridDataExtractorSupplier = Objects.requireNonNull(dataExtractorSupplier);
+		return this;
+	}
+	
 	protected List<ColumnConfiguration<T>> generateAvailableColumns()
 	{
 		return this.grid.getColumns().stream()
@@ -150,7 +161,7 @@ public class GridExporter<T>
 	public void export()
 	{
 		final GridExporterWizardState<T> state = new GridExporterWizardState<>(
-			this.grid,
+			this.gridDataExtractorSupplier.apply(this.grid),
 			this.availableFormats,
 			this.generateAvailableColumns());
 		state.setFileName(this.fileName);

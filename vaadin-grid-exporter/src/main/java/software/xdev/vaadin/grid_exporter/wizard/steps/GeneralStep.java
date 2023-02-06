@@ -37,7 +37,7 @@ import com.vaadin.flow.shared.Registration;
 import software.xdev.vaadin.grid_exporter.GridExportLocalizationConfig;
 import software.xdev.vaadin.grid_exporter.Translator;
 import software.xdev.vaadin.grid_exporter.column.ColumnConfiguration;
-import software.xdev.vaadin.grid_exporter.components.wizard.GridExporterWizardState;
+import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizardState;
 
 
 public class GeneralStep<T> extends AbstractGridExportWizardStepComposite<FormLayout, T>

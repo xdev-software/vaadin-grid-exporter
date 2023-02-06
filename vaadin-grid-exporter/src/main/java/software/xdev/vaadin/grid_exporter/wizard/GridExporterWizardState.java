@@ -19,16 +19,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.vaadin.flow.component.grid.Grid;
-
 import software.xdev.vaadin.grid_exporter.column.ColumnConfiguration;
+import software.xdev.vaadin.grid_exporter.components.wizard.WizardState;
 import software.xdev.vaadin.grid_exporter.format.Format;
 import software.xdev.vaadin.grid_exporter.format.SpecificConfig;
+import software.xdev.vaadin.grid_exporter.grid.GridDataExtractor;
 
 
 public class GridExporterWizardState<T> implements WizardState
 {
-	protected final Grid<T> grid;
+	protected final GridDataExtractor<T> gridDataExtractor;
 	protected final List<Format> availableFormats;
 	protected final List<ColumnConfiguration<T>> availableColumns;
 	
@@ -39,11 +39,11 @@ public class GridExporterWizardState<T> implements WizardState
 	protected final List<SpecificConfig> specificConfigs = new ArrayList<>();
 	
 	public GridExporterWizardState(
-		final Grid<T> grid,
+		final GridDataExtractor<T> gridDataExtractor,
 		final List<Format> availableFormats,
 		final List<ColumnConfiguration<T>> availableColumns)
 	{
-		this.grid = Objects.requireNonNull(grid);
+		this.gridDataExtractor = Objects.requireNonNull(gridDataExtractor);
 		this.availableFormats = Objects.requireNonNull(availableFormats);
 		this.availableColumns = Objects.requireNonNull(availableColumns);
 		
@@ -51,9 +51,9 @@ public class GridExporterWizardState<T> implements WizardState
 		this.selectedColumns = new ArrayList<>(availableColumns);
 	}
 	
-	public Grid<T> getGrid()
+	public GridDataExtractor<T> getGridDataExtractor()
 	{
-		return this.grid;
+		return this.gridDataExtractor;
 	}
 	
 	public List<Format> getAvailableFormats()

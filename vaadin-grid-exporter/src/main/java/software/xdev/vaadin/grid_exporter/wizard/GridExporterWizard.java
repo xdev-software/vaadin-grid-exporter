@@ -26,7 +26,6 @@ import com.vaadin.flow.router.AfterNavigationObserver;
 
 import software.xdev.vaadin.grid_exporter.GridExportLocalizationConfig;
 import software.xdev.vaadin.grid_exporter.Translator;
-import software.xdev.vaadin.grid_exporter.components.wizard.GridExporterWizardState;
 import software.xdev.vaadin.grid_exporter.components.wizard.buttonbar.WizardButtonBarWithAnchor;
 import software.xdev.vaadin.grid_exporter.components.wizard.panel.WizardPanel;
 import software.xdev.vaadin.grid_exporter.wizard.steps.FormatStep;

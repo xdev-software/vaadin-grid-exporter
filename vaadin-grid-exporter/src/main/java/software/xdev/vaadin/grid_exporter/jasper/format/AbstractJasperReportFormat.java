@@ -24,8 +24,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-import com.vaadin.flow.component.grid.Grid;
-
 import net.sf.dynamicreports.jasper.base.export.AbstractJasperExporter;
 import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
 import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
@@ -35,12 +33,13 @@ import net.sf.dynamicreports.report.builder.column.TextColumnBuilder;
 import net.sf.dynamicreports.report.builder.component.Components;
 import net.sf.dynamicreports.report.builder.component.PageXofYBuilder;
 import net.sf.dynamicreports.report.builder.component.TextFieldBuilder;
+import net.sf.dynamicreports.report.datasource.DRDataSource;
 import net.sf.dynamicreports.report.exception.DRException;
 import software.xdev.vaadin.grid_exporter.column.ColumnConfiguration;
 import software.xdev.vaadin.grid_exporter.format.AbstractFormat;
 import software.xdev.vaadin.grid_exporter.format.SpecificConfig;
+import software.xdev.vaadin.grid_exporter.grid.GridDataExtractor;
 import software.xdev.vaadin.grid_exporter.jasper.DynamicExporter;
-import software.xdev.vaadin.grid_exporter.jasper.GridDataSourceFactory;
 import software.xdev.vaadin.grid_exporter.jasper.GridReportStyles;
 import software.xdev.vaadin.grid_exporter.jasper.config.encoding.EncodingConfig;
 import software.xdev.vaadin.grid_exporter.jasper.config.encoding.ExportEncoding;
@@ -81,11 +80,11 @@ public abstract class AbstractJasperReportFormat
 	
 	@Override
 	public <T> byte[] export(
-		final Grid<T> gridToExport,
+		final GridDataExtractor<T> gridDataExtractor,
 		final List<ColumnConfiguration<T>> columnsToExport,
 		final List<? extends SpecificConfig> configs)
 	{
-		return this.exportToBytes(this.buildReport(gridToExport, columnsToExport, configs), configs);
+		return this.exportToBytes(this.buildReport(gridDataExtractor, columnsToExport, configs), configs);
 	}
 	
 	protected byte[] exportToBytes(
@@ -138,7 +137,7 @@ public abstract class AbstractJasperReportFormat
 	}
 	
 	protected <T> JasperReportBuilder buildReport(
-		final Grid<T> gridToExport,
+		final GridDataExtractor<T> gridDataExtractor,
 		final List<ColumnConfiguration<T>> columnsToExport,
 		final List<? extends SpecificConfig> configs)
 	{
@@ -148,7 +147,7 @@ public abstract class AbstractJasperReportFormat
 			.map(this::toReportColumn)
 			.forEach(report::addColumn);
 		
-		report.setDataSource(new GridDataSourceFactory.Default<T>().createDataSource(gridToExport, columnsToExport));
+		report.setDataSource(this.buildDataSource(gridDataExtractor, columnsToExport));
 		
 		if(this.hasStyle)
 		{
@@ -203,6 +202,23 @@ public abstract class AbstractJasperReportFormat
 			});
 		
 		return report;
+	}
+	
+	protected <T> DRDataSource buildDataSource(
+		final GridDataExtractor<T> gridDataExtractor,
+		final List<ColumnConfiguration<T>> columnsToExport)
+	{
+		final DRDataSource dataSource = new DRDataSource(
+			columnsToExport.stream()
+				.map(ColumnConfiguration::getKeyOrHeader)
+				.toArray(String[]::new));
+		
+		gridDataExtractor.getSortedAndFilteredData(columnsToExport)
+			.stream()
+			.map(List::toArray)
+			.forEach(dataSource::add);
+		
+		return dataSource;
 	}
 	
 	protected TextColumnBuilder<String> toReportColumn(final ColumnConfiguration<?> column)

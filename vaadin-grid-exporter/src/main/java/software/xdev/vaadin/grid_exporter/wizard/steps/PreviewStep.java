@@ -26,8 +26,8 @@ import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.shared.Registration;
 
 import software.xdev.vaadin.grid_exporter.Translator;
-import software.xdev.vaadin.grid_exporter.components.wizard.GridExporterWizardState;
 import software.xdev.vaadin.grid_exporter.format.Format;
+import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizardState;
 
 
 public class PreviewStep<T> extends AbstractGridExportWizardStepComposite<VerticalLayout, T>
@@ -58,7 +58,10 @@ public class PreviewStep<T> extends AbstractGridExportWizardStepComposite<Vertic
 	{
 		// Generate data and preview
 		final Format format = state.getSelectedFormat();
-		final byte[] bytes = format.export(state.getGrid(), state.getSelectedColumns(), state.getSpecificConfigs());
+		final byte[] bytes = format.export(
+			state.getGridDataExtractor(),
+			state.getSelectedColumns(),
+			state.getSpecificConfigs());
 		
 		final StreamResource resource = new StreamResource(
 			state.getFileName() + "." + format.getFormatFilenameSuffix(),

@@ -18,10 +18,9 @@ package software.xdev.vaadin.grid_exporter.format;
 import java.util.List;
 import java.util.function.Function;
 
-import com.vaadin.flow.component.grid.Grid;
-
 import software.xdev.vaadin.grid_exporter.Translator;
 import software.xdev.vaadin.grid_exporter.column.ColumnConfiguration;
+import software.xdev.vaadin.grid_exporter.grid.GridDataExtractor;
 
 
 /**
@@ -38,7 +37,7 @@ public interface Format
 	List<Function<Translator, ? extends SpecificConfigComponent<? extends SpecificConfig>>> getConfigComponents();
 	
 	<T> byte[] export(
-		Grid<T> gridToExport,
+		GridDataExtractor<T> gridDataExtractor,
 		List<ColumnConfiguration<T>> columnsToExport,
 		List<? extends SpecificConfig> configs);
 }
