@@ -134,6 +134,7 @@ public class DemoView extends Composite<VerticalLayout>
 			.with(GridExportLocalizationConfig.COLUMNS, "Spalten")
 			.with(GridExportLocalizationConfig.NAME, "Name")
 			.with(GridExportLocalizationConfig.POSITION, "Position")
+			.with(GridExportLocalizationConfig.ALREADY_PRESENT, "Bereits vorhanden")
 			.with(GridExportLocalizationConfig.FORMAT, "Format")
 			.with(GridExportLocalizationConfig.PREVIEW, "Vorschau")
 			.with(GridExportLocalizationConfig.UNABLE_TO_SHOW_PREVIEW, "Vorschau kann nicht angezeigt werden")

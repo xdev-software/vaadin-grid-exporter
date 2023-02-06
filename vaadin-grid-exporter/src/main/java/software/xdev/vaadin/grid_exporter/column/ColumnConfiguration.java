@@ -62,12 +62,12 @@ public class ColumnConfiguration<T>
 			return false;
 		}
 		final ColumnConfiguration<?> that = (ColumnConfiguration<?>)o;
-		return Objects.equals(this.gridColumn, that.gridColumn) && Objects.equals(this.header, that.header);
+		return Objects.equals(this.gridColumn, that.gridColumn);
 	}
 	
 	@Override
 	public int hashCode()
 	{
-		return Objects.hash(this.gridColumn, this.header);
+		return Objects.hash(this.gridColumn);
 	}
 }

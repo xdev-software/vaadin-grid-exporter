@@ -17,7 +17,9 @@ package software.xdev.vaadin.grid_exporter.wizard.steps;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Stream;
 
@@ -47,6 +49,7 @@ public class GeneralStep<T> extends AbstractGridExportWizardStepComposite<FormLa
 	
 	protected final TextField txtFileName = new TextField();
 	protected final Grid<ColumnConfiguration<T>> gridColumns = new Grid<>();
+	protected final Map<ColumnConfiguration<T>, Binder<ColumnConfiguration<T>>> columnBinders = new HashMap<>();
 	protected Registration gridSelectionChanged = null;
 	
 	public GeneralStep(final Translator translator)
@@ -67,16 +70,33 @@ public class GeneralStep<T> extends AbstractGridExportWizardStepComposite<FormLa
 		
 		this.gridColumns.addColumn(new ComponentRenderer<>(v ->
 			{
+				final Binder<ColumnConfiguration<T>> nameBinder = new Binder<>();
+				
 				final TextField txtField = new TextField();
 				txtField.setRequired(true);
 				txtField.setWidthFull();
-				
-				txtField.setValue(v.getHeader());
-				txtField.addValueChangeListener(e -> {
-					v.setHeader(Objects.requireNonNullElse(e.getValue(), ""));
-					this.validateGrid();
-				});
 				txtField.addThemeVariants(TextFieldVariant.LUMO_SMALL);
+				
+				nameBinder.forField(txtField)
+					// is required (can't be empty)
+					.asRequired()
+					// The name is unique
+					.withValidator(
+						s -> this.getWizardState()
+							.getSelectedColumns()
+							.stream()
+							// Ignore self
+							.filter(colToCheck -> !Objects.equals(colToCheck, v))
+							.map(ColumnConfiguration::getHeader)
+							// Ensure that the name is not already present
+							.noneMatch(header -> Objects.equals(s, header)),
+						this.translate(GridExportLocalizationConfig.ALREADY_PRESENT))
+					.bind(ColumnConfiguration::getHeader, ColumnConfiguration::setHeader);
+				nameBinder.setBean(v);
+				
+				nameBinder.addValueChangeListener(e -> this.validateGrid());
+				
+				this.columnBinders.put(v, nameBinder);
 				
 				return txtField;
 			}))
@@ -169,11 +189,15 @@ public class GeneralStep<T> extends AbstractGridExportWizardStepComposite<FormLa
 	
 	protected boolean isColumnsInvalid(final GridExporterWizardState<T> state)
 	{
-		return state.getSelectedColumns().isEmpty()
+		final List<ColumnConfiguration<T>> selCols = state.getSelectedColumns();
+		// Nothing selected
+		return selCols.isEmpty()
+			// All fields are valid
 			|| state.getSelectedColumns()
 			.stream()
-			.map(ColumnConfiguration::getHeader)
-			.anyMatch(String::isBlank);
+			.map(this.columnBinders::get)
+			// The null check here ensures that the field was rendered by the user
+			.anyMatch(b -> b == null || !b.isValid());
 	}
 	
 	protected boolean isMovingPossible(final boolean increment, final ColumnConfiguration<T> column)

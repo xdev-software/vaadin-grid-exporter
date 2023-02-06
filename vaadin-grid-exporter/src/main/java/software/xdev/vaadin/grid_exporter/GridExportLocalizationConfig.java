@@ -45,6 +45,7 @@ public class GridExportLocalizationConfig
 	public static final String COLUMNS = PREFIX + "columns";
 	public static final String NAME = PREFIX + "name";
 	public static final String POSITION = PREFIX + "position";
+	public static final String ALREADY_PRESENT = PREFIX + "already_present";
 	
 	public static final String FORMAT = PREFIX + "format";
 	
@@ -66,6 +67,7 @@ public class GridExportLocalizationConfig
 		entry(COLUMNS, "Columns"),
 		entry(NAME, "Name"),
 		entry(POSITION, "Position"),
+		entry(ALREADY_PRESENT, "Already present"),
 		entry(FORMAT, "Format"),
 		entry(PREVIEW, "Preview"),
 		entry(UNABLE_TO_SHOW_PREVIEW, "Unable to show preview")
