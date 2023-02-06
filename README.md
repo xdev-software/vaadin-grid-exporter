@@ -7,7 +7,7 @@
 # vaadin-grid-exporter
 A Vaadin Grid Exporter
 
-![demo](assets/demo.png)
+![demo](assets/preview.gif)
 
 
 ## Installation
