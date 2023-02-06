@@ -132,6 +132,13 @@ public class GridExporter<T>
 		return this;
 	}
 	
+	public GridExporter<T> addAvailableFormat(final Format availableFormat)
+	{
+		Objects.requireNonNull(availableFormat);
+		this.availableFormats.add(availableFormat);
+		return this;
+	}
+	
 	public GridExporter<T> withPreSelectedFormat(final Format preSelectedFormat)
 	{
 		Objects.requireNonNull(preSelectedFormat);

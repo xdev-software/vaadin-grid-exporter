@@ -99,7 +99,8 @@ public class GridExportLocalizationConfig
 		final BiFunction<Component, String, String> resolver = this.getKeyResolvers().get(key);
 		if(resolver == null)
 		{
-			return DEFAULT_VALUES.get(key);
+			final String defaultValue = DEFAULT_VALUES.get(key);
+			return defaultValue != null ? defaultValue : key;
 		}
 		return resolver.apply(caller, key);
 	}

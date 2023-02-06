@@ -21,7 +21,6 @@ import java.io.OutputStream;
 import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 
 import net.sf.dynamicreports.jasper.base.export.AbstractJasperExporter;
@@ -224,26 +223,5 @@ public abstract class AbstractJasperReportFormat
 	protected TextColumnBuilder<String> toReportColumn(final ColumnConfiguration<?> column)
 	{
 		return Columns.column(column.getHeader(), column.getKeyOrHeader(), String.class);
-	}
-	
-	protected <C extends SpecificConfig> Optional<C> getConfigFrom(
-		final List<? extends SpecificConfig> configs,
-		final Class<C> targetedConfigClass)
-	{
-		return configs.stream()
-			.filter(targetedConfigClass::isInstance)
-			.map(targetedConfigClass::cast)
-			.findFirst();
-	}
-	
-	protected <V, C extends SpecificConfig> Optional<V> getValueFrom(
-		final List<? extends SpecificConfig> configs,
-		final Class<C> targetedConfigClass,
-		final Function<C, V> mapper)
-	{
-		return this.getConfigFrom(configs, targetedConfigClass)
-			.stream()
-			.findFirst()
-			.map(mapper);
 	}
 }

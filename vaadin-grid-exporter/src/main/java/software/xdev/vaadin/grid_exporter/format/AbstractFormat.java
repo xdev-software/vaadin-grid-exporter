@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.function.Function;
 
 import software.xdev.vaadin.grid_exporter.Translator;
@@ -74,5 +75,26 @@ public abstract class AbstractFormat implements Format
 	public List<Function<Translator, ? extends SpecificConfigComponent<? extends SpecificConfig>>> getConfigComponents()
 	{
 		return this.configComponents;
+	}
+	
+	protected <C extends SpecificConfig> Optional<C> getConfigFrom(
+		final List<? extends SpecificConfig> configs,
+		final Class<C> targetedConfigClass)
+	{
+		return configs.stream()
+			.filter(targetedConfigClass::isInstance)
+			.map(targetedConfigClass::cast)
+			.findFirst();
+	}
+	
+	protected <V, C extends SpecificConfig> Optional<V> getValueFrom(
+		final List<? extends SpecificConfig> configs,
+		final Class<C> targetedConfigClass,
+		final Function<C, V> mapper)
+	{
+		return this.getConfigFrom(configs, targetedConfigClass)
+			.stream()
+			.findFirst()
+			.map(mapper);
 	}
 }
