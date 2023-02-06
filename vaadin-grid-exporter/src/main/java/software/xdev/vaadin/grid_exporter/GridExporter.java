@@ -33,28 +33,21 @@ import software.xdev.vaadin.grid_exporter.column.ColumnConfigurationBuilder;
 import software.xdev.vaadin.grid_exporter.column.ColumnConfigurationHeaderResolvingStrategyBuilder;
 import software.xdev.vaadin.grid_exporter.format.Format;
 import software.xdev.vaadin.grid_exporter.grid.GridDataExtractor;
-import software.xdev.vaadin.grid_exporter.jasper.config.JasperConfigsLocalization;
-import software.xdev.vaadin.grid_exporter.jasper.format.CsvFormat;
-import software.xdev.vaadin.grid_exporter.jasper.format.DocxFormat;
-import software.xdev.vaadin.grid_exporter.jasper.format.HtmlFormat;
-import software.xdev.vaadin.grid_exporter.jasper.format.OdsFormat;
-import software.xdev.vaadin.grid_exporter.jasper.format.OdtFormat;
-import software.xdev.vaadin.grid_exporter.jasper.format.PdfFormat;
-import software.xdev.vaadin.grid_exporter.jasper.format.PptxFormat;
-import software.xdev.vaadin.grid_exporter.jasper.format.RtfFormat;
-import software.xdev.vaadin.grid_exporter.jasper.format.TextFormat;
-import software.xdev.vaadin.grid_exporter.jasper.format.XlsxFormat;
-import software.xdev.vaadin.grid_exporter.jasper.format.XmlFormat;
+import software.xdev.vaadin.grid_exporter.jasper.JasperGridExporterProvider;
 import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizard;
 import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizardState;
 
 
+/**
+ * Opens a wizard to export a Grid.
+ *
+ * @param <T> The grid bean type
+ */
 public class GridExporter<T>
 {
 	protected final Grid<T> grid;
 	
-	protected GridExportLocalizationConfig localizationConfig =
-		new GridExportLocalizationConfig().withAll(JasperConfigsLocalization.DEFAULT_VALUES);
+	protected GridExportLocalizationConfig localizationConfig = new GridExportLocalizationConfig();
 	
 	protected Predicate<Grid.Column<T>> columnFilter = col -> true;
 	
@@ -63,22 +56,9 @@ public class GridExporter<T>
 			ColumnConfigurationHeaderResolvingStrategyBuilder::withVaadinInternalHeaderStrategy);
 	
 	protected String fileName = "Report_" + DateTimeFormatter.ofPattern("yyyy_MM_dd_HH_mm")
-			.format(LocalDateTime.now(ZoneOffset.UTC));
+		.format(LocalDateTime.now(ZoneOffset.UTC));
 	
-	protected List<Format> availableFormats =
-		new ArrayList<>(Arrays.asList(
-			new PdfFormat(),
-			new XlsxFormat(),
-			new CsvFormat(),
-			new DocxFormat(),
-			new HtmlFormat(),
-			new OdsFormat(),
-			new OdtFormat(),
-			new PptxFormat(),
-			new RtfFormat(),
-			new TextFormat(),
-			new XmlFormat()
-		));
+	protected List<Format> availableFormats = new ArrayList<>();
 	
 	protected Format preSelectedFormat = null;
 	
@@ -87,6 +67,13 @@ public class GridExporter<T>
 	public GridExporter(final Grid<T> grid)
 	{
 		this.grid = Objects.requireNonNull(grid);
+	}
+	
+	public GridExporter<T> loadFromProvider(final GridExporterProvider provider)
+	{
+		this.localizationConfig.withAll(provider.getDefaultTranslationKeyValues());
+		this.availableFormats.addAll(provider.getFormats());
+		return this;
 	}
 	
 	public GridExporter<T> withLocalizationConfig(final GridExportLocalizationConfig localizationConfig)
@@ -126,7 +113,7 @@ public class GridExporter<T>
 			throw new IllegalStateException("Available formats is empty");
 		}
 		
-		this.availableFormats = availableFormats;
+		this.availableFormats = new ArrayList<>(availableFormats);
 		return this;
 	}
 	
@@ -163,6 +150,9 @@ public class GridExporter<T>
 			.collect(Collectors.toList());
 	}
 	
+	/**
+	 * Opens the {@link GridExporterWizard}.
+	 */
 	public void export()
 	{
 		final GridExporterWizardState<T> state = new GridExporterWizardState<>(
@@ -178,5 +168,17 @@ public class GridExporter<T>
 		state.setSelectedFormat(this.preSelectedFormat);
 		
 		new GridExporterWizard<>(state, this.localizationConfig).open();
+	}
+	
+	/**
+	 * Creates a new {@link GridExporter} with the default JasperReports exports.
+	 * <p>
+	 * <i>Note: This may be removed or split into a separate module in the future.</i>
+	 * </p>
+	 */
+	public static <T> GridExporter<T> newWithDefaults(final Grid<T> grid)
+	{
+		return new GridExporter<>(grid)
+			.loadFromProvider(new JasperGridExporterProvider());
 	}
 }

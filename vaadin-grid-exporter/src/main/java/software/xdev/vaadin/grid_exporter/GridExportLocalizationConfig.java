@@ -25,9 +25,7 @@ import com.vaadin.flow.component.Component;
 
 
 /**
- * Makes i18n possible for the component. As default the english language is used.
- *
- * @author AB
+ * Makes i18n possible for the component. As defaults the english language is used.
  */
 public class GridExportLocalizationConfig
 {

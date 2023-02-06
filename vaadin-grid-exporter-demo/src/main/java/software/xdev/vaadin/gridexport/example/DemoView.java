@@ -15,8 +15,7 @@ import com.vaadin.flow.router.Route;
 import software.xdev.vaadin.grid_exporter.GridExportLocalizationConfig;
 import software.xdev.vaadin.grid_exporter.GridExporter;
 import software.xdev.vaadin.grid_exporter.jasper.config.JasperConfigsLocalization;
-import software.xdev.vaadin.gridexport.example.jsonext.JsonConfigComponent;
-import software.xdev.vaadin.gridexport.example.jsonext.JsonFormat;
+import software.xdev.vaadin.gridexport.example.jsonext.JsonGridExporterProvider;
 
 
 @PageTitle("GridExport Examples")
@@ -33,21 +32,19 @@ public class DemoView extends Composite<VerticalLayout>
 			new Button(
 				"Export",
 				VaadinIcon.PRINT.create(),
-				e -> new GridExporter<>(this.grExamples)
+				e -> GridExporter.newWithDefaults(this.grExamples)
 					.export()),
 			new Button(
 				"Export (German translation)",
 				VaadinIcon.PRINT.create(),
-				e -> new GridExporter<>(this.grExamples)
+				e -> GridExporter.newWithDefaults(this.grExamples)
 					.withLocalizationConfig(germanLocalizationConfig())
 					.export()),
 			new Button(
 				"Export (JSON)",
 				VaadinIcon.PRINT.create(),
-				e -> new GridExporter<>(this.grExamples)
-					.withLocalizationConfig(new GridExportLocalizationConfig()
-						.withAll(JsonConfigComponent.DEFAULT_VALUES))
-					.withAvailableFormats(new JsonFormat())
+				e -> GridExporter.newWithDefaults(this.grExamples)
+					.loadFromProvider(new JsonGridExporterProvider())
 					.export())
 		);
 		

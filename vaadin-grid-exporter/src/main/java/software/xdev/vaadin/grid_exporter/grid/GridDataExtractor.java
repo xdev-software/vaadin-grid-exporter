@@ -35,6 +35,12 @@ import com.vaadin.flow.function.ValueProvider;
 import software.xdev.vaadin.grid_exporter.column.ColumnConfiguration;
 
 
+/**
+ * Extracts the sorted and filtered data from a {@link Grid}.
+ * <p>
+ * Be aware that this class uses reflection to achieve it's goals.
+ * </p>
+ */
 @SuppressWarnings({"java:S3011", "unchecked"}) // Accessing non-public Vaadin fields
 public class GridDataExtractor<T>
 {

@@ -39,7 +39,7 @@ import software.xdev.vaadin.grid_exporter.format.AbstractFormat;
 import software.xdev.vaadin.grid_exporter.format.SpecificConfig;
 import software.xdev.vaadin.grid_exporter.grid.GridDataExtractor;
 import software.xdev.vaadin.grid_exporter.jasper.DynamicExporter;
-import software.xdev.vaadin.grid_exporter.jasper.GridReportStyles;
+import software.xdev.vaadin.grid_exporter.jasper.JasperGridReportStyles;
 import software.xdev.vaadin.grid_exporter.jasper.config.encoding.EncodingConfig;
 import software.xdev.vaadin.grid_exporter.jasper.config.encoding.ExportEncoding;
 import software.xdev.vaadin.grid_exporter.jasper.config.header.HeaderConfig;
@@ -52,7 +52,7 @@ public abstract class AbstractJasperReportFormat
 	<B extends AbstractJasperExporterBuilder<B, ? extends AbstractJasperExporter>>
 	extends AbstractFormat
 {
-	protected final GridReportStyles gridReportStyles = GridReportStyles.New();
+	protected final JasperGridReportStyles jasperGridReportStyles = JasperGridReportStyles.New();
 	
 	protected final boolean hasPages;
 	
@@ -150,8 +150,8 @@ public abstract class AbstractJasperReportFormat
 		
 		if(this.hasStyle)
 		{
-			report.setColumnTitleStyle(this.gridReportStyles.columnTitleStyle());
-			report.setColumnStyle(this.gridReportStyles.columnStyle());
+			report.setColumnTitleStyle(this.jasperGridReportStyles.columnTitleStyle());
+			report.setColumnStyle(this.jasperGridReportStyles.columnStyle());
 		}
 		
 		report.setIgnorePagination(!this.hasPages);
@@ -167,7 +167,7 @@ public abstract class AbstractJasperReportFormat
 				final TextFieldBuilder<String> txtTitle = Components.text(title);
 				if(this.hasStyle)
 				{
-					txtTitle.setStyle(this.gridReportStyles.titleStyle());
+					txtTitle.setStyle(this.jasperGridReportStyles.titleStyle());
 				}
 				report.title(txtTitle);
 				report.setReportName(title);
@@ -181,7 +181,7 @@ public abstract class AbstractJasperReportFormat
 			.filter(highlight -> highlight)
 			.ifPresent(x ->
 			{
-				report.setDetailOddRowStyle(this.gridReportStyles.columnStyleHighlighted());
+				report.setDetailOddRowStyle(this.jasperGridReportStyles.columnStyleHighlighted());
 				report.highlightDetailOddRows();
 			});
 		
@@ -193,7 +193,7 @@ public abstract class AbstractJasperReportFormat
 					final PageXofYBuilder pageXofYBuilder = DynamicReports.cmp.pageXofY();
 					if(this.hasStyle)
 					{
-						pageXofYBuilder.setStyle(this.gridReportStyles.footerStyle());
+						pageXofYBuilder.setStyle(this.jasperGridReportStyles.footerStyle());
 					}
 					report.pageFooter(pageXofYBuilder);
 				}

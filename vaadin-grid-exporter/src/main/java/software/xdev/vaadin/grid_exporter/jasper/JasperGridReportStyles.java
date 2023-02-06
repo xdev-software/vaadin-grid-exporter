@@ -23,7 +23,7 @@ import net.sf.dynamicreports.report.builder.style.Styles;
 import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
 
 
-public interface GridReportStyles
+public interface JasperGridReportStyles
 {
 	StyleBuilder titleStyle();
 	
@@ -35,12 +35,12 @@ public interface GridReportStyles
 	
 	SimpleStyleBuilder columnStyleHighlighted();
 	
-	static GridReportStyles New()
+	static JasperGridReportStyles New()
 	{
 		return new Default();
 	}
 	
-	public static class Default implements GridReportStyles
+	public static class Default implements JasperGridReportStyles
 	{
 		protected final StyleBuilder defaultStyle = Styles.style().setPadding(2);
 		protected final StyleBuilder boldCenterStyle = Styles.style(this.defaultStyle)
