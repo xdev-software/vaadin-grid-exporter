@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package software.xdev.vaadin.grid_exporter.components.wizard;
+package software.xdev.vaadin.grid_exporter.wizard;
 
 import java.util.ArrayList;
 import java.util.List;
