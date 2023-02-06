@@ -8,6 +8,7 @@ import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 
@@ -70,6 +71,11 @@ public class DemoView extends Composite<VerticalLayout>
 			.addColumn(Example::getDesc)
 			.setHeader("Description")
 			.setFlexGrow(1);
+		
+		this.grExamples
+			.addColumn(new ComponentRenderer<>(x -> new Button("Dummy open button")))
+			.setAutoWidth(true)
+			.setFlexGrow(0);
 		
 		this.grExamples.setSizeFull();
 		this.grExamples.addThemeVariants(GridVariant.LUMO_COMPACT);

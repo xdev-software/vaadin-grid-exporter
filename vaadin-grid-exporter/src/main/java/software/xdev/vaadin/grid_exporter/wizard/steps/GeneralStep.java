@@ -18,6 +18,7 @@ package software.xdev.vaadin.grid_exporter.wizard.steps;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import com.vaadin.flow.component.button.Button;
@@ -71,7 +72,10 @@ public class GeneralStep<T> extends AbstractGridExportWizardStepComposite<FormLa
 				txtField.setWidthFull();
 				
 				txtField.setValue(v.getHeader());
-				txtField.addValueChangeListener(e -> v.setHeader(e.getValue()));
+				txtField.addValueChangeListener(e -> {
+					v.setHeader(Objects.requireNonNullElse(e.getValue(), ""));
+					this.validateGrid();
+				});
 				txtField.addThemeVariants(TextFieldVariant.LUMO_SMALL);
 				
 				return txtField;
@@ -140,23 +144,36 @@ public class GeneralStep<T> extends AbstractGridExportWizardStepComposite<FormLa
 		// Can't bind a grid - doing that manually
 		this.gridSelectionChanged = this.gridColumns.addSelectionListener(ev ->
 		{
-			// Highlight grid when nothing is selected
-			ev.getSource().getStyle().set(
-				"border",
-				ev.getAllSelectedItems().isEmpty() ? "1px solid var(--lumo-error-color-50pct)" : null);
 			this.getWizardState().setSelectedColumns(new ArrayList<>(ev.getAllSelectedItems()));
+			this.validateGrid();
 		});
+	}
+	
+	protected void validateGrid()
+	{
+		this.gridColumns.getStyle().set(
+			"border",
+			this.isColumnsInvalid(this.getWizardState()) ? "1px solid var(--lumo-error-color-50pct)" : null);
 	}
 	
 	@Override
 	public boolean onProgress(final GridExporterWizardState<T> state)
 	{
-		if(state.getSelectedColumns().isEmpty())
+		if(this.isColumnsInvalid(state))
 		{
 			return false;
 		}
 		
 		return this.binder.isValid();
+	}
+	
+	protected boolean isColumnsInvalid(final GridExporterWizardState<T> state)
+	{
+		return state.getSelectedColumns().isEmpty()
+			|| state.getSelectedColumns()
+			.stream()
+			.map(ColumnConfiguration::getHeader)
+			.anyMatch(String::isBlank);
 	}
 	
 	protected boolean isMovingPossible(final boolean increment, final ColumnConfiguration<T> column)

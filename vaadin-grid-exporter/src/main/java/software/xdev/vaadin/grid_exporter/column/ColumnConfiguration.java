@@ -31,7 +31,7 @@ public class ColumnConfiguration<T>
 		final SerializableFunction<Column<?>, String> headerResolver)
 	{
 		this.gridColumn = gridColumn;
-		this.header = headerResolver.apply(gridColumn);
+		this.header = Objects.requireNonNullElse(headerResolver.apply(gridColumn), "");
 	}
 	
 	public Column<T> getGridColumn()
@@ -46,15 +46,8 @@ public class ColumnConfiguration<T>
 	
 	public ColumnConfiguration<T> setHeader(final String header)
 	{
-		this.header = header;
+		this.header = Objects.requireNonNull(header);
 		return this;
-	}
-	
-	public String getKeyOrHeader()
-	{
-		return this.getGridColumn().getKey() != null
-			? this.getGridColumn().getKey()
-			: this.getHeader();
 	}
 	
 	@Override

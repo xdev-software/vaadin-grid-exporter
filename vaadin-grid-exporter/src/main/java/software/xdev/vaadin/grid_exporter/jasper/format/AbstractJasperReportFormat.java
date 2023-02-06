@@ -209,7 +209,7 @@ public abstract class AbstractJasperReportFormat
 	{
 		final DRDataSource dataSource = new DRDataSource(
 			columnsToExport.stream()
-				.map(ColumnConfiguration::getKeyOrHeader)
+				.map(ColumnConfiguration::getHeader)
 				.toArray(String[]::new));
 		
 		gridDataExtractor.getSortedAndFilteredData(columnsToExport)
@@ -222,6 +222,6 @@ public abstract class AbstractJasperReportFormat
 	
 	protected TextColumnBuilder<String> toReportColumn(final ColumnConfiguration<?> column)
 	{
-		return Columns.column(column.getHeader(), column.getKeyOrHeader(), String.class);
+		return Columns.column(column.getHeader(), column.getHeader(), String.class);
 	}
 }

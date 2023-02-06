@@ -47,7 +47,7 @@ public class JsonFormat extends AbstractFormat
 					// Create a key-value Map
 					? rowData.stream()
 					.map(list -> columnsToExport.stream().collect(Collectors.toMap(
-						ColumnConfiguration::getKeyOrHeader,
+						ColumnConfiguration::getHeader,
 						i -> list.get(columnsToExport.indexOf(i))))
 					)
 					.collect(Collectors.toList())
