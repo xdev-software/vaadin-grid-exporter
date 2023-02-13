@@ -5,12 +5,45 @@
 ![Vaadin 23+](https://img.shields.io/badge/Vaadin%20Platform/Flow-23+-00b4f0.svg)
 
 # vaadin-grid-exporter
-A Vaadin Grid Exporter
+
+The Vaadin Grid Exporter can convert any Vaadin Grid to a variety of formats. Out of the box supported formats:
+
+* CSV
+* Word (DOCX)
+* HTML
+* ODS
+* ODT
+* PDF
+* PowerPoint (PPTX)
+* RTF
+* Plain text
+* Excel (XLSX)
+* XML
+
+It's also easy to extend the Exporter to support your custom format.
+
+Default usage:
+
+```java
+GridExporter
+	.newWithDefaults(this.grExamples)
+	.open();
+```
+
+Custom format (see
+[JsonGridExporterProvider from Demo](vaadin-grid-exporter-demo/src/main/java/software/xdev/vaadin/gridexport/example/jsonext/JsonGridExporterProvider.java)):
+
+```java
+GridExporter
+	.newWithDefaults(this.grExamples)
+	.loadFromProvider(new JsonGridExporterProvider())
+	.open();
+```
 
 ![demo](assets/preview.gif)
 
-
 ## Installation
+
 [Installation guide for the latest release](https://github.com/xdev-software/vaadin-grid-exporter/releases/latest#Installation)
 
 #### Compatibility with Vaadin
