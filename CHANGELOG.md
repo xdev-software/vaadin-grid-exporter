@@ -1,16 +1,27 @@
-## 1.0.4
+## 2.0.0
+* Undocked from RapidClipse
+  * Changed package from ``com.rapidclipse.framework.server.reports`` to ``software.xdev.vaadin.grid_exporter``
+* Restructured the UI
+  * Using a step-by-step-wizard like layout
+  * Made formats configurable via UI
+* Refactored software architecture to make the component more expandable
+* Removed XLS from default formats due to not included dependency which causes a crash (XLSX still works)
 * Updated dependencies
+
+Example usage:
+
+| v1 | v2 |
+| --- | --- |
+| ``GridExportDialog.open(grid)`` | ``GridExporter.newWithDefaults(grid).open()`` |
 
 ## 1.0.3
 * Removed unused code
 
 ## 1.0.2
-
 * Updated dependencies
   * Vaadin 23.2
 
 ## 1.0.1
-
 * Removed unnecessary code and dependencies; Updated jasperreports to latest version
 
 ## 1.0.0
