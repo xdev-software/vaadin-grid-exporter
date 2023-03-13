@@ -21,6 +21,12 @@ updates:
     time: "00:00"
   open-pull-requests-limit: 10
   ignore:
+  - dependency-name: "jakarta.xml.bind:jakarta.xml.bind-api"
+    # Version 3+ uses jakarta.* instead of javax.*
+    versions: ">=3.0.0"
+  - dependency-name: "org.glassfish.jaxb:jaxb-runtime"
+    # Version 3+ uses jakarta.* instead of javax.*
+    versions: ">=3.0.0"
   - dependency-name: "org.springframework.boot:*"
     # Version 3+ requires Vaadin 24
     versions: ">=3.0.0"
