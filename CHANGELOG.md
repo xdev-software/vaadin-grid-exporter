@@ -1,3 +1,6 @@
+## 2.0.1
+* Updated dependencies
+
 ## 2.0.0
 * Undocked from RapidClipse
   * Changed package from ``com.rapidclipse.framework.server.reports`` to ``software.xdev.vaadin.grid_exporter``
