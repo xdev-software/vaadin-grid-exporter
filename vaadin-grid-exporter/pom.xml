@@ -136,7 +136,7 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>6.20.0</version>
+			<version>6.20.4</version>
 		</dependency>
 
 		<!-- JAXB is no longer in the JDK (Java 9+) -->
