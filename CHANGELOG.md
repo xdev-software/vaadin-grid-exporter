@@ -5,6 +5,7 @@
   <i>If you are still using Vaadin 23, use the ``3.x`` versions.</i>
   * Requires Java 17+
 * Updated dependencies
+* Replaced ``VaadinInternalRenderingColumnHeaderResolvingStrategy`` with ``VaadinColumnHeaderResolvingStrategy``
 
 ## 2.0.0
 * Undocked from RapidClipse
