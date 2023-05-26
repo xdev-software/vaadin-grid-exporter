@@ -50,7 +50,8 @@ GridExporter
 
 | Vaadin version | GridExporter version |
 | --- | --- |
-| Vaadin 23+ (latest) | ``1+`` |
+| Vaadin 24+ (latest) | ``3+`` |
+| Vaadin 23 | ``2.x`` |
 
 
 ## Run the Demo
