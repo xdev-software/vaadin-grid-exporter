@@ -15,9 +15,9 @@
  */
 package software.xdev.vaadin.grid_exporter.jasper.format;
 
-import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.jasper.builder.export.Exporters;
-import net.sf.dynamicreports.jasper.builder.export.JasperDocxExporterBuilder;
+import software.xdev.dynamicreports.jasper.builder.JasperReportBuilder;
+import software.xdev.dynamicreports.jasper.builder.export.Exporters;
+import software.xdev.dynamicreports.jasper.builder.export.JasperDocxExporterBuilder;
 
 
 public class DocxFormat extends AbstractJasperReportWordProcessingFormat<JasperDocxExporterBuilder>

@@ -18,8 +18,8 @@ package software.xdev.vaadin.grid_exporter.jasper.format;
 import java.io.OutputStream;
 import java.util.function.Function;
 
-import net.sf.dynamicreports.jasper.base.export.AbstractJasperExporter;
-import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
+import software.xdev.dynamicreports.jasper.base.export.AbstractJasperExporter;
+import software.xdev.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
 import software.xdev.vaadin.grid_exporter.jasper.DynamicExporter;
 import software.xdev.vaadin.grid_exporter.jasper.config.header.HeaderConfigComponent;
 import software.xdev.vaadin.grid_exporter.jasper.config.highlight.HighlightConfigComponent;
