@@ -29,7 +29,6 @@ import software.xdev.vaadin.grid_exporter.jasper.format.PptxFormat;
 import software.xdev.vaadin.grid_exporter.jasper.format.RtfFormat;
 import software.xdev.vaadin.grid_exporter.jasper.format.TextFormat;
 import software.xdev.vaadin.grid_exporter.jasper.format.XlsxFormat;
-import software.xdev.vaadin.grid_exporter.jasper.format.XmlFormat;
 
 
 public class JasperGridExporterProvider extends GridExporterProvider
@@ -48,8 +47,7 @@ public class JasperGridExporterProvider extends GridExporterProvider
 				new OdtFormat(),
 				new PptxFormat(),
 				new RtfFormat(),
-				new TextFormat(),
-				new XmlFormat()
+				new TextFormat()
 			));
 	}
 }
