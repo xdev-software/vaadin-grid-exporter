@@ -4,7 +4,7 @@
 * Adds support for Vaadin 24+, drops support for Vaadin 23<br/>
   <i>If you are still using Vaadin 23, use the ``3.x`` versions.</i>
   * Requires Java 17+
-* Replaced the underlying reporting framework ``dynamicreports`` with [our fork of it](https://github.com/xdev-software/dynamicreports-core-for-grid-exporter) which specially designed for this project
+* Replaced the underlying reporting framework ``dynamicreports`` with [our fork of it](https://github.com/xdev-software/dynamicreports-core-for-grid-exporter) which is specially designed for this project
   * Differences from the original project are roughly described in the [changelog](https://github.com/xdev-software/dynamicreports-core-for-grid-exporter/blob/develop/CHANGELOG.md).
 * Removed ``XML`` from the default formats because the exported data was unusable
 * Replaced ``VaadinInternalRenderingColumnHeaderResolvingStrategy`` with ``VaadinColumnHeaderResolvingStrategy``
