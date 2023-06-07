@@ -26,7 +26,7 @@ import com.vaadin.flow.function.SerializableFunction;
 
 import software.xdev.vaadin.grid_exporter.column.headerresolving.ColumnHeaderResolvingStrategy;
 import software.xdev.vaadin.grid_exporter.column.headerresolving.ManualColumnHeaderResolvingStrategy;
-import software.xdev.vaadin.grid_exporter.column.headerresolving.VaadinInternalRenderingColumnHeaderResolvingStrategy;
+import software.xdev.vaadin.grid_exporter.column.headerresolving.VaadinColumnHeaderResolvingStrategy;
 
 
 /**
@@ -38,11 +38,11 @@ public class ColumnConfigurationHeaderResolvingStrategyBuilder
 	protected final List<ColumnHeaderResolvingStrategy> strategies = new ArrayList<>();
 	
 	/**
-	 * Uses the {@link VaadinInternalRenderingColumnHeaderResolvingStrategy}
+	 * Uses the {@link VaadinColumnHeaderResolvingStrategy}
 	 */
 	public ColumnConfigurationHeaderResolvingStrategyBuilder withVaadinInternalHeaderStrategy()
 	{
-		return this.withStrategy(new VaadinInternalRenderingColumnHeaderResolvingStrategy());
+		return this.withStrategy(new VaadinColumnHeaderResolvingStrategy());
 	}
 	
 	/**

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package software.xdev.vaadin.grid_exporter.grid.column.headerresolving;
+package software.xdev.vaadin.grid_exporter.column.headerresolving;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -29,24 +29,42 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.Grid.Column;
 import com.vaadin.flow.component.html.Label;
 
-import software.xdev.vaadin.grid_exporter.column.headerresolving.VaadinInternalRenderingColumnHeaderResolvingStrategy;
 
-class VaadinInternalRenderingColumnHeaderResolvingStrategyTest
+class VaadinColumnHeaderResolvingStrategyTest
 {
 	@Test
 	@DisplayName("Grid-Header is read correctly from a grid with one set column header")
-	void test_001()
+	void setHeaderText_ShouldBeFound()
 	{
 		final String expectedHeader = "username";
 		
 		final Grid<TestUserDTO> grid = new Grid<>();
 		
 		final Column<TestUserDTO> colUsername = grid
-			.addColumn(TestUserDTO::getUsername)
+			.addColumn(TestUserDTO::username)
 			.setHeader(expectedHeader);
 		
 		final Optional<String> optResolvedName =
-			new VaadinInternalRenderingColumnHeaderResolvingStrategy().resolve(colUsername);
+			new VaadinColumnHeaderResolvingStrategy().resolve(colUsername);
+		
+		assertTrue(optResolvedName.isPresent(), "No resolved column name found");
+		assertEquals(expectedHeader, optResolvedName.get());
+	}
+	
+	@Test
+	@DisplayName("Grid-Header be found when read from a grid with a column renderer/component")
+	void setHeaderComponent_ShouldBeFound()
+	{
+		final String expectedHeader = "text";
+		
+		final Grid<TestUserDTO> grid = new Grid<>();
+		
+		final Column<TestUserDTO> colUsername = grid
+			.addColumn(TestUserDTO::username)
+			.setHeader(new Label(expectedHeader));
+		
+		final Optional<String> optResolvedName =
+			new VaadinColumnHeaderResolvingStrategy().resolve(colUsername);
 		
 		assertTrue(optResolvedName.isPresent(), "No resolved column name found");
 		assertEquals(expectedHeader, optResolvedName.get());
@@ -54,72 +72,31 @@ class VaadinInternalRenderingColumnHeaderResolvingStrategyTest
 	
 	@Test
 	@DisplayName("Grid-Header should not be found when read from a grid with no column header")
-	void test_002()
+	void noHeaderSet_NoNameShouldBeFound()
 	{
 		final Grid<TestUserDTO> grid = new Grid<>();
 		
 		final Column<TestUserDTO> colUsername = grid
-			.addColumn(TestUserDTO::getUsername);
+			.addColumn(TestUserDTO::username);
 		
 		final Optional<String> optResolvedName =
-			new VaadinInternalRenderingColumnHeaderResolvingStrategy().resolve(colUsername);
-		
-		assertFalse(optResolvedName.isPresent(), "column name found");
-	}
-	
-	@Test
-	@DisplayName("Grid-Header should not be found when read from a grid with a column renderer/component")
-	void test_003()
-	{
-		final Grid<TestUserDTO> grid = new Grid<>();
-		
-		final Column<TestUserDTO> colUsername = grid
-			.addColumn(TestUserDTO::getUsername)
-			.setHeader(new Label("text"));
-		
-		final Optional<String> optResolvedName =
-			new VaadinInternalRenderingColumnHeaderResolvingStrategy().resolve(colUsername);
+			new VaadinColumnHeaderResolvingStrategy().resolve(colUsername);
 		
 		assertFalse(optResolvedName.isPresent(), "column name found");
 	}
 	
 	@Test
 	@DisplayName("Test null safety")
-	void test_004()
+	void nullSafety()
 	{
 		final Optional<String> optResolvedName =
 			assertDoesNotThrow(
-				() -> new VaadinInternalRenderingColumnHeaderResolvingStrategy().resolve(null));
+				() -> new VaadinColumnHeaderResolvingStrategy().resolve(null));
 		
 		assertFalse(optResolvedName.isPresent(), "column name found");
 	}
 	
-	static class TestUserDTO
+	record TestUserDTO(String username, String firstName, String lastName)
 	{
-		private final String username;
-		private final String firstName;
-		private final String lastName;
-		
-		public TestUserDTO(final String username, final String firstName, final String lastName)
-		{
-			this.username = username;
-			this.firstName = firstName;
-			this.lastName = lastName;
-		}
-		
-		public String getUsername()
-		{
-			return this.username;
-		}
-		
-		public String getFirstName()
-		{
-			return this.firstName;
-		}
-		
-		public String getLastName()
-		{
-			return this.lastName;
-		}
 	}
 }

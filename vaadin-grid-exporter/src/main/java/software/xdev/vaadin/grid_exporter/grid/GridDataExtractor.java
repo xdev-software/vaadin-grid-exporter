@@ -20,7 +20,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.vaadin.flow.component.ItemLabelGenerator;
@@ -56,8 +55,8 @@ public class GridDataExtractor<T>
 		return this.getSortedAndFilteredData(this.grid)
 			.map(item -> columnsToExport.stream()
 				.map(column -> this.getFormattedValue(column.getGridColumn(), item))
-				.collect(Collectors.toList()))
-			.collect(Collectors.toList());
+				.toList())
+			.toList();
 	}
 	
 	protected String getFormattedValue(final Grid.Column<T> column, final T item)
@@ -83,12 +82,12 @@ public class GridDataExtractor<T>
 			}
 			else if(renderer instanceof ColumnPathRenderer)
 			{
-				for(final ValueProvider<T, ?> valprov : renderer.getValueProviders().values())
+				final Field provider = ColumnPathRenderer.class.getDeclaredField("provider");
+				provider.setAccessible(true);
+				final ValueProvider<T, ?> valprov = (ValueProvider<T, ?>)provider.get(renderer);
+				if(valprov != null)
 				{
-					if(valprov != null)
-					{
-						return valprov.apply(item).toString();
-					}
+					return valprov.apply(item).toString();
 				}
 			}
 		}
@@ -141,7 +140,7 @@ public class GridDataExtractor<T>
 				Integer.MAX_VALUE,
 				grid.getSortOrder().stream()
 					.flatMap(so -> so.getSorted().getSortOrder(so.getDirection()))
-					.collect(Collectors.toList()),
+					.toList(),
 				grid.getDataCommunicator().getInMemorySorting(),
 				null));
 	}

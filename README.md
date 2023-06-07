@@ -18,7 +18,6 @@ The Vaadin Grid Exporter can convert any Vaadin Grid to a variety of formats. Ou
 * RTF
 * Plain text
 * Excel (XLSX)
-* XML
 
 It's also easy to extend the Exporter to support your custom format.
 

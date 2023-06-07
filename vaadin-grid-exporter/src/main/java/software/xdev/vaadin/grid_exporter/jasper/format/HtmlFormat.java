@@ -15,9 +15,9 @@
  */
 package software.xdev.vaadin.grid_exporter.jasper.format;
 
-import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.jasper.builder.export.Exporters;
-import net.sf.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
+import software.xdev.dynamicreports.jasper.builder.JasperReportBuilder;
+import software.xdev.dynamicreports.jasper.builder.export.Exporters;
+import software.xdev.dynamicreports.jasper.builder.export.JasperHtmlExporterBuilder;
 import software.xdev.vaadin.grid_exporter.jasper.config.header.HeaderConfigComponent;
 import software.xdev.vaadin.grid_exporter.jasper.config.highlight.HighlightConfigComponent;
 import software.xdev.vaadin.grid_exporter.jasper.config.title.TitleConfigComponent;
