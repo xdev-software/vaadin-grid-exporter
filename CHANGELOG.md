@@ -1,3 +1,15 @@
+## 3.0.0
+⚠️<i>This release contains breaking changes</i>
+
+* Adds support for Vaadin 24+, drops support for Vaadin 23<br/>
+  <i>If you are still using Vaadin 23, use the ``3.x`` versions.</i>
+  * Requires Java 17+
+* Replaced the underlying reporting framework ``dynamicreports`` with [our fork of it](https://github.com/xdev-software/dynamicreports-core-for-grid-exporter) which is specially designed for this project
+  * Differences from the original project are roughly described in the [changelog](https://github.com/xdev-software/dynamicreports-core-for-grid-exporter/blob/develop/CHANGELOG.md).
+* Removed ``XML`` from the default formats because the exported data was unusable
+* Replaced ``VaadinInternalRenderingColumnHeaderResolvingStrategy`` with ``VaadinColumnHeaderResolvingStrategy``
+* Updated dependencies
+
 ## 2.0.0
 * Undocked from RapidClipse
   * Changed package from ``com.rapidclipse.framework.server.reports`` to ``software.xdev.vaadin.grid_exporter``
@@ -5,7 +17,7 @@
   * Using a step-by-step-wizard like layout
   * Made formats configurable via UI
 * Refactored software architecture to make the component more expandable
-* Removed XLS from default formats due to not included dependency which causes a crash (XLSX still works)
+* Removed ``XLS`` from default formats due to not included dependency which causes a crash (``XLSX`` still works)
 * Updated dependencies
 
 Example usage:

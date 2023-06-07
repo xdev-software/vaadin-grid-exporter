@@ -19,8 +19,8 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.textfield.IntegerField;
 
-import net.sf.dynamicreports.report.constant.PageOrientation;
-import net.sf.dynamicreports.report.constant.PageType;
+import software.xdev.dynamicreports.report.constant.PageOrientation;
+import software.xdev.dynamicreports.report.constant.PageType;
 import software.xdev.vaadin.grid_exporter.Translator;
 import software.xdev.vaadin.grid_exporter.format.SpecificConfigComponent;
 import software.xdev.vaadin.grid_exporter.jasper.config.JasperConfigsLocalization;

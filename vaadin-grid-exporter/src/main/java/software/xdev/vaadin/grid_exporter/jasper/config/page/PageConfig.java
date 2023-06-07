@@ -19,8 +19,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import net.sf.dynamicreports.report.constant.PageOrientation;
-import net.sf.dynamicreports.report.constant.PageType;
+import software.xdev.dynamicreports.report.constant.PageOrientation;
+import software.xdev.dynamicreports.report.constant.PageType;
 import software.xdev.vaadin.grid_exporter.format.SpecificConfig;
 
 

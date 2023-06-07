@@ -6,7 +6,7 @@
 
 	<groupId>com.xdev-software</groupId>
 	<artifactId>vaadin-grid-exporter</artifactId>
-	<version>2.0.1-SNAPSHOT</version>
+	<version>3.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>GridExporter for Vaadin</name>
@@ -42,7 +42,7 @@
 	</licenses>
 
 	<properties>
-		<javaVersion>11</javaVersion>
+		<javaVersion>17</javaVersion>
 		<maven.compiler.release>${javaVersion}</maven.compiler.release>
 
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -50,7 +50,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 		<!-- Dependency-Versions -->
-		<vaadin.version>23.3.6</vaadin.version>
+		<vaadin.version>24.0.5</vaadin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -106,57 +106,15 @@
 			<artifactId>vaadin-core</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>net.sourceforge.dynamicreports</groupId>
-			<artifactId>dynamicreports-core</artifactId>
-			<version>6.12.1</version>
-			<exclusions>
-				<!--
-				Unused. Has extremely outdated and vulnerable transitive dependencies.
-				Ships junit 3.7 (yes this is set to compile scope not to test!)
-				Ships commons-lang 1.0 from 2005
-				Ships ant
-				-->
-				<exclusion>
-					<groupId>net.sf.barcode4j</groupId>
-					<artifactId>barcode4j</artifactId>
-				</exclusion>
-				<!-- Unused -->
-				<exclusion>
-					<groupId>com.google.zxing</groupId>
-					<artifactId>core</artifactId>
-				</exclusion>
-				<!-- Unused -->
-				<exclusion>
-					<groupId>org.apache.xmlgraphics</groupId>
-					<artifactId>batik-bridge</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<!-- Forced update. Dynamicreports uses 6.12 -->
-		<dependency>
-			<groupId>net.sf.jasperreports</groupId>
-			<artifactId>jasperreports</artifactId>
-			<version>6.20.0</version>
-		</dependency>
-
-		<!-- JAXB is no longer in the JDK (Java 9+) -->
-		<!-- API, java.xml.bind module -->
-		<dependency>
-			<groupId>jakarta.xml.bind</groupId>
-			<artifactId>jakarta.xml.bind-api</artifactId>
-			<version>2.3.3</version>
-		</dependency>
-		<!-- Runtime, com.sun.xml.bind module -->
-		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
-			<version>2.3.7</version>
+			<groupId>com.xdev-software</groupId>
+			<artifactId>dynamicreports-core-for-grid-exporter</artifactId>
+			<version>1.0.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>5.9.2</version>
+			<version>5.9.3</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -166,7 +124,7 @@
 			<plugin>
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
-				<version>4.1</version>
+				<version>4.2</version>
 				<configuration>
 					<properties>
 						<email>${project.organization.url}</email>
@@ -210,7 +168,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.10.1</version>
+				<version>3.11.0</version>
 				<configuration>
 					<release>${maven.compiler.release}</release>
 					<compilerArgs>
@@ -221,7 +179,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.4.1</version>
+				<version>3.5.0</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -239,7 +197,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>3.2.1</version>
+				<version>3.3.0</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -276,7 +234,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M8</version>
+				<version>3.1.2</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -288,7 +246,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
-						<version>3.0.1</version>
+						<version>3.1.0</version>
 						<executions>
 							<execution>
 								<id>sign-artifacts</id>
@@ -319,45 +277,6 @@
 							<!-- Sometimes OSSRH is really slow -->
 							<stagingProgressTimeoutMinutes>30</stagingProgressTimeoutMinutes>
 							<autoReleaseAfterClose>true</autoReleaseAfterClose>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>directory</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-assembly-plugin</artifactId>
-						<version>3.4.2</version>
-						<configuration>
-							<appendAssemblyId>false</appendAssemblyId>
-							<descriptors>
-								<descriptor>assembly/assembly.xml</descriptor>
-							</descriptors>
-						</configuration>
-						<executions>
-							<execution>
-								<goals>
-									<goal>single</goal>
-								</goals>
-								<phase>install</phase>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-jar-plugin</artifactId>
-						<version>3.3.0</version>
-						<configuration>
-							<!-- VAADIN files that shouldn't be included in add-ons -->
-							<excludes>
-								<exclude>
-									META-INF/VAADIN/
-								</exclude>
-							</excludes>
 						</configuration>
 					</plugin>
 				</plugins>

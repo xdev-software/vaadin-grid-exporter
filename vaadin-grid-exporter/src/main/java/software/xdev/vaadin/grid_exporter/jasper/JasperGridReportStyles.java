@@ -17,10 +17,10 @@ package software.xdev.vaadin.grid_exporter.jasper;
 
 import java.awt.Color;
 
-import net.sf.dynamicreports.report.builder.style.SimpleStyleBuilder;
-import net.sf.dynamicreports.report.builder.style.StyleBuilder;
-import net.sf.dynamicreports.report.builder.style.Styles;
-import net.sf.dynamicreports.report.constant.HorizontalTextAlignment;
+import software.xdev.dynamicreports.report.builder.style.SimpleStyleBuilder;
+import software.xdev.dynamicreports.report.builder.style.StyleBuilder;
+import software.xdev.dynamicreports.report.builder.style.Styles;
+import software.xdev.dynamicreports.report.constant.HorizontalTextAlignment;
 
 
 public interface JasperGridReportStyles

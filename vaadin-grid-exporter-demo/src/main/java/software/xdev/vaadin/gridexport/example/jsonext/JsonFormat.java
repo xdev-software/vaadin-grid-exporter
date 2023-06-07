@@ -51,7 +51,7 @@ public class JsonFormat extends AbstractFormat
 						ColumnConfiguration::getHeader,
 						i -> list.get(columnsToExport.indexOf(i))))
 					)
-					.collect(Collectors.toList())
+					.toList()
 					: rowData);
 		}
 		catch(final JsonProcessingException e)

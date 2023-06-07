@@ -15,10 +15,10 @@
  */
 package software.xdev.vaadin.grid_exporter.jasper;
 
-import net.sf.dynamicreports.jasper.base.export.AbstractJasperExporter;
-import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
-import net.sf.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
-import net.sf.dynamicreports.report.exception.DRException;
+import software.xdev.dynamicreports.jasper.base.export.AbstractJasperExporter;
+import software.xdev.dynamicreports.jasper.builder.JasperReportBuilder;
+import software.xdev.dynamicreports.jasper.builder.export.AbstractJasperExporterBuilder;
+import software.xdev.dynamicreports.report.exception.DRException;
 
 
 @FunctionalInterface
