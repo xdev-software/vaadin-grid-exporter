@@ -27,7 +27,7 @@ import org.junit.jupiter.api.Test;
 
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.Grid.Column;
-import com.vaadin.flow.component.html.Label;
+import com.vaadin.flow.component.html.Span;
 
 
 class VaadinColumnHeaderResolvingStrategyTest
@@ -61,7 +61,7 @@ class VaadinColumnHeaderResolvingStrategyTest
 		
 		final Column<TestUserDTO> colUsername = grid
 			.addColumn(TestUserDTO::username)
-			.setHeader(new Label(expectedHeader));
+			.setHeader(new Span(expectedHeader));
 		
 		final Optional<String> optResolvedName =
 			new VaadinColumnHeaderResolvingStrategy().resolve(colUsername);
