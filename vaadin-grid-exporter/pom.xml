@@ -50,7 +50,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 		<!-- Dependency-Versions -->
-		<vaadin.version>24.1.11</vaadin.version>
+		<vaadin.version>24.2.2</vaadin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -179,7 +179,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.6.0</version>
+				<version>3.6.2</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
