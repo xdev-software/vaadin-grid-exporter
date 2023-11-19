@@ -107,7 +107,8 @@ public class FormatStep<T> extends AbstractGridExportWizardStepComposite<Vertica
 		{
 			final Details details = new Details(c.getHeader(), c);
 			details.setOpened(true);
-			details.addThemeVariants(DetailsVariant.FILLED, DetailsVariant.SMALL);
+			// Remove Theme FILLED, pb with Parity theme
+			details.addThemeVariants(DetailsVariant.SMALL);
 			details.setWidthFull();
 			
 			this.vlConfigs.add(details);

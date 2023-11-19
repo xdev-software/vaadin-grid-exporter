@@ -158,7 +158,8 @@ public class GeneralStep<T> extends AbstractGridExportWizardStepComposite<FormLa
 		}
 		
 		this.gridColumns.setItems(DataProvider.ofCollection(state.getAvailableColumns()));
-		state.getSelectedColumns().forEach(this.gridColumns::select);
+		// Only check default visible columns
+		state.getSelectedColumns().stream().filter(item -> item.getGridColumn().isVisible() ).forEach(this.gridColumns::select);
 		
 		// Rebind listener
 		// Can't bind a grid - doing that manually
