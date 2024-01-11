@@ -49,17 +49,17 @@ public class DemoView extends Composite<VerticalLayout>
 		);
 		
 		this.grExamples
-			.addColumn(Example::getRoute)
+			.addColumn(Example::route)
 			.setHeader("Route")
 			.setFlexGrow(1);
 		
 		this.grExamples
-			.addColumn(Example::getName)
+			.addColumn(Example::name)
 			.setHeader("Name")
 			.setFlexGrow(1);
 		
 		this.grExamples
-			.addColumn(Example::getDesc)
+			.addColumn(Example::desc)
 			.setHeader("Description")
 			.setFlexGrow(1);
 		
@@ -88,34 +88,8 @@ public class DemoView extends Composite<VerticalLayout>
 		);
 	}
 	
-	static class Example
+	record Example(String route, String name, String desc)
 	{
-		private final String route;
-		private final String name;
-		private final String desc;
-		
-		public Example(final String route, final String name, final String desc)
-		{
-			super();
-			this.route = route;
-			this.name = name;
-			this.desc = desc;
-		}
-		
-		public String getRoute()
-		{
-			return this.route;
-		}
-		
-		public String getName()
-		{
-			return this.name;
-		}
-		
-		public String getDesc()
-		{
-			return this.desc;
-		}
 	}
 	
 	static GridExportLocalizationConfig germanLocalizationConfig()

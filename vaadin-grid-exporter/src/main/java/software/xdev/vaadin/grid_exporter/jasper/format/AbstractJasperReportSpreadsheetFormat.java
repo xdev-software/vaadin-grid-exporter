@@ -25,8 +25,8 @@ import software.xdev.vaadin.grid_exporter.jasper.config.header.HeaderConfigCompo
 import software.xdev.vaadin.grid_exporter.jasper.config.highlight.HighlightConfigComponent;
 
 
-public abstract class AbstractJasperReportSpreadsheetFormat
-	<B extends AbstractJasperExporterBuilder<B, ? extends AbstractJasperExporter>>
+public abstract class AbstractJasperReportSpreadsheetFormat<B extends AbstractJasperExporterBuilder<B,
+	? extends AbstractJasperExporter>>
 	extends AbstractJasperReportFormat<B>
 {
 	protected AbstractJasperReportSpreadsheetFormat(

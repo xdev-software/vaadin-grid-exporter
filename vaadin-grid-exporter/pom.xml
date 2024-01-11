@@ -50,7 +50,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 		<!-- Dependency-Versions -->
-		<vaadin.version>24.1.2</vaadin.version>
+		<vaadin.version>24.3.2</vaadin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -108,13 +108,13 @@
 		<dependency>
 			<groupId>com.xdev-software</groupId>
 			<artifactId>dynamicreports-core-for-grid-exporter</artifactId>
-			<version>1.0.3</version>
+			<version>1.1.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>5.9.3</version>
+			<version>5.10.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -124,7 +124,7 @@
 			<plugin>
 				<groupId>com.mycila</groupId>
 				<artifactId>license-maven-plugin</artifactId>
-				<version>4.2</version>
+				<version>4.3</version>
 				<configuration>
 					<properties>
 						<email>${project.organization.url}</email>
@@ -168,7 +168,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
+				<version>3.12.1</version>
 				<configuration>
 					<release>${maven.compiler.release}</release>
 					<compilerArgs>
@@ -179,7 +179,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.5.0</version>
+				<version>3.6.3</version>
 				<executions>
 					<execution>
 						<id>attach-javadocs</id>
@@ -234,7 +234,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.1.2</version>
+				<version>3.2.5</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -278,6 +278,35 @@
 							<stagingProgressTimeoutMinutes>30</stagingProgressTimeoutMinutes>
 							<autoReleaseAfterClose>true</autoReleaseAfterClose>
 						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>checkstyle</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-checkstyle-plugin</artifactId>
+						<version>3.3.1</version>
+						<dependencies>
+							<dependency>
+								<groupId>com.puppycrawl.tools</groupId>
+								<artifactId>checkstyle</artifactId>
+								<version>10.12.7</version>
+							</dependency>
+						</dependencies>
+						<configuration>
+							<configLocation>../.config/checkstyle/checkstyle.xml</configLocation>
+						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>check</goal>
+								</goals>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>

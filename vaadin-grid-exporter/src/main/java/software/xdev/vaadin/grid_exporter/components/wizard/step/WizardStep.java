@@ -32,7 +32,7 @@ public interface WizardStep<S extends WizardState>
 	/**
 	 * Called when next is clicked and the current step is exited
 	 * @param state The current state
-	 * @return <code>false</code> when the exit can't happen due to e.g. validation problems. Otherwise <code>true</code>.
+	 * @return <code>false</code> when the exit can't happen due to e.g. validation problems.
 	 */
 	default boolean onProgress(final S state)
 	{

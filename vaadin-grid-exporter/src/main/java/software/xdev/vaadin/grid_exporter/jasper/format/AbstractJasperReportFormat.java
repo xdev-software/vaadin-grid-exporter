@@ -48,8 +48,8 @@ import software.xdev.vaadin.grid_exporter.jasper.config.page.PageConfig;
 import software.xdev.vaadin.grid_exporter.jasper.config.title.TitleConfig;
 
 
-public abstract class AbstractJasperReportFormat
-	<B extends AbstractJasperExporterBuilder<B, ? extends AbstractJasperExporter>>
+public abstract class AbstractJasperReportFormat<B extends AbstractJasperExporterBuilder<B,
+	? extends AbstractJasperExporter>>
 	extends AbstractFormat
 {
 	protected final JasperGridReportStyles jasperGridReportStyles = new JasperGridReportStyles.Default();

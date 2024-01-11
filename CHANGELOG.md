@@ -1,3 +1,7 @@
+## 3.0.2
+* Fixed not working translations on preview step #153
+* Updated dependencies
+
 ## 3.0.1
 * Fixed compilation problems due to missing ``ecj`` dependency #98
 * Updated dependencies

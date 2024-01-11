@@ -27,8 +27,8 @@ import software.xdev.vaadin.grid_exporter.jasper.config.page.PageConfigComponent
 import software.xdev.vaadin.grid_exporter.jasper.config.title.TitleConfigComponent;
 
 
-public abstract class AbstractJasperReportWordProcessingFormat
-	<B extends AbstractJasperExporterBuilder<B, ? extends AbstractJasperExporter>>
+public abstract class AbstractJasperReportWordProcessingFormat<B extends AbstractJasperExporterBuilder<B,
+	? extends AbstractJasperExporter>>
 	extends AbstractJasperReportFormat<B>
 {
 	protected AbstractJasperReportWordProcessingFormat(
