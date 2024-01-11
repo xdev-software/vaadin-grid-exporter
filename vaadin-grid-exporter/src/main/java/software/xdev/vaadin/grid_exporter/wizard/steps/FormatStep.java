@@ -115,7 +115,9 @@ public class FormatStep<T> extends AbstractGridExportWizardStepComposite<Vertica
 	}
 	
 	@SuppressWarnings({"unchecked", "rawtypes"})
-	protected void bindConfigComponents(final GridExporterWizardState<T> state, final boolean deleteNonMatchingFromState)
+	protected void bindConfigComponents(
+		final GridExporterWizardState<T> state,
+		final boolean deleteNonMatchingFromState)
 	{
 		for(final SpecificConfigComponent<?> component : this.configComponents)
 		{

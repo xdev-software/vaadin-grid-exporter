@@ -46,6 +46,7 @@ public interface JasperGridReportStyles
 		protected final StyleBuilder columnStyle = Styles.style(this.defaultStyle)
 			.setBorder(Styles.pen1Point());
 		
+		@SuppressWarnings("checkstyle:MagicNumber")
 		protected final SimpleStyleBuilder columnStyleHighlighted = Styles.simpleStyle()
 			.setPadding(2)
 			.setBackgroundColor(new Color(222, 222, 222)) // Extra light gray so that the data remains readable
