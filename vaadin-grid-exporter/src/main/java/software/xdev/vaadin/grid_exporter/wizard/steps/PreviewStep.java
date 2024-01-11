@@ -25,6 +25,7 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.server.StreamResource;
 import com.vaadin.flow.shared.Registration;
 
+import software.xdev.vaadin.grid_exporter.GridExportLocalizationConfig;
 import software.xdev.vaadin.grid_exporter.Translator;
 import software.xdev.vaadin.grid_exporter.format.Format;
 import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizardState;
@@ -37,7 +38,7 @@ public class PreviewStep<T> extends AbstractGridExportWizardStepComposite<Vertic
 	public PreviewStep(final Translator translator)
 	{
 		super(translator);
-		this.setStepName("Preview");
+		this.setStepName(this.translate(GridExportLocalizationConfig.PREVIEW));
 		
 		this.initUI();
 	}
@@ -45,7 +46,7 @@ public class PreviewStep<T> extends AbstractGridExportWizardStepComposite<Vertic
 	protected void initUI()
 	{
 		this.resViewer.getStyle().set("text-align", "center");
-		this.resViewer.getElement().setText("Unable to show preview");
+		this.resViewer.getElement().setText(this.translate(GridExportLocalizationConfig.UNABLE_TO_SHOW_PREVIEW));
 		this.resViewer.setSizeFull();
 		
 		this.getContent().add(this.resViewer);

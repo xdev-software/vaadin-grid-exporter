@@ -39,7 +39,7 @@ public class GridExporterWizard<T> extends Dialog implements AfterNavigationObse
 	protected final Button closeButton = new Button(VaadinIcon.CLOSE.create());
 	protected final WizardPanel<GridExporterWizardState<T>> wizardPanel = new WizardPanel<>();
 	protected final WizardButtonBarWithAnchor buttonBar = new WizardButtonBarWithAnchor(this.wizardPanel);
-	protected final PreviewStep<T> previewStep = new PreviewStep<>(this);
+	protected final PreviewStep<T> previewStep;
 	
 	protected final GridExportLocalizationConfig localizationConfig;
 	
@@ -48,6 +48,8 @@ public class GridExporterWizard<T> extends Dialog implements AfterNavigationObse
 		final GridExportLocalizationConfig localizationConfig)
 	{
 		this.localizationConfig = Objects.requireNonNull(localizationConfig);
+		// Needs to be done after setting localizationConfig
+		this.previewStep = new PreviewStep<>(this);
 		
 		this.initUI();
 		this.registerListeners();
