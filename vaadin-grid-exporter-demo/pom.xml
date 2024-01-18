@@ -4,9 +4,9 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.xdev-software</groupId>
+	<groupId>software.xdev</groupId>
 	<artifactId>vaadin-grid-exporter-demo</artifactId>
-	<version>3.0.2</version>
+	<version>3.0.3-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<inceptionYear>2022</inceptionYear>
@@ -26,7 +26,7 @@
 		<mainClass>software.xdev.vaadin.Application</mainClass>
 
 		<!-- Dependency-Versions -->
-		<vaadin.version>24.3.2</vaadin.version>
+		<vaadin.version>24.3.3</vaadin.version>
 
 		<org.springframework.boot.version>3.2.1</org.springframework.boot.version>
 	</properties>
@@ -58,9 +58,16 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-core</artifactId>
+			<exclusions>
+				<!-- https://github.com/vaadin/flow/issues/18449 -->
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>copilot</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>com.xdev-software</groupId>
+			<groupId>software.xdev</groupId>
 			<artifactId>vaadin-grid-exporter</artifactId>
 			<version>${project.version}</version>
 		</dependency>

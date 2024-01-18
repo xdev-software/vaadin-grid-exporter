@@ -1,3 +1,7 @@
+## 3.0.3
+* ⚠️ GroupId changed from ``com.xdev-software`` to ``software.xdev``
+* Updated dependencies
+
 ## 3.0.2
 * Fixed not working translations on preview step #153
 * Updated dependencies
