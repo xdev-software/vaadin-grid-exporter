@@ -50,7 +50,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 		<!-- Dependency-Versions -->
-		<vaadin.version>24.3.3</vaadin.version>
+		<vaadin.version>24.3.7</vaadin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -175,7 +175,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.12.1</version>
+				<version>3.13.0</version>
 				<configuration>
 					<release>${maven.compiler.release}</release>
 					<compilerArgs>
@@ -253,7 +253,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
-						<version>3.1.0</version>
+						<version>3.2.1</version>
 						<executions>
 							<execution>
 								<id>sign-artifacts</id>
@@ -301,7 +301,7 @@
 							<dependency>
 								<groupId>com.puppycrawl.tools</groupId>
 								<artifactId>checkstyle</artifactId>
-								<version>10.12.7</version>
+								<version>10.14.2</version>
 							</dependency>
 						</dependencies>
 						<configuration>
