@@ -1,3 +1,6 @@
+## 3.0.4
+* Updated dependencies
+
 ## 3.0.3
 * ⚠️ GroupId changed from ``com.xdev-software`` to ``software.xdev``
 * Updated dependencies
