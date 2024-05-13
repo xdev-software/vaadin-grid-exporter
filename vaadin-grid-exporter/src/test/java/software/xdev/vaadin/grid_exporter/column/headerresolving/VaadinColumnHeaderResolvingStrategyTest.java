@@ -34,7 +34,7 @@ class VaadinColumnHeaderResolvingStrategyTest
 {
 	@Test
 	@DisplayName("Grid-Header is read correctly from a grid with one set column header")
-	void setHeaderText_ShouldBeFound()
+	void checkSetHeaderText()
 	{
 		final String expectedHeader = "username";
 		
@@ -53,7 +53,7 @@ class VaadinColumnHeaderResolvingStrategyTest
 	
 	@Test
 	@DisplayName("Grid-Header be found when read from a grid with a column renderer/component")
-	void setHeaderComponent_ShouldBeFound()
+	void checkSetHeaderComponent()
 	{
 		final String expectedHeader = "text";
 		
@@ -72,7 +72,7 @@ class VaadinColumnHeaderResolvingStrategyTest
 	
 	@Test
 	@DisplayName("Grid-Header should not be found when read from a grid with no column header")
-	void noHeaderSet_NoNameShouldBeFound()
+	void checkNoHeaderSet()
 	{
 		final Grid<TestUserDTO> grid = new Grid<>();
 		
