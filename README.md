@@ -52,12 +52,10 @@ GridExporter
 | Vaadin 24+ (latest) | ``3+`` |
 | Vaadin 23 | ``2.x`` |
 
-
 ## Run the Demo
 * Checkout the repo
 * Run ``mvn install && mvn -f vaadin-grid-exporter-demo spring-boot:run``
 * Open http://localhost:8080
-
 
 <details>
   <summary>Show example</summary>

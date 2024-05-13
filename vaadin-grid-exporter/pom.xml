@@ -50,7 +50,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 		<!-- Dependency-Versions -->
-		<vaadin.version>24.3.9</vaadin.version>
+		<vaadin.version>24.3.10</vaadin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -315,7 +315,7 @@
 							<dependency>
 								<groupId>com.puppycrawl.tools</groupId>
 								<artifactId>checkstyle</artifactId>
-								<version>10.15.0</version>
+								<version>10.16.0</version>
 							</dependency>
 						</dependencies>
 						<configuration>
