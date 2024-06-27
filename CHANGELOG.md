@@ -1,3 +1,7 @@
+## 3.1.0
+* Update to [JasperReports 7](https://github.com/xdev-software/dynamicreports-core-for-grid-exporter/blob/develop/CHANGELOG.md#200)
+* Updated dependencies
+
 ## 3.0.3
 * ⚠️ GroupId changed from ``com.xdev-software`` to ``software.xdev``
 * Updated dependencies

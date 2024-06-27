@@ -22,13 +22,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
-import com.vaadin.flow.component.ItemLabelGenerator;
 import com.vaadin.flow.component.grid.ColumnPathRenderer;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.data.provider.Query;
 import com.vaadin.flow.data.renderer.BasicRenderer;
 import com.vaadin.flow.data.renderer.Renderer;
-import com.vaadin.flow.data.renderer.TextRenderer;
 import com.vaadin.flow.function.ValueProvider;
 
 import software.xdev.vaadin.grid_exporter.column.ColumnConfiguration;
@@ -73,12 +71,6 @@ public class GridDataExtractor<T>
 				{
 					return (String)getValueFormatter.invoke(renderer, value);
 				}
-			}
-			else if(renderer instanceof TextRenderer)
-			{
-				final Field itemLabelGenerator = TextRenderer.class.getDeclaredField("itemLabelGenerator");
-				itemLabelGenerator.setAccessible(true);
-				return ((ItemLabelGenerator<T>)itemLabelGenerator.get(renderer)).apply(item);
 			}
 			else if(renderer instanceof ColumnPathRenderer)
 			{
