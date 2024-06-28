@@ -6,7 +6,7 @@
 
 	<groupId>software.xdev</groupId>
 	<artifactId>vaadin-grid-exporter</artifactId>
-	<version>3.1.1-SNAPSHOT</version>
+	<version>3.2.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>vaadin-grid-exporter</name>
@@ -50,7 +50,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 		<!-- Dependency-Versions -->
-		<vaadin.version>24.3.13</vaadin.version>
+		<vaadin.version>24.4.4</vaadin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -104,13 +104,6 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-core</artifactId>
-			<exclusions>
-				<!-- https://github.com/vaadin/flow/issues/18449 -->
-				<exclusion>
-					<groupId>com.vaadin</groupId>
-					<artifactId>copilot</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>software.xdev</groupId>
@@ -121,7 +114,7 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>5.10.2</version>
+			<version>5.10.3</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -369,12 +362,12 @@
 							<dependency>
 								<groupId>net.sourceforge.pmd</groupId>
 								<artifactId>pmd-core</artifactId>
-								<version>7.2.0</version>
+								<version>7.3.0</version>
 							</dependency>
 							<dependency>
 								<groupId>net.sourceforge.pmd</groupId>
 								<artifactId>pmd-java</artifactId>
-								<version>7.2.0</version>
+								<version>7.3.0</version>
 							</dependency>
 						</dependencies>
 					</plugin>

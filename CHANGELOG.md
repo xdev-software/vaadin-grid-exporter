@@ -1,3 +1,6 @@
+## 3.2.0
+* Updated to Vaadin 24.4
+
 ## 3.1.0
 * Update to [JasperReports 7](https://github.com/xdev-software/dynamicreports-core-for-grid-exporter/blob/develop/CHANGELOG.md#200)
 * Updated dependencies
