@@ -1,3 +1,7 @@
+## 3.2.1
+* Fix cells truncating data #229
+* Updated dependencies
+
 ## 3.2.0
 * Updated to Vaadin 24.4
 
