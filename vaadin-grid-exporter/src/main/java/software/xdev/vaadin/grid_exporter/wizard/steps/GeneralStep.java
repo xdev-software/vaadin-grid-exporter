@@ -224,6 +224,9 @@ public class GeneralStep<T> extends AbstractGridExportWizardStepComposite<FormLa
 		final int index = columns.indexOf(column);
 		Collections.swap(columns, index - (increment ? 0 : 1), index + (increment ? 1 : 0));
 		
+		// Sync order of selected columns
+		this.getWizardState().getSelectedColumns().sort(Comparator.comparing(columns::indexOf));
+		
 		this.gridColumns.getDataProvider().refreshAll();
 	}
 }
