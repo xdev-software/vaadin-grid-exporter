@@ -54,6 +54,10 @@ GridExporter
 | Vaadin 24+ (latest) | ``3+`` |
 | Vaadin 23 | ``2.x`` |
 
+#### Compatibility with JasperReports
+
+Starting with version [3.1.0](./CHANGELOG.md#310) JasperReports 7 is required.
+
 ## Run the Demo
 * Checkout the repo
 * Run ``mvn install && mvn -f vaadin-grid-exporter-demo spring-boot:run``
