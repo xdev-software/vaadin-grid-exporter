@@ -6,8 +6,9 @@
 
 # vaadin-grid-exporter
 
-The Vaadin Grid Exporter can convert any Vaadin Grid to a variety of formats. Out of the box supported formats:
+The Vaadin Grid Exporter can convert any Vaadin Grid to a variety of formats.
 
+Out of the box supported formats:
 * CSV
 * Word (DOCX)
 * HTML
@@ -19,6 +20,8 @@ The Vaadin Grid Exporter can convert any Vaadin Grid to a variety of formats. Ou
 * Plain text
 * Excel (XLSX)
 
+_These formats are exported using [dynamicreports](https://github.com/xdev-software/dynamicreports-core-for-grid-exporter)._
+
 It's also easy to extend the Exporter to support your custom format.
 
 Default usage:
@@ -29,8 +32,7 @@ GridExporter
 	.open();
 ```
 
-Custom format (see
-[JsonGridExporterProvider from Demo](vaadin-grid-exporter-demo/src/main/java/software/xdev/vaadin/gridexport/example/jsonext/JsonGridExporterProvider.java)):
+Custom format (see [JsonGridExporterProvider from Demo](vaadin-grid-exporter-demo/src/main/java/software/xdev/vaadin/gridexport/example/jsonext/JsonGridExporterProvider.java)):
 
 ```java
 GridExporter
