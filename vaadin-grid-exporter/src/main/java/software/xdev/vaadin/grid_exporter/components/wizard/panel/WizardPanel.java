@@ -53,7 +53,7 @@ public class WizardPanel<S extends WizardState>
 	protected final List<Component> lstSteps = new ArrayList<>();
 	protected final Map<Tab, Component> tabStepMap = new HashMap<>();
 	
-	protected S curState = null;
+	protected S curState;
 	
 	protected final Tabs tabsStep = new Tabs();
 	protected final ProgressBar progress = new ProgressBar();
@@ -216,10 +216,10 @@ public class WizardPanel<S extends WizardState>
 			return;
 		}
 		
-		final Component tab = this.tabsStep.getComponentAt(stepIndex);
-		if(tab instanceof HasEnabled)
+		final Component tab = this.tabsStep.getTabAt(stepIndex);
+		if(tab instanceof final HasEnabled hasEnabled)
 		{
-			((HasEnabled)tab).setEnabled(enable);
+			hasEnabled.setEnabled(enable);
 		}
 	}
 	

@@ -26,7 +26,6 @@ import software.xdev.vaadin.grid_exporter.jasper.config.JasperConfigsLocalizatio
 public class EncodingConfigComponent extends SpecificConfigComponent<EncodingConfig>
 {
 	protected final ComboBox<ExportEncoding> cbExportEncoding = new ComboBox<>();
-	
 	protected final Checkbox chbxUseBom = new Checkbox();
 	
 	public EncodingConfigComponent(final Translator translator)

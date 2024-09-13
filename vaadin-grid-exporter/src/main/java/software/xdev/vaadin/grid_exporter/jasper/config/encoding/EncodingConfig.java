@@ -29,10 +29,8 @@ public class EncodingConfig implements SpecificConfig
 		new ExportEncoding(StandardCharsets.UTF_8, "\ufeff"),
 		new ExportEncoding(StandardCharsets.ISO_8859_1)
 	);
-	
 	protected ExportEncoding selected = this.available.get(0);
-	
-	protected boolean useBOM = false;
+	protected boolean useBOM;
 	
 	public List<ExportEncoding> getAvailable()
 	{

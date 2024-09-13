@@ -1,3 +1,6 @@
+## 3.2.2
+* Fix column order being ignored #256
+
 ## 3.2.1
 * Fix cells truncating data #229
 * Updated dependencies

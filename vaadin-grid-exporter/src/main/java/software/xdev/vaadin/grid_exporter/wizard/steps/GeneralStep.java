@@ -17,6 +17,7 @@ package software.xdev.vaadin.grid_exporter.wizard.steps;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class GeneralStep<T> extends AbstractGridExportWizardStepComposite<FormLa
 	protected final TextField txtFileName = new TextField();
 	protected final Grid<ColumnConfiguration<T>> gridColumns = new Grid<>();
 	protected final Map<ColumnConfiguration<T>, Binder<ColumnConfiguration<T>>> columnBinders = new HashMap<>();
-	protected Registration gridSelectionChanged = null;
+	protected Registration gridSelectionChanged;
 	
 	public GeneralStep(final Translator translator)
 	{
@@ -223,6 +224,9 @@ public class GeneralStep<T> extends AbstractGridExportWizardStepComposite<FormLa
 		final List<ColumnConfiguration<T>> columns = this.getWizardState().getAvailableColumns();
 		final int index = columns.indexOf(column);
 		Collections.swap(columns, index - (increment ? 0 : 1), index + (increment ? 1 : 0));
+		
+		// Sync order of selected columns
+		this.getWizardState().getSelectedColumns().sort(Comparator.comparing(columns::indexOf));
 		
 		this.gridColumns.getDataProvider().refreshAll();
 	}
