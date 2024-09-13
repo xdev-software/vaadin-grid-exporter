@@ -28,16 +28,12 @@ public class PageConfig implements SpecificConfig
 {
 	public static final int PAGE_MARGIN_MIN = 0;
 	public static final int PAGE_MARGIN_MAX = 1_000;
+	
 	protected List<PageType> availablePageTypes = Arrays.asList(PageType.values());
-	
 	protected List<PageOrientation> availablePageOrientations = Arrays.asList(PageOrientation.values());
-	
 	protected PageType selectedPageType = PageType.A4;
-	
 	protected PageOrientation selectedPageOrientation = PageOrientation.PORTRAIT;
-	
-	protected boolean usePageNumbering = false;
-	
+	protected boolean usePageNumbering;
 	protected int pageMargin = 20;
 	
 	public List<PageType> getAvailablePageTypes()

@@ -57,11 +57,10 @@ public class ColumnConfiguration<T>
 		{
 			return true;
 		}
-		if(!(o instanceof ColumnConfiguration))
+		if(!(o instanceof final ColumnConfiguration<?> that))
 		{
 			return false;
 		}
-		final ColumnConfiguration<?> that = (ColumnConfiguration<?>)o;
 		return Objects.equals(this.gridColumn, that.gridColumn);
 	}
 	

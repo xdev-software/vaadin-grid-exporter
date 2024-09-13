@@ -18,7 +18,6 @@ package software.xdev.vaadin.grid_exporter.components.wizard.step;
 public class WizardStepState
 {
 	protected final int currentStep;
-	
 	protected final int totalSteps;
 	
 	public WizardStepState(final int currentStep, final int totalSteps)

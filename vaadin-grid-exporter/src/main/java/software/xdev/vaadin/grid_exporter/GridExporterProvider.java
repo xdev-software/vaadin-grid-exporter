@@ -31,7 +31,6 @@ import software.xdev.vaadin.grid_exporter.format.Format;
 public class GridExporterProvider
 {
 	protected final Map<String, String> defaultTranslationKeyValues;
-	
 	protected final List<Format> formats;
 	
 	public GridExporterProvider(final Map<String, String> defaultTranslationKeyValues, final Format... formats)

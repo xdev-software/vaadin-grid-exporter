@@ -29,11 +29,8 @@ import software.xdev.vaadin.grid_exporter.jasper.config.JasperConfigsLocalizatio
 public class PageConfigComponent extends SpecificConfigComponent<PageConfig>
 {
 	protected final ComboBox<PageType> cbPageType = new ComboBox<>();
-	
 	protected final ComboBox<PageOrientation> cbPageOrientation = new ComboBox<>();
-	
 	protected final Checkbox chbxPageNumbering = new Checkbox();
-	
 	protected final IntegerField intfPageMargin = new IntegerField();
 	
 	public PageConfigComponent(final Translator translator)

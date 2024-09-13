@@ -28,11 +28,8 @@ import software.xdev.vaadin.grid_exporter.Translator;
 public abstract class AbstractFormat implements Format
 {
 	protected final String nameToDisplay;
-	
 	protected final String fileSuffix;
-	
 	protected final String mimeType;
-	
 	protected List<Function<Translator, ? extends SpecificConfigComponent<? extends SpecificConfig>>> configComponents =
 		new ArrayList<>();
 	

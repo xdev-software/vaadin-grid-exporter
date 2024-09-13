@@ -18,7 +18,6 @@ package software.xdev.vaadin.grid_exporter.wizard;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import software.xdev.vaadin.grid_exporter.column.ColumnConfiguration;
 import software.xdev.vaadin.grid_exporter.components.wizard.WizardState;
@@ -35,7 +34,7 @@ public class GridExporterWizardState<T> implements WizardState
 	
 	protected String fileName = "";
 	protected List<ColumnConfiguration<T>> selectedColumns;
-	protected Format selectedFormat = null;
+	protected Format selectedFormat;
 	
 	protected final List<SpecificConfig> specificConfigs = new ArrayList<>();
 	
@@ -45,13 +44,13 @@ public class GridExporterWizardState<T> implements WizardState
 		final List<ColumnConfiguration<T>> availableColumns)
 	{
 		this.gridDataExtractor = Objects.requireNonNull(gridDataExtractor);
-		this.availableFormats = Objects.requireNonNull(availableFormats);
-		this.availableColumns = Objects.requireNonNull(availableColumns);
+		this.availableFormats = new ArrayList<>(Objects.requireNonNull(availableFormats));
+		this.availableColumns = new ArrayList<>(Objects.requireNonNull(availableColumns));
 		
 		// By default, all columns should be selected that have a name
-		this.selectedColumns = availableColumns.stream()
+		this.selectedColumns = new ArrayList<>(availableColumns.stream()
 			.filter(col -> !col.getHeader().isBlank())
-			.collect(Collectors.toList());
+			.toList());
 	}
 	
 	public GridDataExtractor<T> getGridDataExtractor()

@@ -26,16 +26,12 @@ public abstract class WizardStepComposite<C extends Component, S extends WizardS
 	implements WizardStep<S>
 {
 	protected String stepName = "";
-	protected S state = null;
+	protected S state;
 	
 	protected WizardStepComposite()
 	{
 		this.setStepName(this.getClass().getSimpleName());
 	}
-	
-	/*
-	 * OVERRIDES
-	 */
 	
 	@Override
 	public String getStepName()

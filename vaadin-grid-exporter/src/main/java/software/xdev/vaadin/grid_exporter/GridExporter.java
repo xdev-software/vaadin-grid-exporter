@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import com.vaadin.flow.component.grid.Grid;
 
@@ -60,7 +59,7 @@ public class GridExporter<T>
 	
 	protected List<Format> availableFormats = new ArrayList<>();
 	
-	protected Format preSelectedFormat = null;
+	protected Format preSelectedFormat;
 	
 	protected Function<Grid<T>, GridDataExtractor<T>> gridDataExtractorSupplier = GridDataExtractor::new;
 	
@@ -147,7 +146,7 @@ public class GridExporter<T>
 		return this.grid.getColumns().stream()
 			.filter(this.columnFilter)
 			.map(this.columnConfigurationBuilder::build)
-			.collect(Collectors.toList());
+			.toList();
 	}
 	
 	/**

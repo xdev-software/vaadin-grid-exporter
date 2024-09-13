@@ -15,11 +15,9 @@
  */
 package software.xdev.vaadin.grid_exporter.wizard.steps;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.details.Details;
@@ -35,6 +33,7 @@ import software.xdev.vaadin.grid_exporter.format.SpecificConfig;
 import software.xdev.vaadin.grid_exporter.format.SpecificConfigComponent;
 import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizardState;
 
+
 @SuppressWarnings("java:S1948")
 public class FormatStep<T> extends AbstractGridExportWizardStepComposite<VerticalLayout, T>
 {
@@ -44,7 +43,8 @@ public class FormatStep<T> extends AbstractGridExportWizardStepComposite<Vertica
 	
 	protected final VerticalLayout vlConfigs = new VerticalLayout();
 	
-	protected List<? extends SpecificConfigComponent<? extends SpecificConfig>> configComponents = new ArrayList<>();
+	protected List<? extends SpecificConfigComponent<? extends SpecificConfig>> configComponents =
+		Collections.emptyList();
 	
 	public FormatStep(final Translator translator)
 	{
@@ -98,9 +98,9 @@ public class FormatStep<T> extends AbstractGridExportWizardStepComposite<Vertica
 		
 		this.configComponents = format != null
 			? format.getConfigComponents()
-				.stream()
-				.map(creator -> creator.apply(this))
-				.collect(Collectors.toList())
+			.stream()
+			.map(creator -> creator.apply(this))
+			.toList()
 			: Collections.emptyList();
 		
 		this.configComponents.forEach(c ->
@@ -146,7 +146,7 @@ public class FormatStep<T> extends AbstractGridExportWizardStepComposite<Vertica
 					.filter(ec -> this.configComponents.stream()
 						.map(SpecificConfigComponent::getBean)
 						.noneMatch(c -> Objects.equals(ec, c)))
-					.collect(Collectors.toList())
+					.toList()
 			);
 		}
 	}

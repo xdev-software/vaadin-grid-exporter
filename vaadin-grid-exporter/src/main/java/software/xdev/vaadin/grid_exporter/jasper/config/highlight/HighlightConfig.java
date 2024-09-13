@@ -20,7 +20,7 @@ import software.xdev.vaadin.grid_exporter.format.SpecificConfig;
 
 public class HighlightConfig implements SpecificConfig
 {
-	protected boolean highlightOddRows = false;
+	protected boolean highlightOddRows;
 	
 	public boolean isHighlightOddRows()
 	{
