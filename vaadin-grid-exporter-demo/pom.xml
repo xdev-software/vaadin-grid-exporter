@@ -29,9 +29,9 @@
 		<mainClass>software.xdev.vaadin.Application</mainClass>
 
 		<!-- Dependency-Versions -->
-		<vaadin.version>24.4.11</vaadin.version>
+		<vaadin.version>24.4.13</vaadin.version>
 
-		<org.springframework.boot.version>3.3.3</org.springframework.boot.version>
+		<org.springframework.boot.version>3.3.4</org.springframework.boot.version>
 	</properties>
 
 	<dependencyManagement>
@@ -61,6 +61,12 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-core</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>hilla-dev</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>software.xdev</groupId>
@@ -72,6 +78,12 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>hilla</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- Temporarily excluded by Vaadin due to "security vulnerability" -->
 		<dependency>

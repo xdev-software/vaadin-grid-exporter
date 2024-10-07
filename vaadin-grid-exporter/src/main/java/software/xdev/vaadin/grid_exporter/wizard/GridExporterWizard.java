@@ -63,9 +63,7 @@ public class GridExporterWizard<T> extends Dialog implements AfterNavigationObse
 		this.closeButton.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
 		this.getHeader().add(this.closeButton);
 		
-		this.wizardPanel.addStep(new GeneralStep<>(this));
-		this.wizardPanel.addStep(new FormatStep<>(this));
-		this.wizardPanel.addStep(this.previewStep);
+		this.addStepsToWizardPanel();
 		this.add(this.wizardPanel);
 		
 		this.buttonBar.withButtonText(
@@ -93,6 +91,13 @@ public class GridExporterWizard<T> extends Dialog implements AfterNavigationObse
 		
 		this.setHeight("90%");
 		this.setMaxHeight("70em");
+	}
+	
+	protected void addStepsToWizardPanel()
+	{
+		this.wizardPanel.addStep(new GeneralStep<>(this));
+		this.wizardPanel.addStep(new FormatStep<>(this));
+		this.wizardPanel.addStep(this.previewStep);
 	}
 	
 	protected void registerListeners()
