@@ -1,3 +1,7 @@
+## 3.2.3
+* Added dedicated method for adding steps to WizardPanel to make overriding it easier #269
+* Updated dependencies
+
 ## 3.2.2
 * Fix column order being ignored #256
 
