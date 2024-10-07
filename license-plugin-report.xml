@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<licensePluginReport goal="FORMAT" timestamp="1726216277387">
-    <module artifactId="vaadin-grid-exporter" groupId="software.xdev" version="3.2.2"/>
+<licensePluginReport goal="FORMAT" timestamp="1728288665207">
+    <module artifactId="vaadin-grid-exporter" groupId="software.xdev" version="3.2.3"/>
     <files>
         <file path="src/main/java/software/xdev/vaadin/grid_exporter/GridExportLocalizationConfig.java" result="NOOP"/>
         <file path="src/main/java/software/xdev/vaadin/grid_exporter/GridExporter.java" result="NOOP"/>
