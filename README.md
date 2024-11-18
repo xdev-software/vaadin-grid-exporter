@@ -47,18 +47,10 @@ GridExporter
 
 [Installation guide for the latest release](https://github.com/xdev-software/vaadin-grid-exporter/releases/latest#Installation)
 
-#### Compatibility with Vaadin
+### Comaptibility with  ``CSP`` (Content-Security-Policy) and ``X-Frame-Options``
 
-| Vaadin version | GridExporter version |
-| --- | --- |
-| Vaadin 24+ (latest) | ``3+`` |
-| Vaadin 23 | ``2.x`` |
-
-#### Compatibility with JasperReports
-
-Starting with version [3.1.0](./CHANGELOG.md#310) JasperReports 7 is required.
-
-#### Comaptibility with  ``CSP`` (Content-Security-Policy) and ``X-Frame-Options``
+> [!TIP]
+> In Spring Security the [default value of ``X-Frame-Options`` is ``DENY``](https://docs.spring.io/spring-security/reference/features/exploits/headers.html#headers-frame-options) which will break the preview if not changed.
 
 To show the preview the [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) or the [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) (deprecated in favor of CSP) must be configured in a way that they allow showing same-site elements.
 
@@ -72,6 +64,17 @@ This can be achieved by:
 > [!NOTE]
 > Depending on the browser the settings sometimes have slightly different effects.<br/>
 > For example Firefox blocks the preview due to privacy reasons when ``X-Frame-Option=DENY`` and ``Content-Security-Policy=frame-ancestors 'self'; object-src 'self'; ...`` but Chrome does not.
+
+### Compatibility with Vaadin
+
+| Vaadin version | GridExporter version |
+| --- | --- |
+| Vaadin 24+ (latest) | ``3+`` |
+| Vaadin 23 | ``2.x`` |
+
+### Compatibility with JasperReports
+
+Starting with version [3.1.0](./CHANGELOG.md#310) JasperReports 7 is required.
 
 ## Run the Demo
 * Checkout the repo
