@@ -56,7 +56,7 @@ To show the preview the [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/
 
 This can be achieved by:
 * setting the CSP to include at least ``frame-ancestors 'self'`` and maybe additionally ``object-src 'self'``
-* setting ``X-Frame-Options`` to ``SAMESITE``.<br/>If you use Spring Boot Security without a CSP the easiest way to set this is:
+* setting ``X-Frame-Options`` to ``SAMESITE``.<br/>If you use Spring Security without a CSP the easiest way to set this is:
     ```java
     http.headers(c -> c.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
     ```
