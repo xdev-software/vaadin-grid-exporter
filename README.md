@@ -58,6 +58,21 @@ GridExporter
 
 Starting with version [3.1.0](./CHANGELOG.md#310) JasperReports 7 is required.
 
+#### Comaptibility with  ``CSP`` (Content-Security-Policy) and ``X-Frame-Options``
+
+To show the preview the [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) or the [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) (deprecated in favor of CSP) must be configured in a way that they allow showing same-site elements.
+
+This can be achieved by:
+* setting the CSP to include at least ``frame-ancestors 'self'`` and maybe additionally ``object-src 'self'``
+* setting ``X-Frame-Options`` to ``SAMESITE``.<br/>If you use Spring Boot Security without a CSP the easiest way to set this is:
+    ```java
+    http.headers(c -> c.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
+    ```
+
+> [!NOTE]
+> Depending on the browser the settings sometimes have slightly different effects.<br/>
+> For example Firefox blocks the preview due to privacy reasons when ``X-Frame-Option=DENY`` and ``Content-Security-Policy=frame-ancestors 'self'; object-src 'self'; ...`` but Chrome does not.
+
 ## Run the Demo
 * Checkout the repo
 * Run ``mvn install && mvn -f vaadin-grid-exporter-demo spring-boot:run``
