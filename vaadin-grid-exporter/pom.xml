@@ -108,7 +108,7 @@
 		<dependency>
 			<groupId>software.xdev</groupId>
 			<artifactId>dynamicreports-core-for-grid-exporter</artifactId>
-			<version>2.0.1</version>
+			<version>2.0.2</version>
 		</dependency>
 
 		<dependency>
