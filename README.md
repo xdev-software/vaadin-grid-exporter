@@ -6,7 +6,8 @@
 
 # vaadin-grid-exporter
 
-The Vaadin Grid Exporter can convert any Vaadin Grid to a variety of formats.
+The Vaadin Grid Exporter can convert nearly any Vaadin Grid to a variety of formats.<br/>
+This way you don't have to copy the Grid contents manually or print the whole website with the Grid.
 
 Out of the box supported formats:
 * CSV
@@ -24,6 +25,19 @@ _These formats are exported using [dynamicreports](https://github.com/xdev-softw
 
 It's also easy to extend the Exporter to support your custom format.
 
+![demo](assets/preview.gif)
+
+> [!NOTE]
+> <details><summary><b>Disclaimer about the scope of this component</b> (click to expand)</summary>
+>
+> Although the GridExporter can handle most use-cases, extreme scenarios will likely impact performance, usability and might require some hacks.<br/>
+> For such cases custom written exports are recommended e.g. by utilizing JasperReports directly.<br/>
+> If you need help implementing these feel free to [contact us](#support) or open a [question](https://github.com/xdev-software/vaadin-grid-exporter/issues/new?assignees=&labels=question&projects=&template=question.yml) if you are not sure that the GridExporter is a good option for your scenario.
+>
+> </details>
+
+## Usage
+
 Default usage:
 
 ```java
@@ -40,8 +54,6 @@ GridExporter
 	.loadFromProvider(new JsonGridExporterProvider())
 	.open();
 ```
-
-![demo](assets/preview.gif)
 
 ## Installation
 
