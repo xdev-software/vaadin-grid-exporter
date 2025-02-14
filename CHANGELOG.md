@@ -1,3 +1,6 @@
+## 3.2.4
+* Updated dependencies
+
 ## 3.2.3
 * Added dedicated method for adding steps to WizardPanel to make overriding it easier #269
 * Updated dependencies
