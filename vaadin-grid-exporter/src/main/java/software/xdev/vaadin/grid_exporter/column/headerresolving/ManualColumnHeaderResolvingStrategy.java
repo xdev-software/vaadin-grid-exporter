@@ -30,7 +30,8 @@ import com.vaadin.flow.component.grid.Grid.Column;
  * <p>
  * Example:
  * <br>
- * {@code new ManualColumnHeaderResolvingStrategy( col -> col.getKey(), Map.of( "name", "Username", "pw", "Password"))}
+ * {@code new ManualColumnHeaderResolvingStrategy(col -> col.getKey(), Map.of("name", k -> "Username", "pw", k ->
+ * "Password"))}
  * </p>
  *
  * @param <I> The identifier of the column, e.g. the key or the column itself

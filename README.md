@@ -6,7 +6,8 @@
 
 # vaadin-grid-exporter
 
-The Vaadin Grid Exporter can convert any Vaadin Grid to a variety of formats.
+The Vaadin Grid Exporter can convert nearly any Vaadin Grid to a variety of formats.<br/>
+This way you don't have to copy the Grid contents manually or print the whole website with the Grid.
 
 Out of the box supported formats:
 * CSV
@@ -23,6 +24,19 @@ Out of the box supported formats:
 _These formats are exported using [dynamicreports](https://github.com/xdev-software/dynamicreports-core-for-grid-exporter)._
 
 It's also easy to extend the Exporter to support your custom format.
+
+![demo](assets/preview.gif)
+
+> [!NOTE]
+> <details><summary><b>Disclaimer about the scope of this component</b> (click to expand)</summary>
+>
+> Although the GridExporter can handle most use-cases, extreme scenarios will likely impact performance, usability and might require some hacks.<br/>
+> For such cases custom written exports are recommended e.g. by utilizing JasperReports directly.<br/>
+> If you need help implementing these feel free to [contact us](#support) or open a [question](https://github.com/xdev-software/vaadin-grid-exporter/issues/new?assignees=&labels=question&projects=&template=question.yml) if you are not sure that the GridExporter is a good option for your scenario.
+>
+> </details>
+
+## Usage
 
 Default usage:
 
@@ -41,22 +55,41 @@ GridExporter
 	.open();
 ```
 
-![demo](assets/preview.gif)
-
 ## Installation
 
 [Installation guide for the latest release](https://github.com/xdev-software/vaadin-grid-exporter/releases/latest#Installation)
 
-#### Compatibility with Vaadin
+### Comaptibility with  ``CSP`` (Content-Security-Policy) and ``X-Frame-Options``
+
+> [!TIP]
+> In Spring Security the [default value of ``X-Frame-Options`` is ``DENY``](https://docs.spring.io/spring-security/reference/features/exploits/headers.html#headers-frame-options) which will break the preview if not changed.
+
+To show the preview the [CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) or the [X-Frame-Options](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Frame-Options) (deprecated in favor of CSP) must be configured in a way that they allow showing same-site elements.
+
+This can be achieved by:
+* setting the CSP to include at least ``frame-ancestors 'self'`` and maybe additionally ``object-src 'self'``
+* setting ``X-Frame-Options`` to ``SAMESITE``.<br/>If you use Spring Security without a CSP the easiest way to set this is:
+    ```java
+    http.headers(c -> c.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin));
+    ```
+
+> [!NOTE]
+> Depending on the browser the settings sometimes have slightly different effects.<br/>
+> For example Firefox blocks the preview due to privacy reasons when ``X-Frame-Option=DENY`` and ``Content-Security-Policy=frame-ancestors 'self'; object-src 'self'; ...`` but Chrome does not.
+
+### Compatibility with Vaadin
 
 | Vaadin version | GridExporter version |
 | --- | --- |
 | Vaadin 24+ (latest) | ``3+`` |
 | Vaadin 23 | ``2.x`` |
 
-#### Compatibility with JasperReports
+### Compatibility with JasperReports
 
 Starting with version [3.1.0](./CHANGELOG.md#310) JasperReports 7 is required.
+
+### Spring-Boot
+* You may have to include ``software/xdev`` inside [``vaadin.allowed-packages``](https://vaadin.com/docs/latest/integrations/spring/configuration#configure-the-scanning-of-packages)
 
 ## Run the Demo
 * Checkout the repo
