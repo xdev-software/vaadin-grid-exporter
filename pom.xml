@@ -6,7 +6,7 @@
 
 	<groupId>software.xdev</groupId>
 	<artifactId>vaadin-grid-exporter-root</artifactId>
-	<version>3.2.4-SNAPSHOT</version>
+	<version>3.2.4</version>
 	<packaging>pom</packaging>
 
 	<organization>
