@@ -16,6 +16,7 @@ import software.xdev.vaadin.grid_exporter.GridExportLocalizationConfig;
 import software.xdev.vaadin.grid_exporter.GridExporter;
 import software.xdev.vaadin.grid_exporter.jasper.config.JasperConfigsLocalization;
 import software.xdev.vaadin.gridexport.example.jsonext.JsonGridExporterProvider;
+import software.xdev.vaadin.gridexport.example.pre_defined_title.PredefinedTitleProvider;
 
 
 @PageTitle("GridExport Examples")
@@ -45,6 +46,12 @@ public class DemoView extends Composite<VerticalLayout>
 				VaadinIcon.PRINT.create(),
 				e -> GridExporter.newWithDefaults(this.grExamples)
 					.loadFromProvider(new JsonGridExporterProvider())
+					.open()),
+			new Button(
+				"Export (Predefined title)",
+				VaadinIcon.PRINT.create(),
+				e -> new GridExporter<>(this.grExamples)
+					.loadFromProvider(new PredefinedTitleProvider("Custom title!"))
 					.open())
 		);
 		

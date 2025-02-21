@@ -29,9 +29,9 @@ public abstract class SpecificConfigComponent<T extends SpecificConfig>
 	extends Composite<FormLayout>
 	implements Translator
 {
-	protected final Translator translator;
-	protected final Supplier<T> newConfigSupplier;
-	protected final String header;
+	protected Translator translator;
+	protected Supplier<T> newConfigSupplier;
+	protected String header;
 	
 	protected Binder<T> binder = new Binder<>();
 	
@@ -40,14 +40,34 @@ public abstract class SpecificConfigComponent<T extends SpecificConfig>
 		final Supplier<T> newConfigSupplier,
 		final String headerToTranslate)
 	{
-		this.translator = Objects.requireNonNull(translator);
-		this.newConfigSupplier = Objects.requireNonNull(newConfigSupplier);
-		this.header = this.translate(Objects.requireNonNull(headerToTranslate));
+		this.setTranslator(translator);
+		this.setNewConfigSupplier(newConfigSupplier);
+		this.setHeaderAndTranslate(headerToTranslate);
 		
 		this.getContent().setResponsiveSteps(
 			new FormLayout.ResponsiveStep("0", 1),
 			new FormLayout.ResponsiveStep("400px", 2)
 		);
+	}
+	
+	protected void setTranslator(final Translator translator)
+	{
+		this.translator = Objects.requireNonNull(translator);
+	}
+	
+	protected void setNewConfigSupplier(final Supplier<T> newConfigSupplier)
+	{
+		this.newConfigSupplier = Objects.requireNonNull(newConfigSupplier);
+	}
+	
+	protected void setHeader(final String header)
+	{
+		this.header = header;
+	}
+	
+	protected void setHeaderAndTranslate(final String headerToTranslate)
+	{
+		this.setHeader(this.translate(headerToTranslate));
 	}
 	
 	public Supplier<T> getNewConfigSupplier()

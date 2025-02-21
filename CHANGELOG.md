@@ -1,3 +1,6 @@
+## 3.2.5
+* Make it possible to better customize ``SpecificConfigComponent``
+
 ## 3.2.4
 * Updated dependencies
 
