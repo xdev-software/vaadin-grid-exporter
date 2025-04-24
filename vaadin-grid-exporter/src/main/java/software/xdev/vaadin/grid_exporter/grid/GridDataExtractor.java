@@ -95,7 +95,7 @@ public class GridDataExtractor<T>
 	{
 		for(final Method m : renderer.getClass().getDeclaredMethods())
 		{
-			if(m.getName().contentEquals("getFormattedValue"))
+			if("getFormattedValue".equals(m.getName()))
 			{
 				m.setAccessible(true);
 				return m;

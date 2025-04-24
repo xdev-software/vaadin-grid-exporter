@@ -210,8 +210,8 @@ public class GeneralStep<T> extends AbstractGridExportWizardStepComposite<FormLa
 		}
 		
 		final int index = columns.indexOf(column);
-		return ((increment && index < columns.size() - 1)
-			|| (!increment && index > 0));
+		return increment && index < columns.size() - 1
+			|| !increment && index > 0;
 	}
 	
 	protected void move(final boolean increment, final ColumnConfiguration<T> column)
