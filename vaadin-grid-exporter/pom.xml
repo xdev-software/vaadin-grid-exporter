@@ -50,7 +50,7 @@
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
 		<!-- Dependency-Versions -->
-		<vaadin.version>24.7.1</vaadin.version>
+		<vaadin.version>24.7.2</vaadin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -114,7 +114,7 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
-			<version>5.11.4</version>
+			<version>5.12.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -248,7 +248,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.5.2</version>
+				<version>3.5.3</version>
 			</plugin>
 		</plugins>
 	</build>
