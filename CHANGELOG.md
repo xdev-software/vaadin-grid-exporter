@@ -1,3 +1,6 @@
+## 3.2.6
+* Fix naming so that Vaadin Directory sync works [#318](https://github.com/xdev-software/vaadin-addon-template/issues/318)
+
 ## 3.2.5
 * Make it possible to better customize ``SpecificConfigComponent``
 
