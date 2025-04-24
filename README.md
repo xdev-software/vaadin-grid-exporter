@@ -4,7 +4,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=xdev-software_vaadin-grid-exporter&metric=alert_status)](https://sonarcloud.io/dashboard?id=xdev-software_vaadin-grid-exporter)
 ![Vaadin 24+](https://img.shields.io/badge/Vaadin%20Platform/Flow-24+-00b4f0)
 
-# vaadin-grid-exporter
+# GridExporter for Vaadin
 
 The Vaadin Grid Exporter can convert nearly any Vaadin Grid to a variety of formats.<br/>
 This way you don't have to copy the Grid contents manually or print the whole website with the Grid.
