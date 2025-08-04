@@ -1,5 +1,7 @@
 package software.xdev.vaadin.gridexport.example;
 
+import java.util.List;
+
 import com.vaadin.flow.component.AttachEvent;
 import com.vaadin.flow.component.Composite;
 import com.vaadin.flow.component.button.Button;
@@ -52,6 +54,17 @@ public class DemoView extends Composite<VerticalLayout>
 				VaadinIcon.PRINT.create(),
 				e -> new GridExporter<>(this.grExamples)
 					.loadFromProvider(new PredefinedTitleProvider("Custom title!"))
+					.open()),
+			new Button(
+				"Export (Static items)",
+				VaadinIcon.PRINT.create(),
+				e -> GridExporter.newWithDefaults(
+						this.grExamples,
+						List.of(
+							new Example("styled", "Styled-Demo", "dark mode 🌑 and more"),
+							new Example("parameter", "Parameter-Demo", "configuration is stored in QueryParameters")
+						)
+					)
 					.open())
 		);
 		

@@ -32,6 +32,7 @@ import software.xdev.vaadin.grid_exporter.column.ColumnConfigurationBuilder;
 import software.xdev.vaadin.grid_exporter.column.ColumnConfigurationHeaderResolvingStrategyBuilder;
 import software.xdev.vaadin.grid_exporter.format.Format;
 import software.xdev.vaadin.grid_exporter.grid.GridDataExtractor;
+import software.xdev.vaadin.grid_exporter.grid.GridDataExtractorWithStaticData;
 import software.xdev.vaadin.grid_exporter.jasper.JasperGridExporterProvider;
 import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizard;
 import software.xdev.vaadin.grid_exporter.wizard.GridExporterWizardState;
@@ -179,5 +180,21 @@ public class GridExporter<T>
 	{
 		return new GridExporter<>(grid)
 			.loadFromProvider(new JasperGridExporterProvider());
+	}
+	
+	/**
+	 * Creates a new {@link GridExporter} with the default JasperReports exports and a static set of items that are
+	 * exported.
+	 * <p>
+	 * <i>Note: This may be removed or split into a separate module in the future.</i>
+	 * </p>
+	 */
+	public static <T> GridExporter<T> newWithDefaults(final Grid<T> grid, final List<T> staticItems)
+	{
+		return new GridExporter<>(grid)
+			.loadFromProvider(new JasperGridExporterProvider())
+			.withGridDataExtractorSupplier(
+				localGrid -> new GridDataExtractorWithStaticData<>(localGrid, staticItems)
+			);
 	}
 }
