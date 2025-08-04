@@ -1,3 +1,7 @@
+# 3.2.8
+* Added method `GridExporter#newWithDefaults(final Grid<T> grid, final List<T> staticItems)` to set static items to
+  export.
+
 # 3.2.7
 * Migrated deployment to _Sonatype Maven Central Portal_ [#155](https://github.com/xdev-software/standard-maven-template/issues/155)
 * Updated dependencies
