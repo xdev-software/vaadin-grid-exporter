@@ -90,7 +90,7 @@ public abstract class AbstractJasperReportFormat<B extends AbstractJasperExporte
 		final JasperReportBuilder reportBuilder,
 		final List<? extends SpecificConfig> configs)
 	{
-		final ByteArrayOutputStream stream = new ByteArrayOutputStream();
+		final ByteArrayOutputStream stream = new ByteArrayOutputStream(4096);
 		
 		this.getConfigFrom(configs, EncodingConfig.class)
 			.filter(EncodingConfig::supportsAndUseBOM)
