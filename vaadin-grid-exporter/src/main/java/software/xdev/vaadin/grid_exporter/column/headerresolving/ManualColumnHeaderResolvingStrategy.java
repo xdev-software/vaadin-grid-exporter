@@ -39,14 +39,14 @@ import com.vaadin.flow.component.grid.Grid.Column;
 public class ManualColumnHeaderResolvingStrategy<I> implements ColumnHeaderResolvingStrategy
 {
 	protected final Function<Column<?>, I> identifierResolver;
-	protected final Map<I, Function<I, String>> headerTextResolverMap;
+	protected final Map<I, Function<I, String>> headerTextResolvers;
 	
 	public ManualColumnHeaderResolvingStrategy(
 		final Function<Column<?>, I> identifierResolver,
-		final Map<I, Function<I, String>> headerTextResolverMap)
+		final Map<I, Function<I, String>> headerTextResolvers)
 	{
 		this.identifierResolver = identifierResolver;
-		this.headerTextResolverMap = headerTextResolverMap;
+		this.headerTextResolvers = headerTextResolvers;
 	}
 	
 	@Override
@@ -54,7 +54,7 @@ public class ManualColumnHeaderResolvingStrategy<I> implements ColumnHeaderResol
 	{
 		final I identifier = this.identifierResolver.apply(column);
 		
-		final Function<I, String> resolveFunction = this.headerTextResolverMap.get(identifier);
+		final Function<I, String> resolveFunction = this.headerTextResolvers.get(identifier);
 		if(resolveFunction == null)
 		{
 			return Optional.empty();
