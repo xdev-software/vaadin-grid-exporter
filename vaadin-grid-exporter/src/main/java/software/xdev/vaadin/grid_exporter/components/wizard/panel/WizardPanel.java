@@ -51,7 +51,7 @@ public class WizardPanel<S extends WizardState>
 {
 	protected int stepIndex = -1;
 	protected final List<Component> lstSteps = new ArrayList<>();
-	protected final Map<Tab, Component> tabStepMap = new HashMap<>();
+	protected final Map<Tab, Component> tabSteps = new HashMap<>();
 	
 	protected S curState;
 	
@@ -102,7 +102,7 @@ public class WizardPanel<S extends WizardState>
 	protected void onTabChange(final SelectedChangeEvent event)
 	{
 		final Tab selTab = event.getSelectedTab();
-		final Component tabPage = this.tabStepMap.get(selTab);
+		final Component tabPage = this.tabSteps.get(selTab);
 		this.stepIndex = this.lstSteps.indexOf(tabPage);
 		
 		this.vlContent.removeAll();
@@ -119,7 +119,7 @@ public class WizardPanel<S extends WizardState>
 		tab.setFlexGrow(1);
 		tab.setEnabled(false);
 		
-		this.tabStepMap.put(tab, step);
+		this.tabSteps.put(tab, step);
 		this.lstSteps.add(step);
 		this.tabsStep.add(tab);
 	}

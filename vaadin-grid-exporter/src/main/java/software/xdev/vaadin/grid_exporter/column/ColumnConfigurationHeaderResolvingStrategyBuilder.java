@@ -50,9 +50,9 @@ public class ColumnConfigurationHeaderResolvingStrategyBuilder
 	 */
 	public <I> ColumnConfigurationHeaderResolvingStrategyBuilder withManualColumnHeaderStrategy(
 		final Function<Column<?>, I> identifierResolver,
-		final Map<I, Function<I, String>> headerTextResolverMap)
+		final Map<I, Function<I, String>> headerTextResolvers)
 	{
-		return this.withStrategy(new ManualColumnHeaderResolvingStrategy<>(identifierResolver, headerTextResolverMap));
+		return this.withStrategy(new ManualColumnHeaderResolvingStrategy<>(identifierResolver, headerTextResolvers));
 	}
 	
 	/**
