@@ -80,7 +80,8 @@ This can be achieved by:
 
 | Vaadin version | GridExporter version |
 | --- | --- |
-| Vaadin 24+ (latest) | ``3+`` |
+| Vaadin 25+ (latest) | ``4+`` |
+| Vaadin 24 | ``3.x`` |
 | Vaadin 23 | ``2.x`` |
 
 ### Compatibility with JasperReports

@@ -1,3 +1,6 @@
+# 4.0.0
+* Updated to Vaadin 25
+
 # 3.2.8
 * Updated dependencies
 
