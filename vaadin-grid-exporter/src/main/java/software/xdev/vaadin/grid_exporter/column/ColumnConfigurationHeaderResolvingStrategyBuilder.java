@@ -95,7 +95,7 @@ public class ColumnConfigurationHeaderResolvingStrategyBuilder
 				final Optional<String> optResolvedValue = resolvingFunction.resolve(col);
 				if(optResolvedValue.isPresent())
 				{
-					return optResolvedValue.get();
+					return optResolvedValue.orElseThrow();
 				}
 			}
 			

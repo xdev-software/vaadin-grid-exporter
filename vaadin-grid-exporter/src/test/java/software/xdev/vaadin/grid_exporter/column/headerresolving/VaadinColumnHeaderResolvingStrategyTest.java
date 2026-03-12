@@ -48,7 +48,7 @@ class VaadinColumnHeaderResolvingStrategyTest
 			new VaadinColumnHeaderResolvingStrategy().resolve(colUsername);
 		
 		assertTrue(optResolvedName.isPresent(), "No resolved column name found");
-		assertEquals(expectedHeader, optResolvedName.get());
+		assertEquals(expectedHeader, optResolvedName.orElseThrow());
 	}
 	
 	@Test
@@ -67,7 +67,7 @@ class VaadinColumnHeaderResolvingStrategyTest
 			new VaadinColumnHeaderResolvingStrategy().resolve(colUsername);
 		
 		assertTrue(optResolvedName.isPresent(), "No resolved column name found");
-		assertEquals(expectedHeader, optResolvedName.get());
+		assertEquals(expectedHeader, optResolvedName.orElseThrow());
 	}
 	
 	@Test
