@@ -1,0 +1,7 @@
+.wizard-panel-content {
+    overflow-y: auto;
+}
+
+vaadin-tabs.wizard-panel-tabs vaadin-tab::before {
+    display: none;
+}
