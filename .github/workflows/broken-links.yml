@@ -3,7 +3,7 @@ name: Broken links
 on:
   workflow_dispatch:
   schedule:
-    - cron: "23 23 * * 0"
+    - cron: "23 5 * * 0"
 
 permissions:
   issues: write
