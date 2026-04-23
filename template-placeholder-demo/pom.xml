@@ -62,10 +62,14 @@
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-core</artifactId>
 			<exclusions>
-				<!-- There is like 10 people on the planet that need this by default -->
+				<!-- Unused components -->
 				<exclusion>
 					<groupId>com.vaadin</groupId>
 					<artifactId>collaboration-engine</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.vaadin</groupId>
+					<artifactId>vaadin-ai-components-flow</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
