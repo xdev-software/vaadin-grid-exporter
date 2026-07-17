@@ -1,3 +1,8 @@
+# 4.0.2
+* Updated to Vaadin 25.2
+* Migrated resources from deprecated location
+* Updated dependencies
+
 # 4.0.1
 * Updated dependencies
 
