@@ -1,0 +1,103 @@
+/*
+ * Copyright © 2022 XDEV Software (https://xdev.software)
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package software.xdev.vaadin.grid_exporter.format;
+
+import java.util.Objects;
+import java.util.function.Supplier;
+
+import com.vaadin.flow.component.Composite;
+import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.data.binder.Binder;
+
+import software.xdev.vaadin.grid_exporter.Translator;
+
+@SuppressWarnings("java:S1948")
+public abstract class SpecificConfigComponent<T extends SpecificConfig>
+	extends Composite<FormLayout>
+	implements Translator
+{
+	protected Translator translator;
+	protected Supplier<T> newConfigSupplier;
+	protected String header;
+	
+	protected Binder<T> binder = new Binder<>();
+	
+	protected SpecificConfigComponent(
+		final Translator translator,
+		final Supplier<T> newConfigSupplier,
+		final String headerToTranslate)
+	{
+		this.setTranslator(translator);
+		this.setNewConfigSupplier(newConfigSupplier);
+		this.setHeaderAndTranslate(headerToTranslate);
+		
+		this.getContent().setResponsiveSteps(
+			new FormLayout.ResponsiveStep("0", 1),
+			new FormLayout.ResponsiveStep("400px", 2)
+		);
+	}
+	
+	protected void setTranslator(final Translator translator)
+	{
+		this.translator = Objects.requireNonNull(translator);
+	}
+	
+	protected void setNewConfigSupplier(final Supplier<T> newConfigSupplier)
+	{
+		this.newConfigSupplier = Objects.requireNonNull(newConfigSupplier);
+	}
+	
+	protected void setHeader(final String header)
+	{
+		this.header = header;
+	}
+	
+	protected void setHeaderAndTranslate(final String headerToTranslate)
+	{
+		this.setHeader(this.translate(headerToTranslate));
+	}
+	
+	public Supplier<T> getNewConfigSupplier()
+	{
+		return this.newConfigSupplier;
+	}
+	
+	public String getHeader()
+	{
+		return this.header;
+	}
+	
+	public void updateFrom(final T value)
+	{
+		this.binder.setBean(value);
+	}
+	
+	public T getBean()
+	{
+		return this.binder.getBean();
+	}
+	
+	public boolean isValid()
+	{
+		return this.binder.isValid();
+	}
+	
+	@Override
+	public String translate(final String key)
+	{
+		return this.translator != null ? this.translator.translate(key) : key;
+	}
+}
